@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 	//theWorld.SetupPhysics();
 
 	//adds the default grid so you can more easily place Actors
-	theWorld.Add(new GridActor(), -1);
+	//theWorld.Add(new GridActor(), -2);
 	
 	//YOUR GAME SETUP CODE HERE
 	

@@ -37,12 +37,13 @@ PixelArthScreenTest::PixelArthScreenTest()
 
 void PixelArthScreenTest::Start()
 {
+	Actor *bg = new GroundActor();
 	//Creating a new, generic actor is simple. 
 	a = new Actor();
 	
 	//Sizes and coordinates are always in GL units, which can mean whatever you decide they mean
 	// -- our physics packages (Box2D) assumes that they mean meters, though. 
-	a->SetSize(2.0f); 
+	a->SetSize(MathUtil::PixelsToWorldUnits(164)); 
 	
 	//R, G, B, [A]
 	//a->SetColor(0,0,0);

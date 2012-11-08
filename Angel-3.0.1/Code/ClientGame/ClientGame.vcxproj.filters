@@ -19,6 +19,9 @@
     <Filter Include="WorldMap">
       <UniqueIdentifier>{53729276-18e0-4949-8484-2757bc8f5b4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actors">
+      <UniqueIdentifier>{27333db9-1eb0-4523-bd53-b41f5d11dac1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Angel\Scripting\Interfaces\AngelLuaWrapping.cpp">
@@ -33,6 +36,9 @@
       <Filter>WorldMap</Filter>
     </ClCompile>
     <ClCompile Include="CharActor.cpp" />
+    <ClCompile Include="Actors\GroundActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -43,6 +49,9 @@
       <Filter>WorldMap</Filter>
     </ClInclude>
     <ClInclude Include="CharActor.h" />
+    <ClInclude Include="Actors\GroundActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\defaults.lua">

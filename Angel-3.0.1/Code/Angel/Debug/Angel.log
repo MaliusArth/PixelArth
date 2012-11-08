@@ -1,6 +1,6 @@
-﻿Build started 06.11.2012 11:54:11.
-     1>Project "C:\PixelArth\Angel-3.0.1\Code\Angel\Angel.vcxproj" on node 2 (build target(s)).
-     1>C:\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.Targets(1395,5): warning : The referenced project '{7A2DFC3D-516A-471D-A215-BD40E5E5AD9A}' does not exist.
+﻿Build started 08.11.2012 20:52:42.
+     1>Project "C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Angel.vcxproj" on node 3 (build target(s)).
+     1>C:\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.Targets(1200,9): warning : The referenced project '{7A2DFC3D-516A-471D-A215-BD40E5E5AD9A}' does not exist.
      1>InitializeBuildStatus:
          Creating "Debug\Angel.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
@@ -8,12 +8,12 @@
          All outputs are up-to-date.
        Lib:
          All outputs are up-to-date.
-         Angel.vcxproj -> C:\PixelArth\Angel-3.0.1\Code\Angel\Debug\Angel.lib
+         Angel.vcxproj -> C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Debug\Angel.lib
        FinalizeBuildStatus:
          Deleting file "Debug\Angel.unsuccessfulbuild".
          Touching "Debug\Angel.lastbuildstate".
-     1>Done Building Project "C:\PixelArth\Angel-3.0.1\Code\Angel\Angel.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Angel.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.95
+Time Elapsed 00:00:00.20

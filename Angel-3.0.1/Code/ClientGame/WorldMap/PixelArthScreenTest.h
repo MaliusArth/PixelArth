@@ -30,6 +30,7 @@
 #pragma once
 
 #include "PixelArthGameManager.h"
+#include "Actors/GroundActor.h"
 
 
 class PixelArthScreenTest : public PixelArthScreen

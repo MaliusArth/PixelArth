@@ -177,6 +177,7 @@ cd ..\Tools\BuildScripts\
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Actors\GroundActor.cpp" />
     <ClCompile Include="CharActor.cpp" />
     <ClCompile Include="PixelArthGameManager.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -187,6 +188,7 @@ cd ..\Tools\BuildScripts\
     <ClCompile Include="WorldMap\PixelArthScreenTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actors\GroundActor.h" />
     <ClInclude Include="CharActor.h" />
     <ClInclude Include="PixelArthGameManager.h" />
     <ClInclude Include="stdafx.h" />
