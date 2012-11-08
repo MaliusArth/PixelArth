@@ -1,0 +1,93 @@
+﻿Build started 31.10.2012 15:29:31.
+     1>Project "C:\PixelArth\Angel-3.0.1\Code\Angel\Libraries\lua-5.1.5\Lua.vcxproj" on node 4 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "DebugLibBuild\_LuaLib.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "DebugLibBuild\_LuaLib.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\PixelArth\Angel-3.0.1\Code\Angel\Libraries\lua-5.1.5\src" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32_LEAN_AND_MEAN /D NOGDI /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"DebugLibBuild\\" /Fd"DebugLibBuild\vc100.pdb" /Gd /TC /wd4996 /wd4244 /analyze- /errorReport:prompt src\lapi.c src\lauxlib.c src\lbaselib.c src\lcode.c src\ldblib.c src\ldebug.c src\ldo.c src\ldump.c src\lfunc.c src\lgc.c src\linit.c src\liolib.c src\llex.c src\lmathlib.c src\lmem.c src\loadlib.c src\lobject.c src\lopcodes.c src\loslib.c src\lparser.c src\lstate.c src\lstring.c src\lstrlib.c src\ltable.c src\ltablib.c src\ltm.c src\luac.c src\lundump.c src\lvm.c src\lzio.c "..\lua-libs\luafilesystem-1.5.0\src\lfs.c" "..\lua-libs\lua-ex\w32api\dirent.c" "..\lua-libs\lua-ex\w32api\ex.c" "..\lua-libs\lua-ex\w32api\pusherror.c" "..\lua-libs\lua-ex\w32api\spawn.c"
+         spawn.c
+         pusherror.c
+         ex.c
+         dirent.c
+         lfs.c
+         lzio.c
+         lvm.c
+         lundump.c
+         luac.c
+         ltm.c
+         ltablib.c
+         ltable.c
+         lstrlib.c
+         lstring.c
+         lstate.c
+         lparser.c
+         loslib.c
+         lopcodes.c
+         lobject.c
+         loadlib.c
+         Generating Code...
+         Compiling...
+         lmem.c
+         lmathlib.c
+         llex.c
+         liolib.c
+         linit.c
+         lgc.c
+         lfunc.c
+         ldump.c
+         ldo.c
+         ldebug.c
+         ldblib.c
+         lcode.c
+         lbaselib.c
+         lauxlib.c
+         lapi.c
+         Generating Code...
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(1151,5): warning MSB8012: TargetPath(C:\PixelArth\Angel-3.0.1\Code\Angel\Libraries\lua-5.1.5\Debug\_LuaLib.lib) does not match the Library's OutputFile property value (C:\PixelArth\Angel-3.0.1\Code\Angel\Libraries\lua-5.1.5\Debug\Lua.lib). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(1153,5): warning MSB8012: TargetName(_LuaLib) does not match the Library's OutputFile property value (Lua). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\PixelArth\Angel-3.0.1\Code\Angel\Libraries\lua-5.1.5\Debug\Lua.lib" /NOLOGO DebugLibBuild\lapi.obj
+         DebugLibBuild\lauxlib.obj
+         DebugLibBuild\lbaselib.obj
+         DebugLibBuild\lcode.obj
+         DebugLibBuild\ldblib.obj
+         DebugLibBuild\ldebug.obj
+         DebugLibBuild\ldo.obj
+         DebugLibBuild\ldump.obj
+         DebugLibBuild\lfunc.obj
+         DebugLibBuild\lgc.obj
+         DebugLibBuild\linit.obj
+         DebugLibBuild\liolib.obj
+         DebugLibBuild\llex.obj
+         DebugLibBuild\lmathlib.obj
+         DebugLibBuild\lmem.obj
+         DebugLibBuild\loadlib.obj
+         DebugLibBuild\lobject.obj
+         DebugLibBuild\lopcodes.obj
+         DebugLibBuild\loslib.obj
+         DebugLibBuild\lparser.obj
+         DebugLibBuild\lstate.obj
+         DebugLibBuild\lstring.obj
+         DebugLibBuild\lstrlib.obj
+         DebugLibBuild\ltable.obj
+         DebugLibBuild\ltablib.obj
+         DebugLibBuild\ltm.obj
+         DebugLibBuild\luac.obj
+         DebugLibBuild\lundump.obj
+         DebugLibBuild\lvm.obj
+         DebugLibBuild\lzio.obj
+         DebugLibBuild\lfs.obj
+         DebugLibBuild\dirent.obj
+         DebugLibBuild\ex.obj
+         DebugLibBuild\pusherror.obj
+         DebugLibBuild\spawn.obj
+         Lua.vcxproj -> C:\PixelArth\Angel-3.0.1\Code\Angel\Libraries\lua-5.1.5\Debug\_LuaLib.lib
+       FinalizeBuildStatus:
+         Deleting file "DebugLibBuild\_LuaLib.unsuccessfulbuild".
+         Touching "DebugLibBuild\_LuaLib.lastbuildstate".
+     1>Done Building Project "C:\PixelArth\Angel-3.0.1\Code\Angel\Libraries\lua-5.1.5\Lua.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.84

@@ -1,0 +1,70 @@
+﻿Build started 03.11.2012 01:22:55.
+     1>Project "C:\PixelArth\Angel-3.0.1\Code\IntroGame\IntroGame.vcxproj" on node 4 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\IntroGame.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       PreBuildEvent:
+         Description: Scripting setup...
+         xcopy ..\Angel\Scripting\EngineScripts\* Resources\Scripts /y /e > nul
+         
+         cd ..\Tools\BuildScripts
+         ..\..\Angel\Libraries\lua-5.1.5\Debug\lua.exe swig_wrap.lua -D INTROGAME -p "C:\PixelArth\Angel-3.0.1\Code\
+         
+         :VCEnd
+         Interface files are up to date.
+       ClCompile:
+         All outputs are up-to-date.
+         All outputs are up-to-date.
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\freetype-2.4.8\include" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\FTGL\include" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\DevIL-SDK-1.7.8\win\include" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\glfw-2.7.3\include" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\Box2D-2.2.1" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\lua-5.1.5\src" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\FMOD\inc" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\openal-soft-1.13-bin\include" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\libogg-1.3.0\include" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\libvorbis-1.3.2\include" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\DemoScreens" /I"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D FTGL_LIBRARY_STATIC /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\IntroGame.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /wd4244 /analyze- /errorReport:prompt DemoScreens\DemoScreenSimpleActor.cpp
+         DemoScreenSimpleActor.cpp
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Debug\IntroGame.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\lib\x86" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\DevIL-SDK-1.7.8\win\lib" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\FMOD\lib" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\glfw-2.7.3\support\msvc90\Debug" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\FTGL\win32_vcpp\build" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\freetype-2.4.8\objs" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\Box2D-2.2.1\Build\vs2008\Debug" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Debug" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\lua-5.1.5\Debug" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Scripting\IntroGameDebug" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\openal-soft-1.13-bin\lib\Win32" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\libogg-1.3.0\win32\VS2008\Win32\Debug" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\libvorbis-1.3.2\win32\VS2008\libvorbis\Win32\Debug" /LIBPATH:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\\..\Angel\Libraries\libvorbis-1.3.2\win32\VS2008\libvorbisfile\Win32\Debug" libpng.lib zlib.lib DevIL.lib ILU.lib ILUT.lib opengl32.lib glu32.lib fmodex_vc.lib _GLFW.lib ftgl_static_MTD_d.lib freetype248_D.lib Box2D.lib Angel.lib Lua.lib libOpenAL32.dll.a _libogg.lib _libvorbis.lib _libvorbisfile_static.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:LIBCMTD.LIB /NODEFAULTLIB:MSVCRT.LIB /MANIFEST /ManifestFile:"Debug\IntroGame.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\PixelArth\Angel-3.0.1\Code\IntroGame\Debug\IntroGame.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"Debug\IntroGame.lib" /MACHINE:X86 Debug\IntroGame.exe.embed.manifest.res
+         Debug\AngelLuaWrappingIntroGame.obj
+         Debug\stdafx.obj
+         Debug\DemoScreenBindingInstructions.obj
+         Debug\DemoScreenByeBye.obj
+         Debug\DemoScreenConsole.obj
+         Debug\DemoScreenControllerInstructions.obj
+         Debug\DemoScreenDefFile.obj
+         Debug\DemoScreenImageMap.obj
+         Debug\DemoScreenInstructions.obj
+         Debug\DemoScreenIntervals.obj
+         Debug\DemoScreenLayeredCollisionLevelFile.obj
+         Debug\DemoScreenLevelFile.obj
+         Debug\DemoScreenMessagePassing.obj
+         Debug\DemoScreenMobileSimulator.obj
+         Debug\DemoScreenMovingActor.obj
+         Debug\DemoScreenMultipleControllers.obj
+         Debug\DemoScreenParticleActors.obj
+         Debug\DemoScreenPathfinding.obj
+         Debug\DemoScreenPhysicsActor.obj
+         Debug\DemoScreenRenderLayers.obj
+         Debug\DemoScreenSimpleActor.obj
+         Debug\DemoScreenStart.obj
+         Debug\DemoScreenTuningVariables.obj
+         Debug\DemoGameManager.obj
+         Debug\Main.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\IntroGame.exe.embed.manifest" /manifest Debug\IntroGame.exe.intermediate.manifest
+         All outputs are up-to-date.
+       LinkEmbedManifest:
+         All outputs are up-to-date.
+         IntroGame.vcxproj -> C:\PixelArth\Angel-3.0.1\Code\IntroGame\Debug\IntroGame.exe
+       PostBuildEvent:
+         Description: Copying DLLs...
+         copy ..\Angel\Libraries\DevIL-SDK-1.7.8\win\lib\DevIL.dll . /y > nul
+         copy ..\Angel\Libraries\DevIL-SDK-1.7.8\win\lib\ILU.dll . /y > nul
+         copy ..\Angel\Libraries\DevIL-SDK-1.7.8\win\lib\ILUT.dll . /y > nul
+         xcopy ..\Angel\Libraries\FMOD\*.dll . /y > nul
+         copy ..\Angel\Libraries\openal-soft-1.13-bin\Win32\soft_oal.dll .\OpenAL32.dll /y > nul
+         
+         :VCEnd
+       FinalizeBuildStatus:
+         Deleting file "Debug\IntroGame.unsuccessfulbuild".
+         Touching "Debug\IntroGame.lastbuildstate".
+     1>Done Building Project "C:\PixelArth\Angel-3.0.1\Code\IntroGame\IntroGame.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.82
