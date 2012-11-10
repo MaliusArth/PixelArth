@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="sys">
+      <UniqueIdentifier>{0e11d29b-6355-494f-a032-e7de7c534300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{e9cb965c-bde7-4a4d-ab7b-b3711336fc9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config\Level">
+      <UniqueIdentifier>{027ef47e-a415-44e8-9cc7-72525bf54708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config\ActorDef">
+      <UniqueIdentifier>{3e8b0d74-440c-4b46-84b3-14ae937c5fe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Docs">
+      <UniqueIdentifier>{110ed210-6a86-4ab9-861c-fa9c07fa378f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WorldMap">
+      <UniqueIdentifier>{53729276-18e0-4949-8484-2757bc8f5b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actors">
+      <UniqueIdentifier>{296c917f-2fd0-4dcc-adfd-74155c78671d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Angel\Scripting\Interfaces\AngelLuaWrapping.cpp">
+      <Filter>sys</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>sys</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PixelArthGameManager.cpp" />
+    <ClCompile Include="Actors\CharActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Actors\GroundActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap\PixelArthScreenCharTest.cpp">
+      <Filter>WorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap\PixelArthScreenCollisionTest.cpp">
+      <Filter>WorldMap</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>sys</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelArthGameManager.h" />
+    <ClInclude Include="Actors\CharActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Actors\GroundActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap\PixelArthScreenCharTest.h">
+      <Filter>WorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap\PixelArthScreenCollisionTest.h">
+      <Filter>WorldMap</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\defaults.lua">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="Config\input_bindings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="Config\tuning.lua">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="Documentation\Attributions.txt">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="Documentation\GameInfo.txt">
+      <Filter>Docs</Filter>
+    </None>
+    <None Include="build.lua" />
+    <None Include="Resources\Scripts\client_start.lua" />
+    <None Include="script_interface.i" />
+  </ItemGroup>
+</Project>
