@@ -19,7 +19,9 @@ bool WorldCollision::isCollideing(Vector argBegin, Vector argEnd){
 	int i,j;
 	for(i= argBegin.getX();i < argEnd.getX();i++)
 			for(j= argBegin.getY();j < argEnd.getY();j++)
-				if(m_mask[800*i+600] != 0) return true;
+				if(m_mask[800*i+600] != 0) 
+					return true; //end here by collision
+	//runs only here when there is no collision
 	return false;
 }
 
