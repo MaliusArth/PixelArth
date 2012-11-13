@@ -44,6 +44,8 @@
     <ClCompile Include="WorldMap\PixelArthScreenCollisionTest.cpp">
       <Filter>WorldMap</Filter>
     </ClCompile>
+    <ClCompile Include="WorldCollision.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -62,6 +64,9 @@
     <ClInclude Include="WorldMap\PixelArthScreenCollisionTest.h">
       <Filter>WorldMap</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="WorldCollision.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\defaults.lua">
@@ -82,5 +87,8 @@
     <None Include="build.lua" />
     <None Include="Resources\Scripts\client_start.lua" />
     <None Include="script_interface.i" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ClientGame.rc" />
   </ItemGroup>
 </Project>

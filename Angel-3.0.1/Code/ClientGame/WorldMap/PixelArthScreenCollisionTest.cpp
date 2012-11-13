@@ -37,13 +37,14 @@ PixelArthScreenCollisionTest::PixelArthScreenCollisionTest()
 
 void PixelArthScreenCollisionTest::Start()
 {
-	Actor *bg = new GroundActor();
+	WorldCollision *test = new WorldCollision("Resources/Images/coll.png");
+	test->isCollideing(Vector(1,1), Vector(800,600));
 	//Creating a new, generic actor is simple. 
-	a = new Actor();
+	a = new CharActor();
 	
 	//Sizes and coordinates are always in GL units, which can mean whatever you decide they mean
 	// -- our physics packages (Box2D) assumes that they mean meters, though. 
-	a->SetSize(MathUtil::PixelsToWorldUnits(164)); 
+	a->SetSize(2.0f); 
 	
 	//R, G, B, [A]
 	//a->SetColor(0,0,0);
@@ -63,14 +64,14 @@ void PixelArthScreenCollisionTest::Start()
 
 	//PixelArth housekeeping below this point. 
 	#pragma region PixelArth Housekeeping
-	t = new TextActor("Console", "That's Arth. (Press [X])");
+	t = new TextActor("Console", "Collision Test");
 	t->SetPosition(0, 3.5);
 	t->SetAlignment(TXT_Center);
 	theWorld.Add(t);
-	TextActor *fileLoc = new TextActor("ConsoleSmall", "PixelArthScreenCollisionTest.cpp");
-	fileLoc->SetPosition(MathUtil::ScreenToWorld(5, 563));
-	fileLoc->SetColor(.3f, .3f, .3f);
-	theWorld.Add(fileLoc);
+	TextActor *fileLoc = new TextActor("ConsoleSmall", "PixelArthScreenCharTest.cpp");
+	//fileLoc->SetPosition(MathUtil::ScreenToWorld(10, 563));
+	//fileLoc->SetColor(.3f, .3f, .3f);
+	//theWorld.Add(fileLoc);
 	_objects.push_back(fileLoc);
 	_objects.push_back(t);
 	_objects.push_back(a);
@@ -79,30 +80,5 @@ void PixelArthScreenCollisionTest::Start()
 
 void PixelArthScreenCollisionTest::Update(float dt)
 {
-	if ((theController.IsConnected() && theController.IsBButtonDown()) || theInput.IsKeyDown('b'))
-	{
-		a->SetColor(1.0f, 0.0f, 1.0f, .5f); //R, G, B, A (there is also a Color class you can use)
-		a->ClearSpriteInfo(); //removes any texture that might have been assigned
-		t->SetDisplayString("Now it's purple and translucent. Press [Y] to give it a texture.");
-	}
-	if ((theController.IsConnected() && theController.IsYButtonDown()) || theInput.IsKeyDown('y'))
-	{
-		a->SetColor(1,1,1,1); //(white and opaque so the texture comes through fully)
-		a->ClearSpriteInfo();
-		a->SetSprite("Resources/Images/animations/chars/arth/standing.png"); //Loads any image supported by DevIL (see docs)
-		t->SetDisplayString("Pretty easy. You can do animations as well. Press [X] to check it out.");
-	}
-	if ((theController.IsConnected() && theController.IsXButtonDown()) || theInput.IsKeyDown('x'))
-	{
-		a->SetColor(1,1,1,1);
-		a->LoadSpriteFrames("Resources/Images/animations/chars/arth/standing2/standing2_0.png");
-		a->PlaySpriteAnimation(
-			0.2f,			//amount of time between frames
-			SAT_Loop,		//other options are SAT_PingPong and SAT_OneShot
-			0,				//starting frame
-			8,				//ending frame
-			"Standing"	//name of the animation so you can get the event when it finishes
-		);
-		t->SetDisplayString("Keiner mag den Hufi =/");
-	}
+	
 }

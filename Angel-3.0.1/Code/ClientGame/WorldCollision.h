@@ -4,7 +4,7 @@
 class WorldCollision
 {
 private:
-	char* m_mask;
+	unsigned char* m_mask;
 public:
 	//constructor
 	//param: Bitmap file path

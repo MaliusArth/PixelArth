@@ -31,7 +31,8 @@
 
 #include "PixelArthGameManager.h"
 #include "Actors/GroundActor.h"
-
+#include "WorldCollision.h"
+#include "Actors/CharActor.h"
 
 class PixelArthScreenCollisionTest : public PixelArthScreen
 {
