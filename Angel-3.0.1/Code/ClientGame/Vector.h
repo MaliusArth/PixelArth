@@ -8,10 +8,10 @@ public:
 	//param: x coordinate of vector, y coordinate of vector
 	Vector(int, int);
 	//simple setters/getters... i think they explain themselfs
-	int getX();
-	void setX(int);
-	int getY();
-	void setY(int);
+	int getX() const;
+	void setX(const int);
+	int getY() const;
+	void setY(const int);
 	~Vector(void);
 };
 

@@ -2,8 +2,9 @@
 #include "WorldCollision.h"
 
 
-WorldCollision::WorldCollision(String arg)
-{
+WorldCollision::WorldCollision(const String& arg)
+{//tga anschauen
+	//stb_image
 	int i;
 	std::ifstream maskfile;
 	m_mask= new char[800*600];
@@ -13,10 +14,12 @@ WorldCollision::WorldCollision(String arg)
 			maskfile.getline(m_mask+i,600);
 		}
 	}
+		
 
 }
-bool WorldCollision::isCollideing(Vector argBegin, Vector argEnd){
-	int i,j;
+bool WorldCollision::isCollideing(const Vector& argBegin,const  Vector& argEnd) const{
+	int i,j;//enum
+			//const
 	for(i= argBegin.getX();i < argEnd.getX();i++)
 			for(j= argBegin.getY();j < argEnd.getY();j++)
 				if(m_mask[800*i+600] != 0) 
