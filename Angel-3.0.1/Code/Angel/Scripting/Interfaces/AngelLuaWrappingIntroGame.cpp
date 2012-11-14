@@ -4764,7 +4764,7 @@ static int _wrap_Message_GetSender(lua_State* L) {
   result = (MessageListener *)(arg1)->GetSender();
   {
     int dcast = 0;
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,200,%formacro@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,200,%formacro@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       TextActor *dobj = dynamic_cast<TextActor *>(result);
       if (dobj) {
@@ -4773,7 +4773,7 @@ static int _wrap_Message_GetSender(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       MazeFinder *dobj = dynamic_cast<MazeFinder *>(result);
       if (dobj) {
@@ -4782,7 +4782,7 @@ static int _wrap_Message_GetSender(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       Camera *dobj = dynamic_cast<Camera *>(result);
       if (dobj) {
@@ -4791,7 +4791,7 @@ static int _wrap_Message_GetSender(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       PhysicsActor *dobj = dynamic_cast<PhysicsActor *>(result);
       if (dobj) {
@@ -4800,7 +4800,7 @@ static int _wrap_Message_GetSender(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       ParticleActor *dobj = dynamic_cast<ParticleActor *>(result);
       if (dobj) {
@@ -4809,7 +4809,7 @@ static int _wrap_Message_GetSender(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       Actor *dobj = dynamic_cast<Actor *>(result);
       if (dobj) {
@@ -10734,7 +10734,7 @@ static int _wrap_new_Actor(lua_State* L) {
   result = (Actor *)new Actor();
   {
     int dcast = 0;
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,200,%formacro@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,200,%formacro@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       TextActor *dobj = dynamic_cast<TextActor *>(result);
       if (dobj) {
@@ -10743,7 +10743,7 @@ static int _wrap_new_Actor(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       MazeFinder *dobj = dynamic_cast<MazeFinder *>(result);
       if (dobj) {
@@ -10752,7 +10752,7 @@ static int _wrap_new_Actor(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       Camera *dobj = dynamic_cast<Camera *>(result);
       if (dobj) {
@@ -10761,7 +10761,7 @@ static int _wrap_new_Actor(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       PhysicsActor *dobj = dynamic_cast<PhysicsActor *>(result);
       if (dobj) {
@@ -10770,7 +10770,7 @@ static int _wrap_new_Actor(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       ParticleActor *dobj = dynamic_cast<ParticleActor *>(result);
       if (dobj) {
@@ -14397,7 +14397,7 @@ static int _wrap_Actor_GetNamed(lua_State* L) {
   result = (Actor *)Actor::GetNamed(arg1);
   {
     int dcast = 0;
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,200,%formacro@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,200,%formacro@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       TextActor *dobj = dynamic_cast<TextActor *>(result);
       if (dobj) {
@@ -14406,7 +14406,7 @@ static int _wrap_Actor_GetNamed(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       MazeFinder *dobj = dynamic_cast<MazeFinder *>(result);
       if (dobj) {
@@ -14415,7 +14415,7 @@ static int _wrap_Actor_GetNamed(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       Camera *dobj = dynamic_cast<Camera *>(result);
       if (dobj) {
@@ -14424,7 +14424,7 @@ static int _wrap_Actor_GetNamed(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       PhysicsActor *dobj = dynamic_cast<PhysicsActor *>(result);
       if (dobj) {
@@ -14433,7 +14433,7 @@ static int _wrap_Actor_GetNamed(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       ParticleActor *dobj = dynamic_cast<ParticleActor *>(result);
       if (dobj) {
@@ -14644,7 +14644,7 @@ static int _wrap_Actor_GetSelf(lua_State* L) {
   result = (Actor *)(arg1)->GetSelf();
   {
     int dcast = 0;
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,200,%formacro@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,200,%formacro@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       TextActor *dobj = dynamic_cast<TextActor *>(result);
       if (dobj) {
@@ -14653,7 +14653,7 @@ static int _wrap_Actor_GetSelf(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       MazeFinder *dobj = dynamic_cast<MazeFinder *>(result);
       if (dobj) {
@@ -14662,7 +14662,7 @@ static int _wrap_Actor_GetSelf(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       Camera *dobj = dynamic_cast<Camera *>(result);
       if (dobj) {
@@ -14671,7 +14671,7 @@ static int _wrap_Actor_GetSelf(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       PhysicsActor *dobj = dynamic_cast<PhysicsActor *>(result);
       if (dobj) {
@@ -14680,7 +14680,7 @@ static int _wrap_Actor_GetSelf(lua_State* L) {
       }   
     }/*@SWIG@*/
     
-    /*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelTest\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
+    /*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Tools\swigwin-2.0.4\Lib\typemaps\swigmacros.swg,192,%_formacro_1@*//*@SWIG:C:\Users\Philipp\Documents\PixelArth\Angel-3.0.1\Code\Angel\Scripting\Interfaces\factory.i,7,%_factory_dispatch@*/ 
     if (!dcast) {
       ParticleActor *dobj = dynamic_cast<ParticleActor *>(result);
       if (dobj) {

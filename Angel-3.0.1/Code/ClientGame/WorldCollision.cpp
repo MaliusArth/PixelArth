@@ -15,14 +15,18 @@ WorldCollision::WorldCollision(const String& arg)
 		
 
 }
-bool WorldCollision::isCollideing(const Vector& argBegin,const  Vector& argEnd) const{
+bool WorldCollision::isCollideing(const Vector2& argBegin,const  Vector2& argEnd) const{
 	int i,j;//enum
+	
 			//const
-	std::cout<<"collideing function"<<std::endl;
-	for(i= argBegin.getX();i < argEnd.getX();i++)
-			for(j= argBegin.getY();j < argEnd.getY();j++)
-				if(m_mask[800*i+j] == 0) 
-				{std::cout<<"found collision "<<i<<" "<<j<<std::endl; return true;} //end here by collision
+	for(i= MathUtil::WorldUnitsToPixels(argBegin.X);i < ceil(MathUtil::WorldUnitsToPixels(argEnd.X));i++)
+			for(j= MathUtil::WorldUnitsToPixels(argBegin.Y);j <  ceil(MathUtil::WorldUnitsToPixels(argEnd.Y));j++)
+				if(m_mask[800*(i+SCREEN_X /2)+(j+SCREEN_Y /2)] == 0) 
+				{
+					std::cout<<"found collision! X: "<<i<<" Y: "<<j<<std::endl
+					<<"Mask coordinates: X: " << i+SCREEN_X /2<< " Y: "<<(j+SCREEN_Y /2)<< std::endl; 
+					return true;
+				} //end here by collision
 	//runs only here when there is no collision*/
 	return false;
 }

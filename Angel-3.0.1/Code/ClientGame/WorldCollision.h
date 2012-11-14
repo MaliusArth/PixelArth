@@ -1,6 +1,8 @@
 #pragma once
 #include <fstream>
-#include "Vector.h"
+#include <math.h>
+#define SCREEN_X 800
+#define SCREEN_Y 600
 class WorldCollision
 {
 private:
@@ -12,7 +14,7 @@ public:
 	//checks colission
 	//param: begin of the checked area, end of the checked area
 	//return: true if there IS a collision
-	bool isCollideing(const Vector&,const Vector&) const;
+	bool isCollideing(const Vector2&,const Vector2&) const;
 	~WorldCollision(void);
 };
 
