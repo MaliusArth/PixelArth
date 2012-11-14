@@ -19,6 +19,8 @@ bool WorldCollision::isCollideing(const Vector2& argBegin,const  Vector2& argEnd
 	int i,j;//enum
 	Vector2 begin(MathUtil::WorldUnitsToPixels(argBegin.X) +(SCREEN_X/2),MathUtil::WorldUnitsToPixels(argBegin.Y) +(SCREEN_Y/2));
 	Vector2 end(ceil(MathUtil::WorldUnitsToPixels(argEnd.X)) +(SCREEN_X/2),ceil(MathUtil::WorldUnitsToPixels(argEnd.Y)) +(SCREEN_Y/2));
+	if (begin.X < 0 || begin.Y < 0) return true;
+	if (end.X > 800 || end.Y > 600) return true;
 	std::cout<<"checking "<<begin.X<<", "<<begin.Y<<std::endl;
 			//const
 	for(i= begin.X; i< end.X; i++)
