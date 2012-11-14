@@ -41,9 +41,10 @@ public:
 
 	virtual void Start();
 	virtual void Update(float dt);
-
+	~PixelArthScreenCollisionTest();
 private:
-	TextActor *t;
+	TextActor *m_text;
 	GroundActor *m_background;
-	Actor *a;
+	Actor *m_hero;
+
 };

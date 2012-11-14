@@ -33,30 +33,33 @@
 
 PixelArthScreenCollisionTest::PixelArthScreenCollisionTest()
 {
+	
 }
 
 void PixelArthScreenCollisionTest::Start()
 {
-
+	m_hero = new CharActor();
+	m_text = new TextActor("Console", "Collision Test");
+	m_background= new GroundActor("Resources/Images/coll.png");
 	//Creating a new, generic actor is simple. 
-	a = new CharActor();
+	
 	
 	//Sizes and coordinates are always in GL units, which can mean whatever you decide they mean
 	// -- our physics packages (Box2D) assumes that they mean meters, though. 
-	a->SetSize(2.0f); 
+	m_hero->SetSize(2.0f); 
 	
 	//R, G, B, [A]
 	//a->SetColor(0,0,0);
 
-	a->SetColor(1,1,1,1); //(white and opaque so the texture comes through fully)
+	m_hero->SetColor(1,1,1,1); //(white and opaque so the texture comes through fully)
 	//a->ClearSpriteInfo();
-	a->SetSprite("Resources/Images/animations/chars/arth/standing.png");
+	m_hero->SetSprite("Resources/Images/animations/chars/arth/standing.png");
 
 	//We have to add it to the world for it to be drawn. All Actors implement Update and Render
 	// methods that get called once per frame. All your logic should happen in the Update function,
 	// and you should only implement Render if you have to do something out of the ordinary. 
-	theWorld.Add(a);
-	m_background= new GroundActor("Resources/Images/coll.png");
+	theWorld.Add(m_hero);
+	
 	theWorld.Add(m_background);
 
 
@@ -64,21 +67,26 @@ void PixelArthScreenCollisionTest::Start()
 
 	//PixelArth housekeeping below this point. 
 	#pragma region PixelArth Housekeeping
-	t = new TextActor("Console", "Collision Test");
-	t->SetPosition(0, 3.5);
-	t->SetAlignment(TXT_Center);
-	theWorld.Add(t);
+	m_text->SetPosition(0, 3.5);
+	m_text->SetAlignment(TXT_Center);
+	theWorld.Add(m_text);
 	TextActor *fileLoc = new TextActor("ConsoleSmall", "PixelArthScreenCharTest.cpp");
 	//fileLoc->SetPosition(MathUtil::ScreenToWorld(10, 563));
 	//fileLoc->SetColor(.3f, .3f, .3f);
 	//theWorld.Add(fileLoc);
 	_objects.push_back(fileLoc);
-	_objects.push_back(t);
-	_objects.push_back(a);
+	_objects.push_back(m_text);
+	_objects.push_back(m_hero);
 	#pragma endregion
 }
 
 void PixelArthScreenCollisionTest::Update(float dt)
 {
 	
+}
+PixelArthScreenCollisionTest::~PixelArthScreenCollisionTest()
+{
+	delete m_background;
+	delete m_text;
+	delete m_hero;
 }
