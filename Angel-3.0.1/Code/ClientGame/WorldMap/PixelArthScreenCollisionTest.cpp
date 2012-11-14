@@ -38,7 +38,7 @@ PixelArthScreenCollisionTest::PixelArthScreenCollisionTest()
 void PixelArthScreenCollisionTest::Start()
 {
 	WorldCollision *test = new WorldCollision("Resources/Images/coll.png");
-	test->isCollideing(Vector(1,1), Vector(800,600));
+	//	test->isCollideing(Vector(1,1), Vector(800,600));
 	//Creating a new, generic actor is simple. 
 	a = new CharActor();
 	
