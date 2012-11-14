@@ -44,5 +44,6 @@ public:
 
 private:
 	TextActor *t;
+	GroundActor *m_background;
 	Actor *a;
 };

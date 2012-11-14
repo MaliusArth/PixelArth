@@ -2,12 +2,12 @@
 #include "GroundActor.h"
 
 
-GroundActor::GroundActor(void)
+GroundActor::GroundActor(const String& picturefile)
 {
 	SetLayer(-1);
 	SetSize(MathUtil::PixelsToWorldUnits(800),MathUtil::PixelsToWorldUnits(600));
 	SetColor(1,1,1,1);
-	this->SetSprite("Resources/Images/dummyBackground.png");
+	this->SetSprite(picturefile);
 }
 
 //void GroundActor::Update(float dt){

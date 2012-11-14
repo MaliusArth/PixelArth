@@ -37,8 +37,7 @@ PixelArthScreenCollisionTest::PixelArthScreenCollisionTest()
 
 void PixelArthScreenCollisionTest::Start()
 {
-	WorldCollision *test = new WorldCollision("Resources/Images/coll.png");
-	//	test->isCollideing(Vector(1,1), Vector(800,600));
+
 	//Creating a new, generic actor is simple. 
 	a = new CharActor();
 	
@@ -57,7 +56,8 @@ void PixelArthScreenCollisionTest::Start()
 	// methods that get called once per frame. All your logic should happen in the Update function,
 	// and you should only implement Render if you have to do something out of the ordinary. 
 	theWorld.Add(a);
-
+	m_background= new GroundActor("Resources/Images/coll.png");
+	theWorld.Add(m_background);
 
 
 

@@ -4,7 +4,7 @@
 class GroundActor : public Actor
 {
 public:
-	GroundActor(void);
+	GroundActor(const String&);
 	/*virtual void Update(float dt);
 	virtual void Render();*/
 	~GroundActor(void);
