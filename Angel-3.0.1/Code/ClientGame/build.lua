@@ -3,5 +3,5 @@
 --  in the future.
 
 game_info = {
-  name = "PixelArth Game"
+  name = "My GameJam Game"
 }

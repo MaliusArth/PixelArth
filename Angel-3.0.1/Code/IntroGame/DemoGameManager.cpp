@@ -214,7 +214,7 @@ void DemoGameManager::Render()
 		infoString = "[A/Space]: Next [Back/Minus]: Previous";
 		xOffset = 680;
 	}
-	DrawGameText(infoString, "ConsoleSmall", xOffset, 563);	//763
+	DrawGameText(infoString, "ConsoleSmall", xOffset, 763);
 }
 
 void DemoGameManager::SoundEnded(AngelSoundHandle sound)
