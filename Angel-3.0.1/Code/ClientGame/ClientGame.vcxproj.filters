@@ -16,6 +16,15 @@
     <Filter Include="Docs">
       <UniqueIdentifier>{110ed210-6a86-4ab9-861c-fa9c07fa378f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{cc58f343-26bb-4259-b1b1-a4a616dc5126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actors">
+      <UniqueIdentifier>{f8357471-17b1-423d-8159-6a39da576cb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WorldMap">
+      <UniqueIdentifier>{57a0cda3-eceb-4e6d-ba3e-718cfd78c88d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Angel\Scripting\Interfaces\AngelLuaWrapping.cpp">
@@ -25,10 +34,42 @@
       <Filter>sys</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PixelArthGameManager.cpp" />
+    <ClCompile Include="Physics\WorldCollision.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Actors\CharActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Actors\GroundActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap\PixelArthScreenCharTest.cpp">
+      <Filter>WorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap\PixelArthScreenCollisionTest.cpp">
+      <Filter>WorldMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>sys</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelArthGameManager.h" />
+    <ClInclude Include="Physics\WorldCollision.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Actors\CharActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Actors\GroundActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap\PixelArthScreenCharTest.h">
+      <Filter>WorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap\PixelArthScreenCollisionTest.h">
+      <Filter>WorldMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -177,14 +177,26 @@ cd ..\Tools\BuildScripts\
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Actors\CharActor.cpp" />
+    <ClCompile Include="Actors\GroundActor.cpp" />
+    <ClCompile Include="Physics\WorldCollision.cpp" />
+    <ClCompile Include="PixelArthGameManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="WorldMap\PixelArthScreenCharTest.cpp" />
+    <ClCompile Include="WorldMap\PixelArthScreenCollisionTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actors\CharActor.h" />
+    <ClInclude Include="Actors\GroundActor.h" />
+    <ClInclude Include="Physics\WorldCollision.h" />
+    <ClInclude Include="PixelArthGameManager.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="WorldMap\PixelArthScreenCharTest.h" />
+    <ClInclude Include="WorldMap\PixelArthScreenCollisionTest.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\defaults.lua" />
