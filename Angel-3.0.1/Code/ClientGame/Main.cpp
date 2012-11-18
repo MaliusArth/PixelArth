@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 
+#include "PixelArthGameManager.h"
 
 int main(int argc, char* argv[])
 {
@@ -11,14 +12,16 @@ int main(int argc, char* argv[])
 	//		std::string windowName	default: "Angel Engine"
 	//		bool antiAliasing		default: false
 	//		bool fullScreen			default: false
-	theWorld.Initialize();
+	theWorld.Initialize(800, 600, "PixelArth", true, false);
 	
+	//theWorld.SetupPhysics();
+
 	//adds the default grid so you can more easily place Actors
 	theWorld.Add(new GridActor(), -1);
 	
 	//YOUR GAME SETUP CODE HERE
 	
-	
+	theWorld.SetGameManager(&thePixelArthGame);
 	
     
 
