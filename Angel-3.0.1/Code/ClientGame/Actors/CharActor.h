@@ -4,6 +4,9 @@
 
 #include "Actors/Actor.h"
 
+#include "Physics\WorldCollision.h"
+#include "PixelArthGameManager.h"
+
 /// An Actor for displaying game characters on the screen.
 /**
  * A CharActor handles drawing text to the screen using world coordinates. The
@@ -20,7 +23,7 @@ public:
 	 * The constructor sets up all the information that this CharActor will
 	 *  use to draw itself to the screen. 
 	 */
-	CharActor();
+	explicit CharActor(/*Bitmask* mask*/);
 	
 	/**
 	 * A function which makes the necessary updates to the Actor. The base 
@@ -74,4 +77,6 @@ private:
 	bool _movingLeft;
 	bool _movingRight;
 	float _movementSpeed;
+
+	//Bitmask* _mask;
 };

@@ -148,6 +148,8 @@ PixelArthGameManager::PixelArthGameManager()
 	theSound.SetSoundCallback(this, &GameManager::SoundEnded);
 	
 	sample = theSound.LoadSample("Resources/Sounds/click.ogg", false /*no stream*/);
+	
+	m_wColl = new WorldCollision("Resources/Images/coll.png");	
 }
 
 PixelArthGameManager& PixelArthGameManager::GetInstance()

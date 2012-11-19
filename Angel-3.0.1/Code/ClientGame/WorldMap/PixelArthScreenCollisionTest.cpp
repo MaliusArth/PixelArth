@@ -33,11 +33,13 @@
 
 PixelArthScreenCollisionTest::PixelArthScreenCollisionTest()
 {
-	
+	//thePixelArthGame.m_wColl->setBitmask("Resources/Images/coll.png");
 }
 
 void PixelArthScreenCollisionTest::Start()
 {
+	
+
 	m_hero = new CharActor();
 	m_text = new TextActor("Console", "Collision Test");
 	m_background= new GroundActor("Resources/Images/coll.png");

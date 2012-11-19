@@ -33,6 +33,8 @@
 #include <vector>
 #include <string>
 
+#include "Physics\WorldCollision.h"
+
 class PixelArthScreen : public Renderable
 {
 public:
@@ -70,6 +72,8 @@ public:
 	virtual void SoundEnded(AngelSoundHandle sound);
 
 	virtual void ReceiveMessage(Message* message);
+	
+	WorldCollision *m_wColl;
 	
 protected:
 	PixelArthGameManager();

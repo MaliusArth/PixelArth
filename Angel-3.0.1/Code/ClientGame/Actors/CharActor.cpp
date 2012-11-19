@@ -36,14 +36,19 @@
 #include "Messaging/Switchboard.h"
 #include "Util/DrawUtil.h"
 
+//built-in loggers are pretty poor
 #include "Infrastructure/Log.h"
 
-CharActor::CharActor()
+#include "Physics\WorldCollision.h"
+#include <iostream>
+
+CharActor::CharActor(/*Bitmask* mask*/)
 	: _movementSpeed(0.1f)
 	, _movingUp(false)
 	, _movingDown(false)
 	, _movingLeft(false)
 	, _movingRight(false)
+	//, _mask(mask)
 {
 	SetColor(1.0f, 1.0f, 1.0f);
 
@@ -60,38 +65,39 @@ CharActor::CharActor()
 
 void CharActor::Update(float dt)
 {
+	/*
 	///Movement Try: 1
-	//Vector2 newPosition = _position;
-	//if(_movingUp){
-	//	newPosition.Y += _movementSpeed;
-	//}
-	//if(_movingDown){
-	//	newPosition.Y -= _movementSpeed;
-	//}
-	//if(_movingLeft){
-	//	newPosition.X -= _movementSpeed;
-	//}
-	//if(_movingRight){
-	//	newPosition.X += _movementSpeed;
-	//}
-	//char fsb1[256],fsb2[256] ;
- //   sprintf(fsb1, "%f", _position.X);
- //   sprintf(fsb2, "%f", newPosition.X);
-
-	//SystemLog().Log("_position: ");
-	//SystemLog().Log(fsb1);
-	//SystemLog().Log(" ");
-	//SystemLog().Log("newPosition: ");
-	//SystemLog().Log(fsb2);
-	//SystemLog().Log("\n");
-
-	//if(_position != newPosition){
-	//	MoveTo(newPosition, 0.05f, true);
-	//	//SetPosition(MathUtil::SmoothStep(_position, newPosition, 0.05f));
-	//}
-
-	///Movement Try: 2
+	Vector2 newPosition = _position;
 	if(_movingUp){
+		newPosition.Y += _movementSpeed;
+	}
+	if(_movingDown){
+		newPosition.Y -= _movementSpeed;
+	}
+	if(_movingLeft){
+		newPosition.X -= _movementSpeed;
+	}
+	if(_movingRight){
+		newPosition.X += _movementSpeed;
+	}
+	char fsb1[256],fsb2[256] ;
+    sprintf(fsb1, "%f", _position.X);
+    sprintf(fsb2, "%f", newPosition.X);
+
+	SystemLog().Log("_position: ");
+	SystemLog().Log(fsb1);
+	SystemLog().Log(" ");
+	SystemLog().Log("newPosition: ");
+	SystemLog().Log(fsb2);
+	SystemLog().Log("\n");
+
+	if(_position != newPosition){
+		MoveTo(newPosition, 0.05f, true);
+		//SetPosition(MathUtil::SmoothStep(_position, newPosition, 0.05f));
+	}*/
+	
+	///Movement Try: 2
+	/*if(_movingUp){
 		_position.Y += (_movementSpeed/2);
 	}
 	if(_movingDown){
@@ -102,7 +108,30 @@ void CharActor::Update(float dt)
 	}
 	if(_movingRight){
 		_position.X += _movementSpeed;
+	}*/
+
+	///Movement Try: 3 (with collision)
+	Vector2 newPosition(_position);
+
+	if(_movingUp){
+		newPosition.Y += (_movementSpeed/2);
 	}
+	if(_movingDown){
+		newPosition.Y -= (_movementSpeed/2);
+	}
+	if(_movingLeft){
+		newPosition.X -= _movementSpeed;
+	}
+	if(_movingRight){
+		newPosition.X += _movementSpeed;
+	}
+	std::cout << "newPosition: " << newPosition.X << " " << newPosition.Y << " Size: " << GetSize().X << " " << GetSize().Y
+		<< " nPos+Size: "<< (newPosition+GetSize()).X << " " << (newPosition+GetSize()).Y << std::endl;
+	if(!thePixelArthGame.m_wColl->isColliding(newPosition, newPosition+GetSize()))
+	{
+		_position = newPosition;		//TODO: check for memory leak
+	}
+	
 	Actor::Update(dt);
 }
 

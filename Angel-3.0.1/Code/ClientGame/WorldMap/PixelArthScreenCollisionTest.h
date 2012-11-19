@@ -46,5 +46,4 @@ private:
 	TextActor *m_text;
 	GroundActor *m_background;
 	Actor *m_hero;
-
 };
