@@ -16,6 +16,22 @@ int Bitmask::getY() const{
 int Bitmask::getType() const{
 	return  m_type;
 }
+/*
+void Bitmask::setSize(const Vector2& size)
+{
+	m_size = Vector2(MathUtil::PixelsToWorldUnits((float)m_x)*size.X,MathUtil::PixelsToWorldUnits((float)m_y)*size.Y); 
+}
+*/
+enum CollType Bitmask::checkCollition(const Vector2& begin,const Vector2& end)const{
+	int i,j;//enum
+	if (begin.X < 0 || begin.Y < 0) return c_wall;
+	if (end.X > m_x || end.Y > m_y) return c_wall;
+	for(i= begin.X; i< ceil(end.X); i++)
+		for(j= begin.Y; j< ceil(end.Y); j++)
+			if(m_mask[(m_x*j+i)] == c_wall)
+				return c_wall;
+	return c_none;
+}
 unsigned char * Bitmask::getMask() const{
 	return m_mask;
 }
