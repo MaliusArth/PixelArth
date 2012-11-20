@@ -1,13 +1,13 @@
 #pragma once
 #include <fstream>
 #include <math.h>
-
+#include "BitMask.h"
 #define SCREEN_X 800
 #define SCREEN_Y 600
 class WorldCollision
 {
 private:
-	unsigned char* m_mask;
+	BitMask *m_world;
 public:
 	//constructor
 	//param: Bitmap file path
