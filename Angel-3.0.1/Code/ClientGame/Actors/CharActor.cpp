@@ -126,7 +126,7 @@ void CharActor::Update(float dt)
 		newPosition.X += _movementSpeed;
 	}
 	//std::cout << "newPosition: " << newPosition.X << " " << newPosition.Y << " Size: " << GetSize().X << " " << GetSize().Y
-	//	<< " nPos+Size: "<< (newPosition+GetSize()).X << " " << (newPosition+GetSize()).Y << std::endl;
+	//	<< " nPos+Size/2: "<< (newPosition+(GetSize()/2)).X << " " << (newPosition+(GetSize()/2)).Y << std::endl;
 	if(!thePixelArthGame.m_wColl->isColliding(newPosition-(GetSize()/2), newPosition+(GetSize()/2)))
 	{
 		_position = newPosition;		//TODO: check for memory leak
