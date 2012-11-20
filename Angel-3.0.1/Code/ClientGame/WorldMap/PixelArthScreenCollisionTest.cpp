@@ -38,9 +38,9 @@ PixelArthScreenCollisionTest::PixelArthScreenCollisionTest()
 
 void PixelArthScreenCollisionTest::Start()
 {
-	
+	Bitmask* mask = new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png");
 
-	m_hero = new CharActor();
+	m_hero = new CharActor(mask);
 	m_text = new TextActor("Console", "Collision Test");
 	m_background= new GroundActor("Resources/Images/coll.png");
 	//Creating a new, generic actor is simple. 

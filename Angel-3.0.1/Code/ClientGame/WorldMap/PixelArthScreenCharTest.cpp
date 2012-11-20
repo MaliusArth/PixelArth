@@ -37,8 +37,11 @@ PixelArthScreenCharTest::PixelArthScreenCharTest()
 
 void PixelArthScreenCharTest::Start()
 {
+	//TODO: 
+	Bitmask* mask = new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png");
+	
 	//Creating a new, generic actor is simple. 
-	a = new CharActor();
+	a = new CharActor(mask);
 	
 	//Sizes and coordinates are always in GL units, which can mean whatever you decide they mean
 	// -- our physics packages (Box2D) assumes that they mean meters, though. 

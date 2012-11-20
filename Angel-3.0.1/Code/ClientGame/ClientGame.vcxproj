@@ -179,6 +179,7 @@ cd ..\Tools\BuildScripts\
     </ClCompile>
     <ClCompile Include="Actors\CharActor.cpp" />
     <ClCompile Include="Actors\GroundActor.cpp" />
+    <ClCompile Include="Physics\Bitmask.cpp" />
     <ClCompile Include="Physics\WorldCollision.cpp" />
     <ClCompile Include="PixelArthGameManager.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -192,6 +193,7 @@ cd ..\Tools\BuildScripts\
   <ItemGroup>
     <ClInclude Include="Actors\CharActor.h" />
     <ClInclude Include="Actors\GroundActor.h" />
+    <ClInclude Include="Physics\Bitmask.h" />
     <ClInclude Include="Physics\WorldCollision.h" />
     <ClInclude Include="PixelArthGameManager.h" />
     <ClInclude Include="stdafx.h" />

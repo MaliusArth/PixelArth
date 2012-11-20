@@ -50,6 +50,9 @@
     <ClCompile Include="WorldMap\PixelArthScreenCollisionTest.cpp">
       <Filter>WorldMap</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\Bitmask.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="WorldMap\PixelArthScreenCollisionTest.h">
       <Filter>WorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Bitmask.h">
+      <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

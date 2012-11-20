@@ -42,13 +42,13 @@
 #include "Physics\WorldCollision.h"
 #include <iostream>
 
-CharActor::CharActor(/*Bitmask* mask*/)
+CharActor::CharActor(Bitmask* mask)
 	: _movementSpeed(0.1f)
 	, _movingUp(false)
 	, _movingDown(false)
 	, _movingLeft(false)
 	, _movingRight(false)
-	//, _mask(mask)
+	, _mask(mask)
 {
 	SetColor(1.0f, 1.0f, 1.0f);
 
@@ -127,7 +127,7 @@ void CharActor::Update(float dt)
 	}
 	//std::cout << "newPosition: " << newPosition.X << " " << newPosition.Y << " Size: " << GetSize().X << " " << GetSize().Y
 	//	<< " nPos+Size/2: "<< (newPosition+(GetSize()/2)).X << " " << (newPosition+(GetSize()/2)).Y << std::endl;
-	if(!thePixelArthGame.m_wColl->isColliding(newPosition-(GetSize()/2), newPosition+(GetSize()/2)))
+	if(!thePixelArthGame.m_wColl->isColliding(*_mask, newPosition-(GetSize()/2)))
 	{
 		_position = newPosition;		//TODO: check for memory leak
 	}

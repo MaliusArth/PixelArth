@@ -23,7 +23,7 @@ public:
 	 * The constructor sets up all the information that this CharActor will
 	 *  use to draw itself to the screen. 
 	 */
-	explicit CharActor(/*Bitmask* mask*/);
+	explicit CharActor(Bitmask* mask);
 	
 	/**
 	 * A function which makes the necessary updates to the Actor. The base 
@@ -78,5 +78,5 @@ private:
 	bool _movingRight;
 	float _movementSpeed;
 
-	//Bitmask* _mask;
+	Bitmask* _mask;
 };

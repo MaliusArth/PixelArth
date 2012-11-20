@@ -5,7 +5,7 @@
 WorldCollision::WorldCollision(const String& arg)
 {//tga anschauen
 	//stb_image
-	m_world = new BitMask(arg);
+	m_world = new Bitmask(arg);
 
 	//m_mask = stbi_load(arg.c_str(),&x,&y,&type,0);
 	if (m_world == NULL) std::cout<<"cant inizialise mask"<<std::endl;
@@ -36,7 +36,7 @@ bool WorldCollision::isColliding(const Vector2& argBegin,const  Vector2& argEnd)
 }
 
 
-bool WorldCollision::isColliding(const BitMask& unitMask,const  Vector2& argBegin) const{
+bool WorldCollision::isColliding(const Bitmask& unitMask,const  Vector2& argBegin) const{
 		int i,j;//enum
 	Vector2 begin((int)MathUtil::WorldUnitsToPixels(argBegin.X) +(SCREEN_X/2),
 									(int)MathUtil::WorldUnitsToPixels(argBegin.Y) +(SCREEN_Y/2));

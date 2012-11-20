@@ -1,16 +1,16 @@
 #pragma once
-class BitMask
+class Bitmask
 {
 private:
 	 int m_x, m_y, m_type;
 	 unsigned char * m_mask;
 public:
-	BitMask(const String&);
+	Bitmask(const String&);
 	int getX() const;
 	int getY() const;
 	int getType() const;
 	unsigned char * getMask() const;
 	void loadMask(const String&);
-	~BitMask(void);
+	~Bitmask(void);
 };
 
