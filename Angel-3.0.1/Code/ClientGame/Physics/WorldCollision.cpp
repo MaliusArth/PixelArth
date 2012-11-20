@@ -38,10 +38,12 @@ bool WorldCollision::isColliding(const Vector2& argBegin,const  Vector2& argEnd)
 
 bool WorldCollision::isColliding(const Bitmask& unitMask,const  Vector2& argBegin) const{
 		int i,j;//enum
-	Vector2 begin((int)MathUtil::WorldUnitsToPixels(argBegin.X) +(SCREEN_X/2),
-									(int)MathUtil::WorldUnitsToPixels(argBegin.Y) +(SCREEN_Y/2));
-	Vector2 end((int)ceil(MathUtil::WorldUnitsToPixels(argBegin.X)+unitMask.getX()) +(SCREEN_X/2),
-									(int)ceil(MathUtil::WorldUnitsToPixels(argBegin.Y))+ unitMask.getY() +(SCREEN_Y/2));
+		std::cout<<(float)unitMask.getX()*(30.0f/23.0f)<<std::endl;
+	Vector2 begin((int)MathUtil::WorldUnitsToPixels(argBegin.X) + (SCREEN_X/2),
+									(int)MathUtil::WorldUnitsToPixels(argBegin.Y) + (SCREEN_Y/2));
+	Vector2 end((int)ceil(MathUtil::WorldUnitsToPixels(argBegin.X)+unitMask.getX()*(30.0f/23.0f)) + (SCREEN_X/2),
+									(int)ceil(MathUtil::WorldUnitsToPixels(argBegin.Y)+ unitMask.getY()*(30.0f/23.0f)) + (SCREEN_Y/2));
+	//MathUtil::WorldUnitsToPixels(argBegin.X)+unitMask.getX()*(30/23)) +(SCREEN_X/2)
 	if (begin.X < 0 || begin.Y < 0) return true;
 	if (end.X > m_world->getX() || end.Y > m_world->getY()) return true;
 	std::cout<<"checking "<<begin.X<<", "<<begin.Y<<std::endl;
@@ -51,11 +53,11 @@ bool WorldCollision::isColliding(const Bitmask& unitMask,const  Vector2& argBegi
 			if(m_world->getMask()[m_world->getX()*m_world->getY() - (m_world->getX()*(j+1)-i)] == 0) //mirrored about both axes
 				{
 
-					if(unitMask.getMask()[unitMask.getX()*unitMask.getY() - (unitMask.getX()*((j+(int)argBegin.X+1 - (i-(int)argBegin.Y) ))) ] == 0)
-					{
+					//if(unitMask.getMask()[unitMask.getX()*unitMask.getY() - (unitMask.getX()*((j+(int)argBegin.Y+1 - (i-(int)argBegin.X) ))) ] == 0)
+	//				{
 						std::cout<<"found collision! X: "<<i<<" Y: "<<j<<std::endl; 
 						return true;
-					}
+				//	}
 				} //end here by collision
 	//runs only here when there is no collision*/
 	return false;
