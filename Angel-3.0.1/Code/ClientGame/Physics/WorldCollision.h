@@ -12,6 +12,7 @@ public:
 	//constructor
 	//param: Bitmap file path
 	WorldCollision(const String&);
+	bool isColliding(const BitMask&, const Vector2&) const;
 	//checks colission
 	//param: begin of the checked area, end of the checked area
 	//return: true if there IS a collision
