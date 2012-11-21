@@ -1,6 +1,6 @@
 #pragma once
 enum CollType{
-	c_wall,
+	c_wall =0,
 	c_none =255
 };
 class Bitmask
@@ -14,7 +14,7 @@ public:
 	int getX() const;
 	int getY() const;
 	int getType() const;
-	enum CollType checkCollition(const Vector2&, const Vector2&) const;
+	CollType checkCollition(const Vector2&, const Vector2&) const;
 	//void Bitmask::setSize(const Vector2& size);
 	unsigned char * getMask() const;
 	void loadMask(const String&);

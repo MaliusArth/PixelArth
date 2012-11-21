@@ -40,11 +40,17 @@ bool WorldCollision::isColliding(const Bitmask& unitMask,const  Vector2& argBegi
 		int i,j;//enum
 		float scaleX, scaleY;
 		scaleX=scaleY=30.0f/23.0f;
-	Vector2 begin(MathUtil::WorldUnitsToPixels(argBegin.X) + (SCREEN_X/2),
-		m_world->getY()-(MathUtil::WorldUnitsToPixels(argBegin.Y)+ unitMask.getY()*scaleY + (SCREEN_Y/2)));
-	Vector2 end(MathUtil::WorldUnitsToPixels(argBegin.X)+unitMask.getX()*scaleX + (SCREEN_X/2),
-									m_world->getY()-(MathUtil::WorldUnitsToPixels(argBegin.Y) + (SCREEN_Y/2)));
-	if(m_world->checkCollition(begin,end)!=c_none) return true;
+	Vector2 begin((int)MathUtil::WorldUnitsToPixels(argBegin.X) + (SCREEN_X/2),
+		(int)(m_world->getY()-(MathUtil::WorldUnitsToPixels(argBegin.Y)+ unitMask.getY()*scaleY + (SCREEN_Y/2))));
+	Vector2 end((int)ceil(MathUtil::WorldUnitsToPixels(argBegin.X)+unitMask.getX()*scaleX + (SCREEN_X/2)),
+									(int)ceil(m_world->getY()-(MathUtil::WorldUnitsToPixels(argBegin.Y) + (SCREEN_Y/2))));
+	if (begin.X < 0 || begin.Y < 0) return c_wall;
+	if (end.X > m_world->getX() || end.Y > m_world->getY()) return c_wall;
+	for(i= begin.X; i< ceil(end.X); i++)
+ 		for(j= begin.Y; j< ceil(end.Y); j++)
+			if(m_world->getMask()[(m_world->getX()*j+i)] == c_wall){
+				if(unitMask.checkCollition(Vector2((i-begin.X)/scaleX,(j-begin.Y)/scaleY),Vector2((i-begin.X)/scaleX,(j-begin.Y)/scaleY)) != c_none) return true;
+			}
 	return false;
 }
 WorldCollision::~WorldCollision(void)

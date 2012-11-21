@@ -28,7 +28,7 @@ enum CollType Bitmask::checkCollition(const Vector2& begin,const Vector2& end)co
 	if (end.X > m_x || end.Y > m_y) return c_wall;
 	for(i= begin.X; i< ceil(end.X); i++)
 		for(j= begin.Y; j< ceil(end.Y); j++)
-			if(m_mask[(m_x*j+i)] == c_wall)
+			if(m_mask[(m_x*j+i)] != c_none)
 				return c_wall;
 	return c_none;
 }
