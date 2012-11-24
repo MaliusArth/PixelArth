@@ -40,7 +40,12 @@ public:
 	 * Override of the Renderable::Render function to draw text
 	 */
 	//virtual void Render();
-	
+
+	/**
+	 * 
+	 */
+	virtual void AnimCallback(String animName);
+
 	/**
 	 * An implementation of the MessageListener interface, which listens for 
 	 *  CameraChange messages and responds appropriately. 
@@ -49,7 +54,7 @@ public:
 	 * @param message The message getting delivered. 
 	 */
 	virtual void ReceiveMessage(Message* message);
-	
+
 	/**
 	 * Since CharActors use their own methods of drawing, it can be difficult to 
 	 *  determine what space they're covering. If you want to do any kind of logic
@@ -59,7 +64,7 @@ public:
 	 * @return A BoundingBox describing the area covered by the CharActor in 
 	 *   GL units (not pixels). 
 	 */
-	//const BoundingBox& GetBoundingBox() const;
+	const BoundingBox& GetBoundingBox() const;
 
 	/**
 	 * Used by the SetName function to create a basename for this class. 
@@ -71,12 +76,13 @@ public:
 
 private:
 	
-	//BoundingBox _bBox;
+	BoundingBox _bBox;
+	Bitmask* _mask;
 	bool _movingUp;
 	bool _movingDown;
 	bool _movingLeft;
 	bool _movingRight;
 	float _movementSpeed;
-
-	Bitmask* _mask;
+	float _idleness;
+	bool _isStandingSet;
 };

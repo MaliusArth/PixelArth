@@ -48,14 +48,14 @@ void PixelArthScreenCollisionTest::Start()
 	
 	//Sizes and coordinates are always in GL units, which can mean whatever you decide they mean
 	// -- our physics packages (Box2D) assumes that they mean meters, though. 
-	m_hero->SetSize(2.0f); 
+	//m_hero->SetSize(2.0f); 
 	
 	//R, G, B, [A]
 	//a->SetColor(0,0,0);
 
-	m_hero->SetColor(1,1,1,1); //(white and opaque so the texture comes through fully)
+	//m_hero->SetColor(1,1,1,1); //(white and opaque so the texture comes through fully)
 	//a->ClearSpriteInfo();
-	m_hero->SetSprite("Resources/Images/animations/chars/arth/standing.png");
+	//m_hero->SetSprite("Resources/Images/animations/chars/arth/standing.png");
 
 	//We have to add it to the world for it to be drawn. All Actors implement Update and Render
 	// methods that get called once per frame. All your logic should happen in the Update function,

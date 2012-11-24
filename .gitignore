@@ -10,6 +10,7 @@ AngelLuaWrapping*
 objs/
 Angel-3.0.1/Code/Angel/Libraries/FTGL/win32_vcpp/Build/
 Logs/
+Thumbs.db
 
 # Source: https://github.com/github/gitignore/blob/master/VB.Net.gitignore
 # Build and Object Folders

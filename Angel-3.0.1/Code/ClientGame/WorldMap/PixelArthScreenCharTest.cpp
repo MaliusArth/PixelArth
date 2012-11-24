@@ -37,27 +37,26 @@ PixelArthScreenCharTest::PixelArthScreenCharTest()
 
 void PixelArthScreenCharTest::Start()
 {
-	//TODO: 
 	Bitmask* mask = new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png");
 	
 	//Creating a new, generic actor is simple. 
-	a = new CharActor(mask);
+	Actor *arth = new CharActor(mask);
 	
 	//Sizes and coordinates are always in GL units, which can mean whatever you decide they mean
 	// -- our physics packages (Box2D) assumes that they mean meters, though. 
-	a->SetSize(2.0f); 
+	//a->SetSize(2.0f);
 	
 	//R, G, B, [A]
 	//a->SetColor(0,0,0);
 
-	a->SetColor(1,1,1,1); //(white and opaque so the texture comes through fully)
+	//a->SetColor(1,1,1,1); //(white and opaque so the texture comes through fully)
 	//a->ClearSpriteInfo();
-	a->SetSprite("Resources/Images/animations/chars/arth/standing.png");
+	//a->SetSprite("Resources/Images/animations/chars/arth/standing.png");
 
 	//We have to add it to the world for it to be drawn. All Actors implement Update and Render
 	// methods that get called once per frame. All your logic should happen in the Update function,
 	// and you should only implement Render if you have to do something out of the ordinary. 
-	theWorld.Add(a);
+	theWorld.Add(arth);
 
 
 
@@ -83,28 +82,28 @@ void PixelArthScreenCharTest::Update(float dt)
 {
 	if ((theController.IsConnected() && theController.IsBButtonDown()) || theInput.IsKeyDown('b'))
 	{
-		a->SetColor(1.0f, 0.0f, 1.0f, .5f); //R, G, B, A (there is also a Color class you can use)
-		a->ClearSpriteInfo(); //removes any texture that might have been assigned
+		//a->SetColor(1.0f, 0.0f, 1.0f, .5f); //R, G, B, A (there is also a Color class you can use)
+		//a->ClearSpriteInfo(); //removes any texture that might have been assigned
 		t->SetDisplayString("Now it's purple and translucent. Press [Y] to give it a texture.");
 	}
 	if ((theController.IsConnected() && theController.IsYButtonDown()) || theInput.IsKeyDown('y'))
 	{
-		a->SetColor(1,1,1,1); //(white and opaque so the texture comes through fully)
-		a->ClearSpriteInfo();
-		a->SetSprite("Resources/Images/animations/chars/arth/standing.png"); //Loads any image supported by DevIL (see docs)
+		//a->SetColor(1,1,1,1); //(white and opaque so the texture comes through fully)
+		//a->ClearSpriteInfo();
+		//a->SetSprite("Resources/Images/animations/chars/arth/standing.png"); //Loads any image supported by DevIL (see docs)
 		t->SetDisplayString("Pretty easy. You can do animations as well. Press [X] to check it out.");
 	}
 	if ((theController.IsConnected() && theController.IsXButtonDown()) || theInput.IsKeyDown('x'))
 	{
-		a->SetColor(1,1,1,1);
-		a->LoadSpriteFrames("Resources/Images/animations/chars/arth/standing2/standing2_0.png");
-		a->PlaySpriteAnimation(
-			0.2f,			//amount of time between frames
-			SAT_Loop,		//other options are SAT_PingPong and SAT_OneShot
-			0,				//starting frame
-			8,				//ending frame
-			"Standing"	//name of the animation so you can get the event when it finishes
-		);
+		//a->SetColor(1,1,1,1);
+		//a->LoadSpriteFrames("Resources/Images/animations/chars/arth/standing2/standing2_0.png");
+		//a->PlaySpriteAnimation(
+		//	0.2f,			//amount of time between frames
+		//	SAT_Loop,		//other options are SAT_PingPong and SAT_OneShot
+		//	0,				//starting frame
+		//	8,				//ending frame
+		//	"Standing"	//name of the animation so you can get the event when it finishes
+		//);
 		t->SetDisplayString("Keiner mag den Hufi =/");
 	}
 }
