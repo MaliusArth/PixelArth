@@ -7,6 +7,8 @@
 #include "Physics\WorldCollision.h"
 #include "PixelArthGameManager.h"
 
+enum Direction {UP, UPRIGHT, RIGHT, DOWNRIGHT, DOWN, DOWNLEFT, LEFT, UPLEFT};
+
 /// An Actor for displaying game characters on the screen.
 /**
  * A CharActor handles drawing text to the screen using world coordinates. The
@@ -84,5 +86,6 @@ private:
 	bool _movingRight;
 	float _movementSpeed;
 	float _idleness;
+	Direction _direction;
 	bool _isStandingSet;
 };

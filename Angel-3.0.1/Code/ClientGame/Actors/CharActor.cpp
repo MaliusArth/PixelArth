@@ -22,6 +22,7 @@ CharActor::CharActor(Bitmask* mask)
 	, _movementSpeed(0.05f)
 	, _idleness(0.0f)
 	, _isStandingSet(true)
+	, _direction(DOWN)
 {
 	SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	SetSize(2.0f);
@@ -138,9 +139,10 @@ void CharActor::Update(float dt)
 		//if(_movingUp & !_movingLeft & !_movingRight & !_movingDown)
 		{
 			_idleness=0.0f;
+			_direction = UP;
+			_isStandingSet = false;
 			if(_currentAnimName.compare("WalkUp") != 0)
 			{
-				_isStandingSet = false;
 				ClearSpriteInfo();
 				LoadSpriteFrames("Resources/Images/animations/chars/arth/walk/up/walkUp_00.png");
 				delay = 0.1f;
@@ -155,9 +157,10 @@ void CharActor::Update(float dt)
 		//if(_movingDown & !_movingLeft & !_movingRight & !_movingUp)
 		{
 			_idleness=0.0f;
+			_direction = DOWN;
+			_isStandingSet = false;
 			if(_currentAnimName.compare("WalkDown") != 0)
 			{
-				_isStandingSet = false;
 				ClearSpriteInfo();
 				LoadSpriteFrames("Resources/Images/animations/chars/arth/walk/down/walkDown_00.png");
 				delay = 0.1f;
@@ -172,9 +175,10 @@ void CharActor::Update(float dt)
 		//if(_movingLeft & !_movingUp & !_movingDown & !_movingRight)
 		{
 			_idleness=0.0f;
+			_direction = LEFT;
+			_isStandingSet = false;
 			if(_currentAnimName.compare("WalkLeft") != 0)
 			{
-				_isStandingSet = false;
 				ClearSpriteInfo();
 				LoadSpriteFrames("Resources/Images/animations/chars/arth/walk/left/walkLeft_00.png");
 				delay = 0.1f;
@@ -189,9 +193,10 @@ void CharActor::Update(float dt)
 		//if(_movingRight & !_movingUp & !_movingDown & !_movingLeft)
 		{
 			_idleness=0.0f;
+			_direction = RIGHT;
+			_isStandingSet = false;
 			if(_currentAnimName.compare("WalkRight") != 0)
 			{
-				_isStandingSet = false;
 				ClearSpriteInfo();
 				LoadSpriteFrames("Resources/Images/animations/chars/arth/walk/right/walkRight_00.png");
 				delay = 0.1f;
@@ -206,9 +211,10 @@ void CharActor::Update(float dt)
 		//if(_movingRight & !_movingUp & !_movingDown & !_movingLeft)
 		{
 			_idleness=0.0f;
+			_direction = UPRIGHT;
+			_isStandingSet = false;
 			if(_currentAnimName.compare("WalkUpRight") != 0)
 			{
-				_isStandingSet = false;
 				ClearSpriteInfo();
 				LoadSpriteFrames("Resources/Images/animations/chars/arth/walk/upRight/walkUpRight_00.png");
 				delay = 0.1f;
@@ -223,9 +229,10 @@ void CharActor::Update(float dt)
 		//if(_movingRight & !_movingUp & !_movingDown & !_movingLeft)
 		{
 			_idleness=0.0f;
+			_direction = DOWNRIGHT;
+			_isStandingSet = false;
 			if(_currentAnimName.compare("WalkDownRight") != 0)
 			{
-				_isStandingSet = false;
 				ClearSpriteInfo();
 				LoadSpriteFrames("Resources/Images/animations/chars/arth/walk/downRight/walkDownRight_00.png");
 				delay = 0.1f;
@@ -240,9 +247,10 @@ void CharActor::Update(float dt)
 		//if(_movingRight & !_movingUp & !_movingDown & !_movingLeft)
 		{
 			_idleness=0.0f;
+			_direction = UPLEFT;
+			_isStandingSet = false;
 			if(_currentAnimName.compare("WalkUpLeft") != 0)
 			{
-				_isStandingSet = false;
 				ClearSpriteInfo();
 				LoadSpriteFrames("Resources/Images/animations/chars/arth/walk/upLeft/walkUpLeft_00.png");
 				delay = 0.1f;
@@ -257,9 +265,10 @@ void CharActor::Update(float dt)
 		//if(_movingRight & !_movingUp & !_movingDown & !_movingLeft)
 		{
 			_idleness=0.0f;
+			_direction = DOWNLEFT;
+			_isStandingSet = false;
 			if(_currentAnimName.compare("WalkDownLeft") != 0)
 			{
-				_isStandingSet = false;
 				ClearSpriteInfo();
 				LoadSpriteFrames("Resources/Images/animations/chars/arth/walk/downLeft/walkDownLeft_00.png");
 				delay = 0.1f;
@@ -281,31 +290,198 @@ void CharActor::Update(float dt)
 		_idleness+=dt;
 		if(_idleness < 5.0f)
 		{
-			if((_currentAnimName.compare("LookAroundDown") != 0) & !_isStandingSet)
-			{	
-				_isStandingSet = true;
-				ClearSpriteInfo();
-				_currentAnimName = "";
-				//CLAMPMODES: GL_CLAMP or GL_REPEAT
-				//FILTERMODES: GL_NEAREST, GL_LINEAR, GL_NEAREST_MIPMAP_NEAREST, GL_LINEAR_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR, or 
-				//GL_LINEAR_MIPMAP_LINEAR
-				SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundDown/lookAroundDown_00.png"/*, 0, GL_CLAMP, GL_LINEAR_MIPMAP_NEAREST*/);
+			if(!_isStandingSet)
+			{
+				switch(_direction)
+				{
+				case UP:
+					if(_currentAnimName.compare("LookAroundUp") != 0)
+					{	
+						_isStandingSet = true;
+						ClearSpriteInfo();
+						_currentAnimName = "";
+						//CLAMPMODES: GL_CLAMP or GL_REPEAT
+						//FILTERMODES: GL_NEAREST, GL_LINEAR, GL_NEAREST_MIPMAP_NEAREST, GL_LINEAR_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR, or 
+						//GL_LINEAR_MIPMAP_LINEAR
+						SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundUp/lookAroundUp_00.png"/*, 0, GL_CLAMP, GL_LINEAR_MIPMAP_NEAREST*/);
+					}
+					break;
+				case UPRIGHT:
+					if(_currentAnimName.compare("LookAroundUpRight") != 0)
+					{	
+						_isStandingSet = true;
+						ClearSpriteInfo();
+						_currentAnimName = "";
+						SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundUpRight/lookAroundUpRight_00.png");
+					}
+					break;
+				case RIGHT:
+					if(_currentAnimName.compare("LookAroundRight") != 0)
+					{	
+						_isStandingSet = true;
+						ClearSpriteInfo();
+						_currentAnimName = "";
+						SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundRight/lookAroundRight_00.png");
+					}
+					break;
+				case DOWNRIGHT:
+					if(_currentAnimName.compare("LookAroundDownRight") != 0)
+					{	
+						_isStandingSet = true;
+						ClearSpriteInfo();
+						_currentAnimName = "";
+						SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundDownRight/lookAroundDownRight_00.png");
+					}
+					break;
+				case DOWN:
+					if(_currentAnimName.compare("LookAroundDown") != 0)
+					{	
+						_isStandingSet = true;
+						ClearSpriteInfo();
+						_currentAnimName = "";
+						SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundDown/lookAroundDown_00.png");
+					}
+					break;
+				case DOWNLEFT:
+					if(_currentAnimName.compare("LookAroundDownLeft") != 0)
+					{	
+						_isStandingSet = true;
+						ClearSpriteInfo();
+						_currentAnimName = "";
+						SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundDownLeft/lookAroundDownLeft_00.png");
+					}
+					break;
+				case LEFT:
+					if(_currentAnimName.compare("LookAroundLeft") != 0)
+					{	
+						_isStandingSet = true;
+						ClearSpriteInfo();
+						_currentAnimName = "";
+						SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundLeft/lookAroundLeft_00.png");
+					}
+					break;
+				case UPLEFT:
+					if(_currentAnimName.compare("LookAroundUpLeft") != 0)
+					{	
+						_isStandingSet = true;
+						ClearSpriteInfo();
+						_currentAnimName = "";
+						SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundUpLeft/lookAroundUpLeft_00.png");
+					}
+					break;
+				}
 			}
 		}
 		else if(_idleness >= 5.0f)
 		{
 			_idleness=0.0f;
-			if(_currentAnimName.compare("LookAroundDown") != 0)
-			{
-				_isStandingSet = false;
-				ClearSpriteInfo();
-				LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundDown/lookAroundDown_00.png");
-				delay = 0.2f;
-				animType = SAT_OneShot;
-				startFrame = 0;
-				endFrame = 9;
-				animName = "LookAroundDown";
-			}
+			switch(_direction)
+				{
+				case UP: 
+					if(_currentAnimName.compare("LookAroundUp") != 0)
+					{
+						_isStandingSet = false;
+						ClearSpriteInfo();
+						LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundUp/lookAroundUp_00.png");
+						delay = 0.2f;
+						animType = SAT_OneShot;
+						startFrame = 0;
+						endFrame = 9;
+						animName = "LookAroundUp";
+					}
+					break;
+				case UPRIGHT:
+					if(_currentAnimName.compare("LookAroundUpRight") != 0)
+					{
+						_isStandingSet = false;
+						ClearSpriteInfo();
+						LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundUpRight/lookAroundUpRight_00.png");
+						delay = 0.2f;
+						animType = SAT_OneShot;
+						startFrame = 0;
+						endFrame = 9;
+						animName = "LookAroundUpRight";
+					}
+					break;
+				case RIGHT:
+					if(_currentAnimName.compare("LookAroundRight") != 0)
+					{
+						_isStandingSet = false;
+						ClearSpriteInfo();
+						LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundRight/lookAroundRight_00.png");
+						delay = 0.2f;
+						animType = SAT_OneShot;
+						startFrame = 0;
+						endFrame = 9;
+						animName = "LookAroundRight";
+					}
+					break;
+				case DOWNRIGHT:
+					if(_currentAnimName.compare("LookAroundDownRight") != 0)
+					{
+						_isStandingSet = false;
+						ClearSpriteInfo();
+						LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundDownRight/lookAroundDownRight_00.png");
+						delay = 0.2f;
+						animType = SAT_OneShot;
+						startFrame = 0;
+						endFrame = 9;
+						animName = "LookAroundDownRight";
+					}
+					break;
+				case DOWN:
+					if(_currentAnimName.compare("LookAroundDown") != 0)
+					{
+						_isStandingSet = false;
+						ClearSpriteInfo();
+						LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundDown/lookAroundDown_00.png");
+						delay = 0.2f;
+						animType = SAT_OneShot;
+						startFrame = 0;
+						endFrame = 9;
+						animName = "LookAroundDown";
+					}
+					break;
+				case DOWNLEFT:
+					if(_currentAnimName.compare("LookAroundDownLeft") != 0)
+					{
+						_isStandingSet = false;
+						ClearSpriteInfo();
+						LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundDownLeft/lookAroundDownLeft_00.png");
+						delay = 0.2f;
+						animType = SAT_OneShot;
+						startFrame = 0;
+						endFrame = 9;
+						animName = "LookAroundDownLeft";
+					}
+					break;
+				case LEFT:
+					if(_currentAnimName.compare("LookAroundLeft") != 0)
+					{
+						_isStandingSet = false;
+						ClearSpriteInfo();
+						LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundLeft/lookAroundLeft_00.png");
+						delay = 0.2f;
+						animType = SAT_OneShot;
+						startFrame = 0;
+						endFrame = 9;
+						animName = "LookAroundLeft";
+					}
+					break;
+				case UPLEFT:
+					if(_currentAnimName.compare("LookAroundUpLeft") != 0)
+					{
+						_isStandingSet = false;
+						ClearSpriteInfo();
+						LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundUpLeft/lookAroundUpLeft_00.png");
+						delay = 0.2f;
+						animType = SAT_OneShot;
+						startFrame = 0;
+						endFrame = 9;
+						animName = "LookAroundUpLeft";
+					}
+					break;
+				}
 		}
 	}
 	if((_currentAnimName.compare(animName) != 0) & !IsSpriteAnimPlaying())
@@ -331,10 +507,10 @@ void CharActor::Update(float dt)
 void CharActor::AnimCallback(String animName)
 {
 	_currentAnimName = "";
-	if(animName.compare("LookAroundDown") == 0)
+	/*if(animName.compare("LookAroundDown") == 0)
 	{
 
-	}
+	}*/
 }
 
 void CharActor::ReceiveMessage(Message* m)

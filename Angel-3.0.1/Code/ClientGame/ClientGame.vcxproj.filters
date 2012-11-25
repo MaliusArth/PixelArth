@@ -53,6 +53,9 @@
     <ClCompile Include="Physics\Bitmask.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\Collision.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -75,6 +78,9 @@
       <Filter>WorldMap</Filter>
     </ClInclude>
     <ClInclude Include="Physics\Bitmask.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Collision.h">
       <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>

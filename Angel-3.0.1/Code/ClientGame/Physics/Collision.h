@@ -1,5 +1,7 @@
 #pragma once
 
-class Collision{
-	
+class Collision
+{
+public:
+	Vector2 _vector;
 };
