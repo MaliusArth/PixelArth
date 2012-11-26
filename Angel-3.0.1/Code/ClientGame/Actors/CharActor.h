@@ -7,7 +7,7 @@
 #include "Physics\WorldCollision.h"
 #include "PixelArthGameManager.h"
 
-enum Direction {UP, UPRIGHT, RIGHT, DOWNRIGHT, DOWN, DOWNLEFT, LEFT, UPLEFT};
+enum Direction {NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST};
 
 /// An Actor for displaying game characters on the screen.
 /**
@@ -25,7 +25,7 @@ public:
 	 * The constructor sets up all the information that this CharActor will
 	 *  use to draw itself to the screen. 
 	 */
-	explicit CharActor(Bitmask* mask);
+	explicit CharActor(Bitmask* mask, float size=2.0f);
 	
 	/**
 	 * A function which makes the necessary updates to the Actor. The base 
@@ -77,15 +77,15 @@ public:
 	virtual const String GetClassName() const { return "CharActor"; }
 
 private:
-	
 	BoundingBox _bBox;
 	Bitmask* _mask;
-	bool _movingUp;
-	bool _movingDown;
-	bool _movingLeft;
-	bool _movingRight;
+	Direction _direction;
+	bool _moving;
+	bool _movingNorth;
+	bool _movingEast;
+	bool _movingSouth;
+	bool _movingWest;
 	float _movementSpeed;
 	float _idleness;
-	Direction _direction;
-	bool _isStandingSet;
+	bool _idleAnim;
 };
