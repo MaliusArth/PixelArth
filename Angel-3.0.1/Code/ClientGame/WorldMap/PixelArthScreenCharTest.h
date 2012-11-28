@@ -43,5 +43,5 @@ public:
 
 private:
 	TextActor *t;
-	Actor *a;
+	//Actor *a;
 };

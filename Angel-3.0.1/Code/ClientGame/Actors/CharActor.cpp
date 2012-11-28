@@ -23,7 +23,7 @@ CharActor::CharActor(Bitmask* mask, float size)
 	, _movingEast(false)
 	, _movingSouth(false)
 	, _movingWest(false)
-	, _movementSpeed(0.05f)
+	, _movementSpeed(3.0f)
 	, _idleness(0.0f)
 	, _idleAnim(false)
 {
@@ -75,8 +75,8 @@ void CharActor::Update(float dt)
 	{
 		float angle_rad = MathUtil::AngleFromVector(direction);
 		//bug fix along axes:
-		direction.X = direction.X == 0 ? 0 : _movementSpeed*cos(angle_rad);
-		direction.Y = direction.Y == 0 ? 0 : (_movementSpeed/2)*sin(angle_rad);
+		direction.X = direction.X == 0 ? 0 : (_movementSpeed*dt)*cos(angle_rad);
+		direction.Y = direction.Y == 0 ? 0 : ((_movementSpeed/2)*dt)*sin(angle_rad);
 	}
 	Vector2 newPosition = _position + direction;
 	
