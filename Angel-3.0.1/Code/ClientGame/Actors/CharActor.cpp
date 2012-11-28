@@ -27,9 +27,12 @@ CharActor::CharActor(Bitmask* mask, float size)
 	, _idleness(0.0f)
 	, _idleAnim(false)
 {
+	//SetName("Arth");
 	//SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	SetSize(size);
 	_mask->setSizeInWorldUnits(size);
+	
+	_timestampArrowReleased = theWorld.GetCurrentTimeSeconds();
 
 	//ClearSpriteInfo();
 	SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundDown/lookAroundDown_00.png");
@@ -94,6 +97,8 @@ void CharActor::Update(float dt)
 	if(_moving & !collType)
 	//if(_moving & collList has only c_none)
 	{
+		_idleAnim = false;
+	
 		#pragma region Walk North
 		if((newPosition.Y > _position.Y) & (newPosition.X == _position.X))
 		{
@@ -318,12 +323,12 @@ void CharActor::Update(float dt)
 		else
 		{
 			_idleness=0.0f;
+			_idleAnim = true;
 			switch(_direction)
 			{
 			case NORTH:
 				if(_currentAnimName.compare("LookAroundUp") != 0)
 				{
-					_idleAnim = true;
 					ClearSpriteInfo();
 					LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundUp/lookAroundUp_00.png");
 					delay = 0.2f;
@@ -336,7 +341,6 @@ void CharActor::Update(float dt)
 			case NORTHEAST:
 				if(_currentAnimName.compare("LookAroundUpRight") != 0)
 				{
-					_idleAnim = true;
 					ClearSpriteInfo();
 					LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundUpRight/lookAroundUpRight_00.png");
 					delay = 0.2f;
@@ -349,7 +353,6 @@ void CharActor::Update(float dt)
 			case EAST:
 				if(_currentAnimName.compare("LookAroundRight") != 0)
 				{
-					_idleAnim = true;
 					ClearSpriteInfo();
 					LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundRight/lookAroundRight_00.png");
 					delay = 0.2f;
@@ -362,7 +365,6 @@ void CharActor::Update(float dt)
 			case SOUTHEAST:
 				if(_currentAnimName.compare("LookAroundDownRight") != 0)
 				{
-					_idleAnim = true;
 					ClearSpriteInfo();
 					LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundDownRight/lookAroundDownRight_00.png");
 					delay = 0.2f;
@@ -375,7 +377,6 @@ void CharActor::Update(float dt)
 			case SOUTH:
 				if(_currentAnimName.compare("LookAroundDown") != 0)
 				{
-					_idleAnim = true;
 					ClearSpriteInfo();
 					LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundDown/lookAroundDown_00.png");
 					delay = 0.2f;
@@ -388,7 +389,6 @@ void CharActor::Update(float dt)
 			case SOUTHWEST:
 				if(_currentAnimName.compare("LookAroundDownLeft") != 0)
 				{
-					_idleAnim = true;
 					ClearSpriteInfo();
 					LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundDownLeft/lookAroundDownLeft_00.png");
 					delay = 0.2f;
@@ -401,7 +401,6 @@ void CharActor::Update(float dt)
 			case WEST:
 				if(_currentAnimName.compare("LookAroundLeft") != 0)
 				{
-					_idleAnim = true;
 					ClearSpriteInfo();
 					LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundLeft/lookAroundLeft_00.png");
 					delay = 0.2f;
@@ -414,7 +413,6 @@ void CharActor::Update(float dt)
 			case NORTHWEST:
 				if(_currentAnimName.compare("LookAroundUpLeft") != 0)
 				{
-					_idleAnim = true;
 					ClearSpriteInfo();
 					LoadSpriteFrames("Resources/Images/animations/chars/arth/stand/lookAroundUpLeft/lookAroundUpLeft_00.png");
 					delay = 0.2f;
@@ -502,6 +500,13 @@ void CharActor::ReceiveMessage(Message* m)
 	{
 		//SystemLog().Log("UpArrowReleased");
 		_movingNorth = false;
+
+		/*if(theWorld.GetCurrentTimeSeconds() - _timestampArrowReleased < 0.02f)
+		{
+
+		}*/
+		std::cout << "UP after RIGHT " << theWorld.GetCurrentTimeSeconds() - _timestampArrowReleased << std::endl;
+		_timestampArrowReleased = theWorld.GetCurrentTimeSeconds();
 	}
 	if (m->GetMessageName() == "DownArrowReleased")
 	{
@@ -514,6 +519,13 @@ void CharActor::ReceiveMessage(Message* m)
 	if (m->GetMessageName() == "RightArrowReleased")
 	{
 		_movingEast = false;
+
+		/*if(theWorld.GetCurrentTimeSeconds() - _timestampArrowReleased < 0.02f)
+		{
+
+		}*/
+		std::cout << "RIGHT after UP " << theWorld.GetCurrentTimeSeconds() - _timestampArrowReleased << std::endl;
+		_timestampArrowReleased = theWorld.GetCurrentTimeSeconds();
 	}
 
 #pragma endregion

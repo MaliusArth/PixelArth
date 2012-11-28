@@ -88,4 +88,6 @@ private:
 	float _movementSpeed;
 	float _idleness;
 	bool _idleAnim;
+
+	float _timestampArrowReleased;
 };
