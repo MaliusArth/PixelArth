@@ -46,6 +46,15 @@ CharActor::CharActor(Bitmask* mask, float size)
 	theSwitchboard.SubscribeTo(this, "DownArrowReleased");
 	theSwitchboard.SubscribeTo(this, "LeftArrowReleased");
 	theSwitchboard.SubscribeTo(this, "RightArrowReleased");
+
+	///TEST
+	_world = new Bitmask("Resources/Images/coll.png");
+}
+
+CharActor::~CharActor(void)
+{
+	delete _mask;
+	delete _world;
 }
 
 void CharActor::Update(float dt)
@@ -83,14 +92,13 @@ void CharActor::Update(float dt)
 	}
 	Vector2 newPosition = _position + direction;
 	
-	//TEST
-	Bitmask* world = new Bitmask("Resources/Images/coll.png");
-
+	
 	//multiple color bits in bitmask
 	//unsigned int collType = thePixelArthGame.m_wColl->isColliding(*_mask, newPosition-(GetSize()/2));
 	//if(collType > 0)
-	std::list<CollType> collList = thePixelArthGame.m_collChecker->checkCollisions(Vector2::Zero, *world, newPosition, *_mask);
+	std::list<CollType> collList = thePixelArthGame.m_collChecker->checkCollisions(Vector2(0.0f, 0.0f), *_world, newPosition, *_mask);
 	std::cout << collList.size() << std::endl;
+
 
 	bool collType = false;
 

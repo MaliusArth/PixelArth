@@ -27,6 +27,8 @@ public:
 	 */
 	explicit CharActor(Bitmask* mask, float size=2.0f);
 	
+	~CharActor(void);
+
 	/**
 	 * A function which makes the necessary updates to the Actor. The base 
 	 *  implementation just updates the animations and intervals, but a 
@@ -89,5 +91,8 @@ private:
 	float _idleness;
 	bool _idleAnim;
 
+
 	float _timestampArrowReleased;
+	///TEST
+	Bitmask* _world;
 };

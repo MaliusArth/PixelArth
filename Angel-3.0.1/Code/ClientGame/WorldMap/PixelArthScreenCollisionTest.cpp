@@ -1,32 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////
-// Copyright (C) 2008-2012, Shane Liesegang
-// All rights reserved.
-// 
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions are met:
-// 
-//     * Redistributions of source code must retain the above copyright 
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright 
-//       notice, this list of conditions and the following disclaimer in the 
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the copyright holder nor the names of any 
-//       contributors may be used to endorse or promote products derived from 
-//       this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
-// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
-// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
-// POSSIBILITY OF SUCH DAMAGE.
-//////////////////////////////////////////////////////////////////////////////
-
 #include "stdafx.h"
 #include "PixelArthScreenCollisionTest.h"
 
@@ -36,13 +7,17 @@ PixelArthScreenCollisionTest::PixelArthScreenCollisionTest()
 	//thePixelArthGame.m_wColl->setBitmask("Resources/Images/coll.png");
 }
 
+//PixelArthScreenCollisionTest::~PixelArthScreenCollisionTest()
+//{
+//	delete m_background;
+//	delete m_text;
+//	delete m_hero;
+//}
 void PixelArthScreenCollisionTest::Start()
 {
-	Bitmask* mask = new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png");
-
-	m_hero = new CharActor(mask);
+	m_hero = new CharActor(new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
 	m_text = new TextActor("Console", "Collision Test");
-	m_background= new GroundActor("Resources/Images/coll.png");
+	m_background = new GroundActor("Resources/Images/coll.png");
 	//Creating a new, generic actor is simple. 
 	
 	
@@ -76,8 +51,9 @@ void PixelArthScreenCollisionTest::Start()
 	//fileLoc->SetPosition(MathUtil::ScreenToWorld(10, 563));
 	//fileLoc->SetColor(.3f, .3f, .3f);
 	//theWorld.Add(fileLoc);
-	_objects.push_back(fileLoc);
+	//_objects.push_back(fileLoc);
 	_objects.push_back(m_text);
+	_objects.push_back(m_background);
 	_objects.push_back(m_hero);
 	#pragma endregion
 }
@@ -85,10 +61,4 @@ void PixelArthScreenCollisionTest::Start()
 void PixelArthScreenCollisionTest::Update(float dt)
 {
 	
-}
-PixelArthScreenCollisionTest::~PixelArthScreenCollisionTest()
-{
-	delete m_background;
-	delete m_text;
-	delete m_hero;
 }

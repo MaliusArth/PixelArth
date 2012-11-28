@@ -35,12 +35,14 @@ PixelArthScreenCharTest::PixelArthScreenCharTest()
 {
 }
 
+//PixelArthScreenCharTest::~PixelArthScreenCharTest()
+//{
+//}
+
 void PixelArthScreenCharTest::Start()
 {
-	Bitmask* mask = new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png");
-	
 	//Creating a new, generic actor is simple. 
-	Actor *arth = new CharActor(mask);
+	arth = new CharActor(new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
 	arth->SetName("Arth");
 	//Sizes and coordinates are always in GL units, which can mean whatever you decide they mean
 	// -- our physics packages (Box2D) assumes that they mean meters, though. 
@@ -74,7 +76,7 @@ void PixelArthScreenCharTest::Start()
 	theWorld.Add(fileLoc);
 	_objects.push_back(fileLoc);
 	_objects.push_back(t);
-	//_objects.push_back(a);
+	_objects.push_back(arth);
 	#pragma endregion
 }
 
