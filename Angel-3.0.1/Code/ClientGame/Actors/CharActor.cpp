@@ -29,6 +29,7 @@ CharActor::CharActor(Bitmask* mask, float size)
 {
 	//SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	SetSize(size);
+	_mask->setSizeInWorldUnits(size);
 
 	//ClearSpriteInfo();
 	SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundDown/lookAroundDown_00.png");
@@ -79,12 +80,19 @@ void CharActor::Update(float dt)
 	}
 	Vector2 newPosition = _position + direction;
 	
+	//TEST
+	Bitmask* world = new Bitmask("Resources/Images/coll.png");
+
 	//multiple color bits in bitmask
 	//unsigned int collType = thePixelArthGame.m_wColl->isColliding(*_mask, newPosition-(GetSize()/2));
 	//if(collType > 0)
-	bool collType = false;// = thePixelArthGame.m_wColl->isColliding(*_mask, newPosition-(GetSize()/2));
-	
+	std::list<CollType> collList = thePixelArthGame.m_collChecker->checkCollisions(Vector2::Zero, *world, newPosition, *_mask);
+	std::cout << collList.size() << std::endl;
+
+	bool collType = false;
+
 	if(_moving & !collType)
+	//if(_moving & collList has only c_none)
 	{
 		#pragma region Walk North
 		if((newPosition.Y > _position.Y) & (newPosition.X == _position.X))

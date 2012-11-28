@@ -4,7 +4,8 @@
 #include "Physics/Bitmask.h"
 class CollisionChecker{
 public:
-	CollisionChecker();
-	std::list<CollType> checkCollissions(const Vector2&,const Bitmask&, const Vector2&, const Bitmask&) const;
+
+	//CollisionChecker();
+	std::list<CollType> checkCollisions(const Vector2&,const Bitmask&, const Vector2&, const Bitmask&) const;
 
 };

@@ -39,6 +39,7 @@ PixelArthScreenCollisionTest::PixelArthScreenCollisionTest()
 void PixelArthScreenCollisionTest::Start()
 {
 	Bitmask* mask = new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png");
+	
 
 	m_hero = new CharActor(mask);
 	m_text = new TextActor("Console", "Collision Test");

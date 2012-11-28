@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "CollisionChecker.h"
 
-std::list<CollType > CollisionChecker::checkCollissions(const Vector2& argBegin1,const Bitmask& bitmask1, const Vector2& argBegin2, const Bitmask& bitmask2) const{
+std::list<CollType> CollisionChecker::checkCollisions(const Vector2& argBegin1,const Bitmask& bitmask1, const Vector2& argBegin2, const Bitmask& bitmask2) const{
 	//converting to bitmask coordinates
 	int i;
 	Vector2 begin1, end1, begin2, end2, interBegin, interEnd;

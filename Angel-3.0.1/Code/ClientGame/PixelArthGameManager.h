@@ -33,7 +33,7 @@
 #include <vector>
 #include <string>
 
-#include "Physics\WorldCollision.h"
+#include "Physics\CollisionChecker.h"
 
 class PixelArthScreen : public Renderable
 {
@@ -73,8 +73,7 @@ public:
 
 	virtual void ReceiveMessage(Message* message);
 	
-	WorldCollision *m_wColl;
-	
+	CollisionChecker *m_collChecker;
 protected:
 	PixelArthGameManager();
 	static PixelArthGameManager *s_PixelArthGameManager;
