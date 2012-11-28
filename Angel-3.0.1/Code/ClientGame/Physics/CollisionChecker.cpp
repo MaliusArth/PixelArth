@@ -10,15 +10,15 @@ std::list<CollType> CollisionChecker::checkCollisions(const Vector2& argBegin1,c
 	std::list<Collision>::iterator it;
 	std::list<CollType> collTypeList;
 	std::list<CollType>::iterator collTypeIt;
-	begin1.X=argBegin1.X+bitmask1.getX()/2;
-	begin1.Y=argBegin1.Y+bitmask1.getY()/2-(bitmask1.getY()*bitmask1.getScaleY());
-	end1.X=argBegin1.X+bitmask1.getX()/2-(bitmask1.getX()*bitmask1.getScaleX());
-	end1.Y=argBegin1.Y+bitmask1.getY()/2;
-	begin2.X=argBegin2.X+bitmask2.getX()/2;
-	begin2.Y=argBegin2.Y+bitmask2.getY()/2-(bitmask2.getY()*bitmask2.getScaleY());
-	end2.X=argBegin2.X+bitmask2.getX()/2-(bitmask2.getX()*bitmask2.getScaleX());
-	end2.Y=argBegin2.Y+bitmask2.getY()/2;
-
+	begin1.X= MathUtil::WorldUnitsToPixels(argBegin1.X) + 400 - (bitmask1.getX()*bitmask1.getScaleX())/2;
+	begin1.Y= MathUtil::WorldUnitsToPixels(argBegin1.Y)+300-(bitmask1.getY()*bitmask1.getScaleY())/2;// - (bitmask1.getY()*bitmask1.getScaleY());
+	end1.X= MathUtil::WorldUnitsToPixels(argBegin1.X)+400 + (bitmask1.getX()*bitmask1.getScaleX())/2;
+	end1.Y= MathUtil::WorldUnitsToPixels(argBegin1.Y)+300+(bitmask1.getY()*bitmask1.getScaleY())/2;
+	begin2.X= MathUtil::WorldUnitsToPixels(argBegin2.X) + 400 - (bitmask2.getX()*bitmask2.getScaleX())/2;
+	begin2.Y= MathUtil::WorldUnitsToPixels(argBegin2.Y)+300-(bitmask2.getY()*bitmask2.getScaleY())/2;// - (bitmask2.getY()*bitmask2.getScaleY());
+	end2.X= MathUtil::WorldUnitsToPixels(argBegin2.X)+400 + (bitmask2.getX()*bitmask2.getScaleX())/2;
+	end2.Y= MathUtil::WorldUnitsToPixels(argBegin2.Y)+300+(bitmask2.getY()*bitmask2.getScaleY())/2;
+	
 //getting the intercepting box
 	if(begin1.X>begin2.X) 
 		interBegin.X=begin1.X;
@@ -40,7 +40,7 @@ std::list<CollType> CollisionChecker::checkCollisions(const Vector2& argBegin1,c
 	collList=bitmask1.getAllCollisions(interBegin-begin1,interEnd-begin1);
 	for(it= collList.begin();it!=collList.end();it++)
 	{
-		collTypeList=bitmask2.getAllCollisionTypes(it->getBegin(),it->getEnd());
+		collTypeList=bitmask2.getAllCollisionTypes(it->getBegin()+begin1-begin2,it->getEnd()+begin1-begin2);
 		for(collTypeIt= collTypeList.begin();collTypeIt!=collTypeList.end();it++){
 			foundTypes[(*collTypeIt)]=true;
 		}
