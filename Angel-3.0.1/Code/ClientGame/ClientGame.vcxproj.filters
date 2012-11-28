@@ -56,6 +56,9 @@
     <ClCompile Include="Physics\Collision.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\CollisionChecker.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -81,6 +84,9 @@
       <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="Physics\Collision.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\CollisionChecker.h">
       <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>

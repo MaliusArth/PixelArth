@@ -1,7 +1,17 @@
 #pragma once
-
-class Collision
-{
+#include<math.h>
+enum CollType{
+	c_wall =0,
+	c_none =255
+};
+class Collision{
+private:
+	Vector2 m_begin, m_end;
+	CollType m_type;
 public:
-	Vector2 _vector;
+	Collision(const Vector2&, const Vector2&, const CollType&);
+	Vector2 getBegin() const;
+	Vector2 getEnd() const;
+	CollType getType() const;
+	//~Collision();
 };
