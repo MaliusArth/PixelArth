@@ -10,14 +10,14 @@ std::list<CollType > CollisionChecker::checkCollissions(const Vector2& argBegin1
 	std::list<Collision>::iterator it;
 	std::list<CollType> collTypeList;
 	std::list<CollType>::iterator collTypeIt;
-	begin1.X=argBegin1.X+400;
-	begin1.Y=argBegin1.Y+300-(bitmask1.getY()*bitmask1.getScaleY());
-	end1.X=argBegin1.X+400-(bitmask1.getX()*bitmask1.getScaleX());
-	end1.Y=argBegin1.Y+300;
-	begin2.X=argBegin2.X+400;
-	begin2.Y=argBegin2.Y+300-(bitmask2.getY()*bitmask2.getScaleY());
-	end2.X=argBegin2.X+400-(bitmask2.getX()*bitmask2.getScaleX());
-	end2.Y=argBegin2.Y+300;
+	begin1.X=argBegin1.X+bitmask1.getX()/2;
+	begin1.Y=argBegin1.Y+bitmask1.getY()/2-(bitmask1.getY()*bitmask1.getScaleY());
+	end1.X=argBegin1.X+bitmask1.getX()/2-(bitmask1.getX()*bitmask1.getScaleX());
+	end1.Y=argBegin1.Y+bitmask1.getY()/2;
+	begin2.X=argBegin2.X+bitmask2.getX()/2;
+	begin2.Y=argBegin2.Y+bitmask2.getY()/2-(bitmask2.getY()*bitmask2.getScaleY());
+	end2.X=argBegin2.X+bitmask2.getX()/2-(bitmask2.getX()*bitmask2.getScaleX());
+	end2.Y=argBegin2.Y+bitmask2.getY()/2;
 
 //getting the intercepting box
 	if(begin1.X>begin2.X) 
