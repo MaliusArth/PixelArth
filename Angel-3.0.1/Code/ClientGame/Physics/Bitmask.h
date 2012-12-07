@@ -7,8 +7,9 @@ private:
 	 int m_x, m_y, m_type;
 	 unsigned char * m_mask;
 	 Vector2 m_scale;
-	 float center(const float&) const;
+	 
 public:
+	float center(const float&) const;
 	Bitmask(const String&);
 	int getX() const;
 	int getY() const;

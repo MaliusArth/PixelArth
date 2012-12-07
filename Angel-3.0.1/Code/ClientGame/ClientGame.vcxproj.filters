@@ -59,6 +59,9 @@
     <ClCompile Include="Physics\CollisionChecker.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Physics\Bitmask2.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -87,6 +90,9 @@
       <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="Physics\CollisionChecker.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics\Bitmask2.h">
       <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>

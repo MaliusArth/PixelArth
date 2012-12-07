@@ -4,8 +4,6 @@
 
 Bitmask::Bitmask(const String& path)
 {
-	m_scale.X=1.0f;
-	m_scale.Y=1.0f;
 	Bitmask::loadMask(path);
 }
 
@@ -108,10 +106,10 @@ std::list<Collision> Bitmask::getAllCollisions(const Vector2& argBegin, const Ve
 		}
 	}
 
-	for(i=center(begin.X)+1;i<=center(end.X)-1;i++)
-		for(j=center(begin.Y)+1;j<=center(end.Y)-1;j++)
+	for(i=center(begin.Y)+1;i<=center(end.Y)-1;i++)
+		for(j=center(begin.X)+1;j<=center(end.X)-1;j++)
 		{
-			if(m_mask[j*m_x+i] != c_none)
+			if(m_mask[i*m_x+j] != c_none)
 			{
 				current= c_wall;
 				collList.push_front(Collision(Vector2(i-0.5,j-0.5),Vector2(i+0.5,j+0.5),current));
@@ -169,8 +167,6 @@ unsigned char * Bitmask::getMask() const{
 void Bitmask::loadMask(const String& path){
 	m_mask = stbi_load(path.c_str(),&m_x,&m_y,&m_type,0);
 	if (m_mask == NULL) std::cout<<"cant inizialise mask! inputfile: "<<path<<std::endl;
-	else
-	std::cout<<"Bitmask created! x:"<<m_x<<" y:"<<m_y<<" type:"<<m_type<<"inputfile: "<<path<<std::endl;
 }
 
 Bitmask::~Bitmask(void)

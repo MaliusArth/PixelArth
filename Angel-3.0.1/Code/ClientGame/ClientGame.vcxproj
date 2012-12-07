@@ -180,6 +180,7 @@ cd ..\Tools\BuildScripts\
     <ClCompile Include="Actors\CharActor.cpp" />
     <ClCompile Include="Actors\GroundActor.cpp" />
     <ClCompile Include="Physics\Bitmask.cpp" />
+    <ClCompile Include="Physics\Bitmask2.cpp" />
     <ClCompile Include="Physics\Collision.cpp" />
     <ClCompile Include="Physics\CollisionChecker.cpp" />
     <ClCompile Include="Physics\WorldCollision.cpp" />
@@ -196,6 +197,7 @@ cd ..\Tools\BuildScripts\
     <ClInclude Include="Actors\CharActor.h" />
     <ClInclude Include="Actors\GroundActor.h" />
     <ClInclude Include="Physics\Bitmask.h" />
+    <ClInclude Include="Physics\Bitmask2.h" />
     <ClInclude Include="Physics\Collision.h" />
     <ClInclude Include="Physics\CollisionChecker.h" />
     <ClInclude Include="Physics\WorldCollision.h" />
