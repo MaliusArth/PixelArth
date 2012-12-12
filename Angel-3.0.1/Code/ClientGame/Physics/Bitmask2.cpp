@@ -1,6 +1,15 @@
 #include "StdAfx.h"
 #include "Physics/Bitmask2.h"
 #include "Physics/stb_image.c"
+Bitmask2::Bitmask2(const String& path)
+{
+	m_mask= NULL;
+	m_sizeX= 0;
+	m_sizeY= 0;
+	m_type= 0;
+	loadMask(path);
+}
+
 Bitmask2::Bitmask2()
 {
 	m_mask= NULL;
@@ -28,17 +37,30 @@ void Bitmask2::loadMask(const String& path){
 	}
 }
 
-void Bitmask2::copy(const Bitmask2& argMask, const float& scaleX= 1, const float& scaleY= 1){
-	int i, sizeTotal;
-	float scale;
-	m_sizeX= ceil(argMask.getSizeX()*scaleX);
-	m_sizeY= ceil(argMask.getSizeY()*scaleY);
+void Bitmask2::setSize(const Bitmask2& argMask, const float& sizeX, const float& sizeY){
+	int i,j;
+	float scaleX,scaleY;
+	m_sizeX= ceil(MathUtil::WorldUnitsToPixels(sizeX));
+	m_sizeY= ceil(MathUtil::WorldUnitsToPixels(sizeY));
 	m_type= argMask.getType();
-	sizeTotal= m_sizeX*m_sizeY;
-	scale=(argMask.getSizeX()*argMask.getSizeY())/sizeTotal;
-	m_mask= new unsigned char[sizeTotal];
-	for(i=0;i<sizeTotal;i++)
-		m_mask[i]= argMask.getMask()[(int)(i*scale)];
+	scaleX=(float)argMask.getSizeX()/(float)m_sizeX;
+	scaleY=(float)argMask.getSizeY()/(float)m_sizeY;
+	m_mask= new unsigned char[m_sizeX*m_sizeY];
+	for(i=0;i<m_sizeX;i++)
+	{
+		//std::cout<< i<<";"<<(int)((float)i*scaleX)<<std::endl;
+		for(j=0;j<m_sizeY;j++)
+		{
+			
+			m_mask[j*m_sizeX+i] =argMask.getBit((int)((float)i*scaleX),(int)((float)j*scaleY));
+			/*if(m_mask[i*m_sizeX+j]!=255)
+			std::cout<<"X"<<"|";*/
+		}
+	}
+	int debug;
+	/*for(debug=0;debug<m_sizeX*m_sizeY; debug++)
+		if(m_mask[debug] != 255)
+			std::cout<<"X|";*/
 }
 int Bitmask2::getSizeX() const{
 	return m_sizeX;
@@ -57,5 +79,5 @@ unsigned char * Bitmask2::getMask() const{
 unsigned char Bitmask2::getBit(const int& x, const int& y) const{
 	if (m_mask!=NULL)
 	return m_mask[y*m_sizeX + x];
-	return NULL;
+	return '\n';
 }

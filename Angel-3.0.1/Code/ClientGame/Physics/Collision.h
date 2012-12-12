@@ -2,7 +2,7 @@
 #include<math.h>
 enum CollType{
 	c_wall =0,
-	c_none =255
+	c_floor =255
 };
 class Collision{
 private:

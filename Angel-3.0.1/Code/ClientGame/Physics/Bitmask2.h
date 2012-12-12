@@ -8,9 +8,10 @@ private:
 	 
 public:
 	//float center(const float&) const;
+	Bitmask2(const String&);
 	Bitmask2();
 	~Bitmask2();
-	void copy(const Bitmask2&, const float& = 1, const float& = 1);
+	void setSize(const Bitmask2&, const float& = 1, const float& = 1);
 	void loadMask(const String&);
 	int getSizeX() const;
 	int getSizeY() const;
