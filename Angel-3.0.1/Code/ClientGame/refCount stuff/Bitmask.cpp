@@ -63,7 +63,7 @@ void Bitmask::setSize(const float& x, const float& y){
 };
 
 void Bitmask::setSize(const Vector2& size){
-    Bitmask::setSize(size.X, size.Y);
+    //TODO
 };
 
 unsigned char Bitmask::getBit(const int& xPos, const int& yPos) const
@@ -71,9 +71,4 @@ unsigned char Bitmask::getBit(const int& xPos, const int& yPos) const
     if (m_mask!=NULL)
         return m_mask[yPos*m_size.X + xPos];
 	return '\n';
-};
-
-unsigned char Bitmask::getBit(const Vec2i& pos) const
-{
-    return Bitmask::getBit(pos.X, pos.Y);
 };

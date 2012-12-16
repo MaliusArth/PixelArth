@@ -35,9 +35,6 @@
     </ClCompile>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PixelArthGameManager.cpp" />
-    <ClCompile Include="Physics\WorldCollision.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Actors\CharActor.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
@@ -53,13 +50,7 @@
     <ClCompile Include="Physics\Bitmask.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Physics\Collision.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\CollisionChecker.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics\Bitmask2.cpp">
+    <ClCompile Include="Physics\CollisionHandler.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,9 +59,6 @@
       <Filter>sys</Filter>
     </ClInclude>
     <ClInclude Include="PixelArthGameManager.h" />
-    <ClInclude Include="Physics\WorldCollision.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
     <ClInclude Include="Actors\CharActor.h">
       <Filter>Actors</Filter>
     </ClInclude>
@@ -86,13 +74,7 @@
     <ClInclude Include="Physics\Bitmask.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Physics\Collision.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\CollisionChecker.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics\Bitmask2.h">
+    <ClInclude Include="Physics\CollisionHandler.h">
       <Filter>Physics</Filter>
     </ClInclude>
   </ItemGroup>

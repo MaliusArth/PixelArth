@@ -18,12 +18,8 @@ public:
 	
 	virtual void ReceiveMessage(Message *message) {}
 
-    Bitmask* GetBitmask(const String& path);
-
 protected:
 	std::vector<Renderable*> _objects;
-private:
-    std::map<String, Bitmask*> m_bitmaskmap;
 };
 
 

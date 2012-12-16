@@ -25,7 +25,7 @@ public:
 	 * The constructor sets up all the information that this CharActor will
 	 *  use to draw itself to the screen. 
 	 */
-	explicit CharActor(Bitmask* mask, const Vector2 size=2.0f);
+	explicit CharActor(const String& maskpath, const Vector2 size=2.0f);
 	
 	//~CharActor(void);
 
@@ -93,7 +93,7 @@ public:
 private:
 	//bool m_isKinematic;
 	//BoundingBox m_bBox;
-	Bitmask* m_mask;
+	ReferenceToObj<Bitmask> m_mask;
 	Direction m_direction;
 	bool m_moving;
 	bool m_movingNorth;

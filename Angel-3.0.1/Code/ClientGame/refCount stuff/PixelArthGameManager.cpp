@@ -1,9 +1,8 @@
 #include "stdafx.h"
 #include "PixelArthGameManager.h"
-#include <map>
 
 #if !ANGEL_MOBILE
-	//#include "WorldMap/PixelArthScreenCharTest.h"
+	#include "WorldMap/PixelArthScreenCharTest.h"
 	#include "WorldMap/PixelArthScreenCollisionTest.h"
 #endif
 
@@ -34,21 +33,10 @@ void PixelArthScreen::Stop()
 		it++;
 	}
 	_objects.clear();
-    m_bitmaskmap.clear();
 }
 
 void PixelArthScreen::Update(float dt) {}
 void PixelArthScreen::Render() {}
-
-Bitmask* PixelArthScreen::GetBitmask(const String& path)
-{
-    if ( m_bitmaskmap.find(path) == m_bitmaskmap.end() ) {
-        // not found
-        Bitmask* mask = new Bitmask(path);
-        m_bitmaskmap.insert(make_pair(path,mask));
-    }
-    return m_bitmaskmap.at(path);
-}
 
 
 
@@ -60,12 +48,10 @@ PixelArthGameManager::PixelArthGameManager()
 	theSwitchboard.SubscribeTo(this, "MoveForwards");
 	theSwitchboard.SubscribeTo(this, "MoveBackwards");
 	
-	m_collHandler = new CollisionHandler();	
-	
 	#if ANGEL_MOBILE
 		//_screens.push_back(new PixelArthScreenMobileSimulator());				// 0
 	#else
-		//_screens.push_back(new PixelArthScreenCharTest());
+		_screens.push_back(new PixelArthScreenCharTest());
 		_screens.push_back(new PixelArthScreenCollisionTest());
 	#endif
 	
@@ -86,6 +72,8 @@ PixelArthGameManager::PixelArthGameManager()
 	theSound.SetSoundCallback(this, &GameManager::SoundEnded);
 	
 	sample = theSound.LoadSample("Resources/Sounds/click.ogg", false /*no stream*/);
+	
+	m_collHandler = new CollisionHandler();	
 }
 
 PixelArthGameManager& PixelArthGameManager::GetInstance()

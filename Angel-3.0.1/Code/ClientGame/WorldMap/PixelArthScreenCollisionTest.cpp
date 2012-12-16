@@ -15,9 +15,10 @@ PixelArthScreenCollisionTest::PixelArthScreenCollisionTest()
 //}
 void PixelArthScreenCollisionTest::Start()
 {
-	m_hero = new CharActor(new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
+	
+	m_hero = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
+	m_background = new GroundActor("Resources/Images/floating1.png");
 	m_text = new TextActor("Console", "Collision Test");
-	m_background = new GroundActor("Resources/Images/coll.png");
 	//Creating a new, generic actor is simple. 
 	
 	
@@ -47,7 +48,7 @@ void PixelArthScreenCollisionTest::Start()
 	m_text->SetPosition(0, 3.5);
 	m_text->SetAlignment(TXT_Center);
 	theWorld.Add(m_text);
-	TextActor *fileLoc = new TextActor("ConsoleSmall", "PixelArthScreenCharTest.cpp");
+	//TextActor *fileLoc = new TextActor("ConsoleSmall", "PixelArthScreenCharTest.cpp");
 	//fileLoc->SetPosition(MathUtil::ScreenToWorld(10, 563));
 	//fileLoc->SetColor(.3f, .3f, .3f);
 	//theWorld.Add(fileLoc);

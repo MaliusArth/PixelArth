@@ -1,35 +1,5 @@
-//////////////////////////////////////////////////////////////////////////////
-// Copyright (C) 2008-2012, Shane Liesegang
-// All rights reserved.
-// 
-// Redistribution and use in source and binary forms, with or without 
-// modification, are permitted provided that the following conditions are met:
-// 
-//     * Redistributions of source code must retain the above copyright 
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright 
-//       notice, this list of conditions and the following disclaimer in the 
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the copyright holder nor the names of any 
-//       contributors may be used to endorse or promote products derived from 
-//       this software without specific prior written permission.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
-// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
-// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
-// POSSIBILITY OF SUCH DAMAGE.
-//////////////////////////////////////////////////////////////////////////////
-
 #include "stdafx.h"
 #include "PixelArthScreenCharTest.h"
-
 
 PixelArthScreenCharTest::PixelArthScreenCharTest()
 {
@@ -42,7 +12,9 @@ PixelArthScreenCharTest::PixelArthScreenCharTest()
 void PixelArthScreenCharTest::Start()
 {
 	//Creating a new, generic actor is simple. 
-	arth = new CharActor(new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
+	
+	//m_a = new Actor();
+	arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
 	arth->SetName("Arth");
 	//Sizes and coordinates are always in GL units, which can mean whatever you decide they mean
 	// -- our physics packages (Box2D) assumes that they mean meters, though. 
@@ -59,10 +31,14 @@ void PixelArthScreenCharTest::Start()
 	// methods that get called once per frame. All your logic should happen in the Update function,
 	// and you should only implement Render if you have to do something out of the ordinary. 
 	theWorld.Add(arth);
+	
+	//Bitmask* testmask = new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png");
 
+	//std::map<String, Bitmask*> testmap;
 
+	//testmap.insert(make_pair(testmask->getPath(),testmask));
 
-
+	//std::cout << "BitmaskHashmapTest: " << testmap.at("Resources/Images/animations/chars/arth/arthBitmask.png")->getPath() << std::endl;
 
 	//PixelArth housekeeping below this point. 
 	#pragma region PixelArth Housekeeping

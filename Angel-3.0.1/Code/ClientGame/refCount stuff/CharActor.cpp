@@ -14,9 +14,9 @@
 
 #define IDLE_TIME 5.0f
 
-CharActor::CharActor(Bitmask* mask, const Vector2 size)
+CharActor::CharActor(const String& maskPath, const Vector2 size)
 	: PhysicsActor()
-	, m_mask(mask)
+	//, m_mask(maskPath)
 	, m_direction(SOUTH)
 	, m_moving(false)
 	, m_movingNorth(false)
@@ -28,6 +28,7 @@ CharActor::CharActor(Bitmask* mask, const Vector2 size)
 	, m_idleAnim(false)
 	//, m_isKinematic(true)
 {
+    m_mask = thePixelArthGame.m_collHandler->GetBitmask(maskPath);
 	//SetName("Arth");
 	//SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	SetSize(size.X, size.Y);
@@ -477,7 +478,7 @@ void CharActor::Update(float dt)
 	}
 	GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
 
-	PhysicsActor::Update(dt);
+	Actor::Update(dt);
 }
 
 

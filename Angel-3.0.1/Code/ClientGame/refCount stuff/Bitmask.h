@@ -1,7 +1,8 @@
 #pragma once
+#include "Referenced.h"
 
 /// <summary></summary>
-class Bitmask
+class Bitmask : public Referenced
 {
 public:
 	/// <summary>Constructor</summary>
@@ -49,8 +50,8 @@ public:
     /// <returns>TODO</returns>
     unsigned char getBit(const Vec2i& pos) const;
 private:
-    //Bitmask (const Bitmask &);
-    //Bitmask &operator= (const Bitmask &);
+    Bitmask (const Bitmask &);
+    Bitmask &operator= (const Bitmask &);
 
     /// <summary></summary>
 	void loadMask(const String& path);

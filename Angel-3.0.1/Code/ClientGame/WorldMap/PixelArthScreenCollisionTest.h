@@ -2,7 +2,7 @@
 
 #include "PixelArthGameManager.h"
 #include "Actors/GroundActor.h"
-#include "Physics/WorldCollision.h"
+//#include "Physics/WorldCollision.h"
 #include "Actors/CharActor.h"
 
 class PixelArthScreenCollisionTest : public PixelArthScreen
