@@ -31,7 +31,7 @@ CharActor::CharActor(Bitmask* mask, const Vector2 size)
 	//SetName("Arth");
 	//SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	SetSize(size.X, size.Y);
-	//_mask->setSizeInWorldUnits(size);
+	m_mask->setSize(size);
 
 	SetDensity(1.0f);
 	SetFriction(0.0f);

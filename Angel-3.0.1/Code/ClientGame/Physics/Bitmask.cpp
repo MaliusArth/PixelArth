@@ -45,6 +45,9 @@ Bitmask::~Bitmask(void)
 	//delete[] m_mask;
 };
 
+/// <summary>Loads bitmask from file
+/// <para>Sets m_size and m_type</para></summary>
+/// <param name="path">Path to the bitmask file</param>
 void Bitmask::loadMask(const String& path)
 {
     m_mask = stbi_load(path.c_str(),&m_size.X,&m_size.Y,&m_type,0);
@@ -53,13 +56,44 @@ void Bitmask::loadMask(const String& path)
 	std::cout << "Bitmask created! x: " << m_size.X << " y: " << m_size.Y << " type: " << m_type << " inputfile: " << path << std::endl;
 };
 
-//String Bitmask::getPath(void) const
-//{
-//	return m_path;
-//};
+String Bitmask::getPath(void) const
+{
+	return m_path;
+};
 
-void Bitmask::setSize(const float& x, const float& y){
-    //TODO
+void Bitmask::setSize(const float& sizeX, const float& sizeY){
+    /*
+    //TODO:
+    //infinite loop?
+    Bitmask* mask = thePixelArthGame.GetCurrentScreen()->GetBitmask(m_path);
+
+    // check if this bitmask isn't the same as the one  in the hashmap
+    if(this != mask)
+    {
+        int i,j;
+	    float scaleX,scaleY;
+	    m_size.X= ceil(MathUtil::WorldUnitsToPixels(sizeX));
+	    m_size.Y= ceil(MathUtil::WorldUnitsToPixels(sizeY));
+	    //m_type= argMask.getType();
+	    scaleX=(float)mask->getSize().X/(float)m_size.X;
+	    scaleY=(float)mask->getSize().Y/(float)m_size.Y;
+	    m_mask= new unsigned char[m_size.X*m_size.Y];
+	    for(i=0;i<m_size.X;i++)
+	    {
+		    //std::cout<< i<<";"<<(int)((float)i*scaleX)<<std::endl;
+		    for(j=0;j<m_size.Y;j++)
+		    {
+			
+			    m_mask[j*m_size.X+i] =mask->getBit((int)((float)i*scaleX),(int)((float)j*scaleY));
+			    //if(m_mask[i*m_sizeX+j]!=255)
+			    //std::cout<<"X"<<"|";
+		    }
+	    }
+	    //int debug;
+	    //for(debug=0;debug<m_sizeX*m_sizeY; debug++)
+		//    if(m_mask[debug] != 255)
+		//	    std::cout<<"X|";
+    }*/
 };
 
 void Bitmask::setSize(const Vector2& size){

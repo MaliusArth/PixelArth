@@ -18,7 +18,7 @@ public:
     /// <summary>Copies and resizes the bitmask</summary>
     /// <param name="x">Size along x-axis (in GL units).</param>
     /// <param name="y">Size along y-axis (in GL units). By default -1.0f for a uniform scale.</param>
-	void setSize(const float& x, const float& y = -1.0f);
+	void setSize(const float& sizeX, const float& sizeY = -1.0f);
 	
     /// <summary>Copies and resizes the bitmask</summary>
     /// <param name="size">The size of the bitmask (in GL units).</param>
