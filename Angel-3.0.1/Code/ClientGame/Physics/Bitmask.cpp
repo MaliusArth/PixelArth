@@ -63,7 +63,7 @@ String Bitmask::getPath(void) const
 
 void Bitmask::setSize(const float& sizeX, const float& sizeY){
     /*
-    //TODO:
+    //TODO: hufi
     //infinite loop?
     Bitmask* mask = thePixelArthGame.GetCurrentScreen()->GetBitmask(m_path);
 

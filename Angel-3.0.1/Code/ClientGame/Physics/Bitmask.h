@@ -32,21 +32,21 @@ public:
     inline Vec2i getPixelSize(void) const { return m_size; };
 
     /// <returns>Returns the type of the bitmask file
-    /// <para>TODO: Describe return values!!!</para></returns>
+    /// <para>TODO: hufi: Describe return values!!!</para></returns>
     inline int getType(void) const { return m_type; };
 
-    /// <returns>TODO</returns>
+    /// <returns>TODO hufi</returns>
     inline unsigned char * getMask() const { return m_mask; };
 
-    /// <summary>TODO</summary>
+    /// <summary>TODO hufi</summary>
     /// <param name="xPos">X coord describing the position of a bit (in pixels)</param>
     /// <param name="yPos">Y coord describing the position of a bit (in pixels)</param>
-    /// <returns>TODO</returns>
+    /// <returns>TODO hufi</returns>
     unsigned char getBit(const int& xPos, const int& yPos) const;
 
-    /// <summary>TODO</summary>
+    /// <summary>TODO hufi</summary>
     /// <param name="pos">Position describing a bit (in pixels)</param>
-    /// <returns>TODO</returns>
+    /// <returns>TODO hufi</returns>
     unsigned char getBit(const Vec2i& pos) const;
 private:
     //Bitmask (const Bitmask &);
