@@ -35,6 +35,7 @@ void PixelArthScreen::Stop()
 	}
 	_objects.clear();
     m_bitmaskmap.clear();
+    //LEAK!!! iterate
 }
 
 void PixelArthScreen::Update(float dt) {}

@@ -16,7 +16,6 @@
 
 CharActor::CharActor(Bitmask* mask, const Vector2 size)
 	: PhysicsActor()
-	, m_mask(mask)
 	, m_direction(SOUTH)
 	, m_moving(false)
 	, m_movingNorth(false)
@@ -28,10 +27,14 @@ CharActor::CharActor(Bitmask* mask, const Vector2 size)
 	, m_idleAnim(false)
 	//, m_isKinematic(true)
 {
+    
+    assert(mask != nullptr);
+    m_mask = new Bitmask(*mask);
+    m_mask->m_original_mask = mask;
 	//SetName("Arth");
 	//SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	SetSize(size.X, size.Y);
-	m_mask->setSize(size);
+    m_mask->setSize(size);
 
 	SetDensity(1.0f);
 	SetFriction(0.0f);

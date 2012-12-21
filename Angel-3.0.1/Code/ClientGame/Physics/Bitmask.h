@@ -9,6 +9,12 @@ public:
 	/// <para>e.g. "Resources/Images/..."</para></param>
 	Bitmask(const String& path);
 
+	/// <summary>Constructor</summary>
+	/// <param name="path">Describes the path to the bitmask file
+	/// <para>e.g. "Resources/Images/..."</para></param>
+	/// <param name="orig_mask">Original sized mask</param>
+	Bitmask(const String& path, Bitmask* orig_mask);
+
     /// <summary>Destructor</summary>
 	~Bitmask(void);
 
@@ -16,11 +22,13 @@ public:
 	String getPath(void) const;
 
     /// <summary>Copies and resizes the bitmask</summary>
+    /// <param name="orig_mask">original sized mask.</param>
     /// <param name="x">Size along x-axis (in GL units).</param>
     /// <param name="y">Size along y-axis (in GL units). By default -1.0f for a uniform scale.</param>
 	void setSize(const float& sizeX, const float& sizeY = -1.0f);
 	
     /// <summary>Copies and resizes the bitmask</summary>
+    /// <param name="orig_mask">original sized mask.</param>
     /// <param name="size">The size of the bitmask (in GL units).</param>
     void setSize(const Vector2& size);
 
@@ -48,6 +56,8 @@ public:
     /// <param name="pos">Position describing a bit (in pixels)</param>
     /// <returns>TODO hufi</returns>
     unsigned char getBit(const Vec2i& pos) const;
+    
+    Bitmask * m_original_mask;
 private:
     //Bitmask (const Bitmask &);
     //Bitmask &operator= (const Bitmask &);

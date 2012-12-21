@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Bitmask.h"
 #include "Physics/stb_image.c"
+#include "PixelArthGameManager.h"
 
 //enum BitField
 //{
@@ -24,6 +25,7 @@ Bitmask::Bitmask(const String& path)
 	: m_path(path)
 {
 	Bitmask::loadMask(m_path);
+    m_original_mask = nullptr;
 	/*
 	//TEST
 	int state = NONE;
@@ -37,6 +39,13 @@ Bitmask::Bitmask(const String& path)
 
 	//player::React(Flags<BitField>);
 	*/
+};
+
+Bitmask::Bitmask(const String& path, Bitmask* original)
+	: m_path(path)
+{
+	Bitmask::loadMask(m_path);
+    m_original_mask = original;
 };
 
 Bitmask::~Bitmask(void)
@@ -62,38 +71,32 @@ String Bitmask::getPath(void) const
 };
 
 void Bitmask::setSize(const float& sizeX, const float& sizeY){
-    /*
-    //TODO: hufi
-    //infinite loop?
-    Bitmask* mask = thePixelArthGame.GetCurrentScreen()->GetBitmask(m_path);
-
-    // check if this bitmask isn't the same as the one  in the hashmap
-    if(this != mask)
-    {
-        int i,j;
-	    float scaleX,scaleY;
-	    m_size.X= ceil(MathUtil::WorldUnitsToPixels(sizeX));
-	    m_size.Y= ceil(MathUtil::WorldUnitsToPixels(sizeY));
-	    //m_type= argMask.getType();
-	    scaleX=(float)mask->getSize().X/(float)m_size.X;
-	    scaleY=(float)mask->getSize().Y/(float)m_size.Y;
-	    m_mask= new unsigned char[m_size.X*m_size.Y];
-	    for(i=0;i<m_size.X;i++)
-	    {
-		    //std::cout<< i<<";"<<(int)((float)i*scaleX)<<std::endl;
-		    for(j=0;j<m_size.Y;j++)
-		    {
+    Bitmask* maskToScale = m_original_mask != nullptr ? m_original_mask : this;
+    
+    // check if this bitmask isn't the same as the one in the hashmap
+    int i,j;
+	float scaleX,scaleY;
+	m_size.X= ceil(MathUtil::WorldUnitsToPixels(sizeX));
+	m_size.Y= ceil(MathUtil::WorldUnitsToPixels(sizeY));
+	//m_type= argMask.getType();
+	scaleX=(float)maskToScale->getSize().X/(float)m_size.X;
+	scaleY=(float)maskToScale->getSize().Y/(float)m_size.Y;
+	m_mask= new unsigned char[m_size.X*m_size.Y];
+	for(i=0;i<m_size.X;i++)
+	{
+		//std::cout<< i<<";"<<(int)((float)i*scaleX)<<std::endl;
+		for(j=0;j<m_size.Y;j++)
+		{
 			
-			    m_mask[j*m_size.X+i] =mask->getBit((int)((float)i*scaleX),(int)((float)j*scaleY));
-			    //if(m_mask[i*m_sizeX+j]!=255)
-			    //std::cout<<"X"<<"|";
-		    }
-	    }
-	    //int debug;
-	    //for(debug=0;debug<m_sizeX*m_sizeY; debug++)
-		//    if(m_mask[debug] != 255)
-		//	    std::cout<<"X|";
-    }*/
+			m_mask[j*m_size.X+i] = maskToScale->getBit((int)((float)i*scaleX),(int)((float)j*scaleY));
+			//if(m_mask[i*m_sizeX+j]!=255)
+			//std::cout<<"X"<<"|";
+		}
+	}
+	//int debug;
+	//for(debug=0;debug<m_sizeX*m_sizeY; debug++)
+	//    if(m_mask[debug] != 255)
+	//	    std::cout<<"X|";
 };
 
 void Bitmask::setSize(const Vector2& size){

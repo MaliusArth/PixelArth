@@ -11,8 +11,8 @@ PixelArthScreenCharTest::PixelArthScreenCharTest()
 
 void PixelArthScreenCharTest::Start()
 {
-	//Creating a new, generic actor is simple. 
-	
+	//Creating a new, generic actor is simple.
+
 	//m_a = new Actor();
 	arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
 	arth->SetName("Arth");
