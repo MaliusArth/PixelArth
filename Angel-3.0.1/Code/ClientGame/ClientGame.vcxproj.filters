@@ -53,6 +53,9 @@
     <ClCompile Include="Physics\CollisionHandler.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="Actors\CloudActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -76,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="Physics\CollisionHandler.h">
       <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Actors\CloudActor.h">
+      <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
