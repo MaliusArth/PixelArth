@@ -15,10 +15,16 @@ PixelArthScreenCollisionTest::PixelArthScreenCollisionTest()
 //}
 void PixelArthScreenCollisionTest::Start()
 {
-	
 	m_hero = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
 	m_background = new GroundActor("Resources/Images/floating1.png");
-	m_text = new TextActor("Console", "Collision Test");
+	//m_background->SetLayer(-10);
+	m_background2= new CloudActor("Resources/Images/clouds2.jpg");
+	Position pos;
+	pos.begin= 5;
+	pos.end= -4;
+	m_snake= new SnakeActor(pos);
+	m_snake->SetLayer(0);
+	//m_text = new TextActor("Console", "Collision Test");
 	//Creating a new, generic actor is simple. 
 	
 	
@@ -38,24 +44,27 @@ void PixelArthScreenCollisionTest::Start()
 	// and you should only implement Render if you have to do something out of the ordinary. 
 	theWorld.Add(m_hero);
 	
+	theWorld.Add(m_background2);
 	theWorld.Add(m_background);
-
+	theWorld.Add(m_snake);
 
 
 
 	//PixelArth housekeeping below this point. 
 	#pragma region PixelArth Housekeeping
-	m_text->SetPosition(0, 3.5);
-	m_text->SetAlignment(TXT_Center);
-	theWorld.Add(m_text);
+	//m_text->SetPosition(0, 3.5);
+	//m_text->SetAlignment(TXT_Center);
+	//theWorld.Add(m_text);
 	//TextActor *fileLoc = new TextActor("ConsoleSmall", "PixelArthScreenCharTest.cpp");
 	//fileLoc->SetPosition(MathUtil::ScreenToWorld(10, 563));
 	//fileLoc->SetColor(.3f, .3f, .3f);
 	//theWorld.Add(fileLoc);
 	//_objects.push_back(fileLoc);
-	_objects.push_back(m_text);
+	//_objects.push_back(m_text);
+	_objects.push_back(m_background2);
 	_objects.push_back(m_background);
 	_objects.push_back(m_hero);
+	_objects.push_back(m_snake);
 	#pragma endregion
 }
 
