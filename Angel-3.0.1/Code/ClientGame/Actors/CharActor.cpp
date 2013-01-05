@@ -22,7 +22,7 @@ CharActor::CharActor(Bitmask* mask, const Vector2 size)
 	, m_movingEast(false)
 	, m_movingSouth(false)
 	, m_movingWest(false)
-	, m_movementSpeed(100.0f)	//3.0f
+	, m_movementSpeed(3.0f)	//3.0f
 	, m_idleness(0.0f)
 	, m_idleAnim(false)
 	//, m_isKinematic(true)
@@ -69,12 +69,13 @@ CharActor::CharActor(Bitmask* mask, const Vector2 size)
 
 void CharActor::Update(float dt)
 {
+	SetLayer(-MathUtil::WorldUnitsToPixels(GetPosition().Y-(GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y));
 	float delay = 0.1f;
 	spriteAnimationType animType = SAT_None;
 	int startFrame = 0;
 	int endFrame = 0;
 	String animName = String();
-
+	///HUUUUUUFFFFIIIIII
 	Vector2 direction = Vector2::Zero;
 	if(m_movingNorth)
 	{
@@ -97,12 +98,12 @@ void CharActor::Update(float dt)
 	{
 		float angle_rad = MathUtil::AngleFromVector(direction);
 		//bug fix along axes:
-		direction.X = direction.X == 0 ? 0 : (m_movementSpeed*dt)*cos(angle_rad);
-		direction.Y = direction.Y == 0 ? 0 : ((m_movementSpeed/2)*dt)*sin(angle_rad);
+		direction.X = direction.X == 0 ? 0 : (m_movementSpeed)*cos(angle_rad);
+		direction.Y = direction.Y == 0 ? 0 : (m_movementSpeed/2)*sin(angle_rad);
 		m_idleness = 0.0f;
 	}
 	Vector2 newPosition = _position + direction;
-	
+	///
 	bool collType = false;//thePixelArthGame.m_wColl->isColliding(*m_mask, newPosition-(GetSize()/2));
 
 	//std::cout << "moving: " << m_moving << " collType: " << collType << std::endl;

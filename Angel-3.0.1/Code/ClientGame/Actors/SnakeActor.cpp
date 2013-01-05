@@ -42,6 +42,7 @@ void SnakeActor::doMovement(bool reverse){
 }
 void SnakeActor::Update(float dt){
 	PhysicsActor::Update(dt);
+	SetLayer(-MathUtil::WorldUnitsToPixels(GetPosition().Y-(GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y));
 	if (GetPosition().X <= m_path.begin.X)
 	{
 		
