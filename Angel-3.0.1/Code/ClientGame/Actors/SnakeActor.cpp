@@ -26,6 +26,16 @@ SnakeActor::SnakeActor(const Path& argPath, const float& argSpeed):m_path(argPat
 	
 }
 
+void SnakeActor::setFirstPoint(const Vector2& argPoint){
+	m_path.begin= argPoint;
+}
+
+void SnakeActor::setSecondPoint(const Vector2& argPoint){
+	m_path.end= argPoint;
+}
+void SnakeActor::setMovementSpeed(const float& argSpeed){
+	m_movementSpeed=argSpeed;
+}
 //verwende zum überprüfen der position die function MathUtil::FuzzyEquals(Vector2 currPos, Vector2 goalPos)
 
 void SnakeActor::doMovement(bool reverse){

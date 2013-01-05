@@ -19,11 +19,27 @@ void PixelArthScreenCollisionTest::Start()
 	m_background = new GroundActor("Resources/Images/floating1.png");
 	//m_background->SetLayer(-10);
 	m_background2= new CloudActor("Resources/Images/clouds2.jpg");
-	Position pos;
-	pos.begin= 5;
-	pos.end= -4;
-	m_snake= new SnakeActor(pos);
-	m_snake->SetLayer(0);
+	Path pos;
+	pos.begin.X= 0;
+	pos.begin.Y= 2;
+	pos.end.X= 0;
+	pos.end.Y=-2;
+	m_snake[0]= new SnakeActor(pos);
+	pos.begin.X= 2;
+	pos.begin.Y= 0;
+	pos.end.X= -2;
+	pos.end.Y=0;
+	m_snake[1]= new SnakeActor(pos);
+	pos.begin = 2;
+	pos.end= -2;
+	m_snake[2]= new SnakeActor(pos);
+	pos.begin.X= 2;
+	pos.begin.Y= -2;
+	pos.end.X= -2;
+	pos.end.Y=2;
+	m_snake[3]= new SnakeActor(pos);
+	int i;
+	for(i=0;i<4;i++)m_snake[i]->SetLayer(0);
 	//m_text = new TextActor("Console", "Collision Test");
 	//Creating a new, generic actor is simple. 
 	
@@ -46,7 +62,7 @@ void PixelArthScreenCollisionTest::Start()
 	
 	theWorld.Add(m_background2);
 	theWorld.Add(m_background);
-	theWorld.Add(m_snake);
+	for(i=0;i<4;i++)theWorld.Add(m_snake[i]);
 
 
 
@@ -64,7 +80,7 @@ void PixelArthScreenCollisionTest::Start()
 	_objects.push_back(m_background2);
 	_objects.push_back(m_background);
 	_objects.push_back(m_hero);
-	_objects.push_back(m_snake);
+	for(i=0;i<4;i++)_objects.push_back(m_snake[i]);
 	#pragma endregion
 }
 
