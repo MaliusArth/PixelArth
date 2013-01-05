@@ -56,6 +56,9 @@
     <ClCompile Include="Actors\CloudActor.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
+    <ClCompile Include="Actors\SnakeActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -81,6 +84,9 @@
       <Filter>Physics</Filter>
     </ClInclude>
     <ClInclude Include="Actors\CloudActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Actors\SnakeActor.h">
       <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>

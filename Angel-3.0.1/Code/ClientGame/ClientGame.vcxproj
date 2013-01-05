@@ -180,6 +180,7 @@ cd ..\Tools\BuildScripts\
     <ClCompile Include="Actors\CharActor.cpp" />
     <ClCompile Include="Actors\CloudActor.cpp" />
     <ClCompile Include="Actors\GroundActor.cpp" />
+    <ClCompile Include="Actors\SnakeActor.cpp" />
     <ClCompile Include="Physics\Bitmask.cpp" />
     <ClCompile Include="Physics\CollisionHandler.cpp" />
     <ClCompile Include="PixelArthGameManager.cpp" />
@@ -195,6 +196,7 @@ cd ..\Tools\BuildScripts\
     <ClInclude Include="Actors\CharActor.h" />
     <ClInclude Include="Actors\CloudActor.h" />
     <ClInclude Include="Actors\GroundActor.h" />
+    <ClInclude Include="Actors\SnakeActor.h" />
     <ClInclude Include="Physics\Bitmask.h" />
     <ClInclude Include="Physics\CollisionHandler.h" />
     <ClInclude Include="PixelArthGameManager.h" />
