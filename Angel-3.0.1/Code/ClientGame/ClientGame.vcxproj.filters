@@ -33,7 +33,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>sys</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="PixelArthGameManager.cpp" />
     <ClCompile Include="Actors\CharActor.cpp">
       <Filter>Actors</Filter>
@@ -58,6 +57,18 @@
     </ClCompile>
     <ClCompile Include="Actors\SnakeActor.cpp">
       <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Actors\DoorActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Actors\ButtonActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Actors\CollidingActor.cpp">
+      <Filter>Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>WorldMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +98,15 @@
       <Filter>Actors</Filter>
     </ClInclude>
     <ClInclude Include="Actors\SnakeActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Actors\DoorActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Actors\ButtonActor.h">
+      <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Actors\CollidingActor.h">
       <Filter>Actors</Filter>
     </ClInclude>
   </ItemGroup>

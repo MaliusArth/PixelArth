@@ -77,6 +77,7 @@ cd ..\Tools\BuildScripts
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <DisableSpecificWarnings>4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)/win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -177,8 +178,11 @@ cd ..\Tools\BuildScripts\
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Actors\ButtonActor.cpp" />
     <ClCompile Include="Actors\CharActor.cpp" />
     <ClCompile Include="Actors\CloudActor.cpp" />
+    <ClCompile Include="Actors\CollidingActor.cpp" />
+    <ClCompile Include="Actors\DoorActor.cpp" />
     <ClCompile Include="Actors\GroundActor.cpp" />
     <ClCompile Include="Actors\SnakeActor.cpp" />
     <ClCompile Include="Physics\Bitmask.cpp" />
@@ -193,8 +197,11 @@ cd ..\Tools\BuildScripts\
     <ClCompile Include="WorldMap\PixelArthScreenCollisionTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actors\ButtonActor.h" />
     <ClInclude Include="Actors\CharActor.h" />
     <ClInclude Include="Actors\CloudActor.h" />
+    <ClInclude Include="Actors\CollidingActor.h" />
+    <ClInclude Include="Actors\DoorActor.h" />
     <ClInclude Include="Actors\GroundActor.h" />
     <ClInclude Include="Actors\SnakeActor.h" />
     <ClInclude Include="Physics\Bitmask.h" />
