@@ -34,7 +34,9 @@ void PixelArthScreen::Stop()
 		it++;
 	}
 	_objects.clear();
-    m_arth == NULL;
+
+    m_arth = NULL;
+
     /*if (m_arth != NULL)
 	{
 		if (m_arth->GetBody() != NULL)
@@ -92,7 +94,7 @@ void PixelArthScreen::Update(float dt) {
 		{
             //std::cout << "destroyed? " << pa->IsDestroyed() << std::endl;
             if(!pa->IsDestroyed()){
-            //    std::cout << "SetLayer: " << -MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2) << std::endl;
+                std::cout << "SetLayer: " << -MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2) << std::endl;
                 pa->SetLayer(-MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
                 // TEST: DEBUG: TODO: WTF
                 //pa->SetLayer(10);

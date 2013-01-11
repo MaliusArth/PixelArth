@@ -45,7 +45,7 @@ void PixelArthScreenCollisionTest::Start()
     //theWorld.BeginContact();
 	
 	theWorld.Add(m_arth, "Front");
-	for(i=1;i<=4;i++)theWorld.Add(m_snake[i], 1);
+	for(i=0;i<4;i++)theWorld.Add(m_snake[i], i+1);
 	theWorld.Add(m_sky, "Sky");
 	theWorld.Add(m_ground, "Ground");
 
