@@ -89,7 +89,7 @@ void PixelArthScreen::Update(float dt) {
 	{
 		// we're pre-destroying physics bodies here because it 
 		//  can mess with the pathfinding regeneration.
-		PhysicsActor* pa = dynamic_cast<PhysicsActor*> (*it);
+		CollidingActor* pa = dynamic_cast<CollidingActor*> (*it);
 		if (pa != NULL)
 		{
             //std::cout << "destroyed? " << pa->IsDestroyed() << std::endl;
