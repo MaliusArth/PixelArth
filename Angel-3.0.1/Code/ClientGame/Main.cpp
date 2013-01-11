@@ -1,4 +1,3 @@
-
 #include "stdafx.h"
 
 #include "PixelArthGameManager.h"
@@ -16,6 +15,7 @@ int main(int argc, char* argv[])
 	theWorld.Initialize(800, 600, "PixelArth", true, false);
 	
 	theWorld.SetupPhysics(Vector2::Zero);
+    theWorld.SetSideBlockers(true);
 	theWorld.NameLayer("Sky", -1);
 	theWorld.NameLayer("Ground", 0);
 
@@ -27,8 +27,8 @@ int main(int argc, char* argv[])
 	theWorld.NameLayer("Front",5);
 	
 	//adds the default grid so you can more easily place Actors
-	theWorld.Add(new GridActor(), -2);
-	theWorld.Add(new GroundActor("Resources/Images/background.dds"), "Sky");
+	//theWorld.Add(new GridActor(), -2);
+	//theWorld.Add(new GroundActor("Resources/Images/background.dds"), "Sky");
 	
 	//YOUR GAME SETUP CODE HERE
 	

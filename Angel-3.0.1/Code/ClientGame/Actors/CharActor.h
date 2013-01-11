@@ -1,8 +1,7 @@
-
 /** @file */
 #pragma once
-#include "PixelArthGameManager.h"
-#include "Physics\Bitmask.h"
+#include "CollidingActor.h"
+//#include "Physics\Bitmask.h"
 
 //forward declaration - why isn't this needed in this particular case?
 //class Bitmask;
@@ -18,16 +17,16 @@ enum Direction {NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTH
  * In addition, a CharActor supports wraps up more functionality than the simple 
  *  text rendering, allowing varying alignments, newlines, etc. 
  */
-class CharActor : public PhysicsActor
+class CharActor : public CollidingActor
 {
 public:
 	/**
 	 * The constructor sets up all the information that this CharActor will
 	 *  use to draw itself to the screen. 
 	 */
-	explicit CharActor(Bitmask* mask, const Vector2 size=2.0f);
+	explicit CharActor(Bitmask * const mask, const Vector2 size = 2.0f);
 	
-	//~CharActor(void);
+	~CharActor(void);
 
 	/**
 	 * A function which makes the necessary updates to the Actor. The base 
@@ -72,15 +71,16 @@ public:
 	//virtual void CustomInitPhysics() {}
 
 	/**
-	 * Since CharActors use their own methods of drawing, it can be difficult to 
-	 *  determine what space they're covering. If you want to do any kind of logic
-	 *  dealing with CharActor overlap, this is the way to get the BoundingBox
-	 *  information. 
+	 * If you want to do any kind of logic dealing with CharActor overlap, 
+     *  this is the way to get the BoundingBox information. 
 	 * 
 	 * @return A BoundingBox describing the area covered by the CharActor in 
 	 *   GL units (not pixels). 
 	 */
-	//const BoundingBox& GetBoundingBox() const;
+    const BoundingBox& CharActor::GetBoundingBox() const
+    {
+	    return m_bBox; 
+    }
 
 	/**
 	 * Used by the SetName function to create a basename for this class. 
@@ -92,8 +92,7 @@ public:
 
 private:
 	//bool m_isKinematic;
-	//BoundingBox m_bBox;
-	Bitmask* m_mask;
+	BoundingBox m_bBox;
 	Direction m_direction;
 	bool m_moving;
 	bool m_movingNorth;
@@ -103,7 +102,6 @@ private:
 	float m_movementSpeed;
 	float m_idleness;
 	bool m_idleAnim;
-
 
 	float m_timestampArrowReleased;
 	///TEST

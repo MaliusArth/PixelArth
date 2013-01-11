@@ -14,8 +14,10 @@ void PixelArthScreenCharTest::Start()
 	//Creating a new, generic actor is simple.
 
 	//m_a = new Actor();
-	arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
-	arth->SetName("Arth");
+	m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
+	m_arth->SetName("Arth");
+    
+    //m_arth->GetBody()->SetUserData((void*)m_arth->GetMask());
 	//Sizes and coordinates are always in GL units, which can mean whatever you decide they mean
 	// -- our physics packages (Box2D) assumes that they mean meters, though. 
 	//a->SetSize(2.0f);
@@ -30,7 +32,7 @@ void PixelArthScreenCharTest::Start()
 	//We have to add it to the world for it to be drawn. All Actors implement Update and Render
 	// methods that get called once per frame. All your logic should happen in the Update function,
 	// and you should only implement Render if you have to do something out of the ordinary. 
-	theWorld.Add(arth);
+	theWorld.Add(m_arth);
 	
 	//Bitmask* testmask = new Bitmask("Resources/Images/animations/chars/arth/arthBitmask.png");
 
@@ -52,12 +54,15 @@ void PixelArthScreenCharTest::Start()
 	theWorld.Add(fileLoc);
 	_objects.push_back(fileLoc);
 	_objects.push_back(t);
-	_objects.push_back(arth);
+	_objects.push_back(m_arth);
 	#pragma endregion
 }
 
 void PixelArthScreenCharTest::Update(float dt)
 {
+    PixelArthScreen::Update(dt);
+    //std::cout << "pos: " << (m_arth->GetPosition()+(m_arth->GetSize()/2)).X << " bBox: " << m_arth->GetBoundingBox().Max.X << " right: " << MathUtil::GetWorldDimensions().X/2 << std::endl;
+
 	if ((theController.IsConnected() && theController.IsBButtonDown()) || theInput.IsKeyDown('b'))
 	{
 		//a->SetColor(1.0f, 0.0f, 1.0f, .5f); //R, G, B, A (there is also a Color class you can use)

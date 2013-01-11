@@ -7,6 +7,5 @@ public:
 	GroundActor(const String&);
 	/*virtual void Update(float dt);
 	virtual void Render();*/
-	~GroundActor(void);
+	//~GroundActor(void);
 };
-

@@ -3,7 +3,7 @@
 #include <map>
 
 #if !ANGEL_MOBILE
-	//#include "WorldMap/PixelArthScreenCharTest.h"
+	#include "WorldMap/PixelArthScreenCharTest.h"
 	#include "WorldMap/PixelArthScreenCollisionTest.h"
 #endif
 
@@ -34,11 +34,84 @@ void PixelArthScreen::Stop()
 		it++;
 	}
 	_objects.clear();
+    m_arth == NULL;
+    /*if (m_arth != NULL)
+	{
+		if (m_arth->GetBody() != NULL)
+		{
+			m_arth->GetBody()->SetUserData(NULL);
+			theWorld.GetPhysicsWorld().DestroyBody(m_arth->GetBody());
+			m_arth->ResetBody();
+		}
+	}
+    m_arth->Destroy();*/
+
+    // clear bitmasks
+    std::map<String, Bitmask*>::iterator it2 = m_bitmaskmap.begin();
+	while(m_bitmaskmap.end() != it2)
+	{
+        delete (*it2).second;
+        //it2 = (*it2).second.erase(it2);
+		++it2;
+	}
     m_bitmaskmap.clear();
-    //LEAK!!! iterate
 }
 
-void PixelArthScreen::Update(float dt) {}
+void PixelArthScreen::Update(float dt) {
+
+    //for (b2Contact* c = theWorld.GetPhysicsWorld().GetContactList(); c; c = c->GetNext())
+    //{
+    //    // process c
+    //}
+
+    /*std::vector<Renderable*>::iterator it = _objects.begin();
+	while(_objects.end() != it)
+	{
+		PhysicsActor* pa = dynamic_cast<PhysicsActor*> (*it);
+		if (pa != NULL)
+		{
+			if (pa->GetBody() != NULL)
+			{
+				pa->GetBody()->SetUserData(NULL);
+				theWorld.GetPhysicsWorld().DestroyBody(pa->GetBody());
+				pa->ResetBody();
+			}
+		}
+		(*it)->Destroy();
+		it++;
+	}
+	_objects.clear();*/
+
+    std::vector<Renderable*>::iterator it = _objects.begin();
+	while(_objects.end() != it)
+	{
+		// we're pre-destroying physics bodies here because it 
+		//  can mess with the pathfinding regeneration.
+		PhysicsActor* pa = dynamic_cast<PhysicsActor*> (*it);
+		if (pa != NULL)
+		{
+            //std::cout << "destroyed? " << pa->IsDestroyed() << std::endl;
+            if(!pa->IsDestroyed()){
+            //    std::cout << "SetLayer: " << -MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2) << std::endl;
+                pa->SetLayer(-MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
+                // TEST: DEBUG: TODO: WTF
+                //pa->SetLayer(10);
+                //pa->SetLayer(20);
+            }
+        }
+		it++;
+	}
+
+    //std::cout << "pos: " << (m_arth->GetPosition()+(m_arth->GetSize()/2)).X << " bBox: " << m_arth->GetBoundingBox().Max.X << " right: " << MathUtil::GetWorldDimensions().X/2 << std::endl;
+    if(m_arth->GetBoundingBox().Max.X >= (MathUtil::GetWorldDimensions().X/2))
+    {
+        thePixelArthGame.MoveForwards();
+	}
+    if(m_arth->GetBoundingBox().Min.X <= -(MathUtil::GetWorldDimensions().X/2))
+    {
+        thePixelArthGame.MoveBackwards();
+	}
+}
 void PixelArthScreen::Render() {}
 
 Bitmask* PixelArthScreen::GetBitmask(const String& path)
@@ -66,7 +139,7 @@ PixelArthGameManager::PixelArthGameManager()
 	#if ANGEL_MOBILE
 		//_screens.push_back(new PixelArthScreenMobileSimulator());				// 0
 	#else
-		//_screens.push_back(new PixelArthScreenCharTest());
+		_screens.push_back(new PixelArthScreenCharTest());
 		_screens.push_back(new PixelArthScreenCollisionTest());
 	#endif
 	
@@ -87,6 +160,11 @@ PixelArthGameManager::PixelArthGameManager()
 	theSound.SetSoundCallback(this, &GameManager::SoundEnded);
 	
 	sample = theSound.LoadSample("Resources/Sounds/click.ogg", false /*no stream*/);
+}
+
+PixelArthGameManager::~PixelArthGameManager()
+{
+    delete m_collHandler;
 }
 
 PixelArthGameManager& PixelArthGameManager::GetInstance()

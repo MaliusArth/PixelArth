@@ -1,10 +1,15 @@
 #pragma once
-
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <vector>
 #include <string>
 
 #include "Physics\CollisionHandler.h"
+#include "Actors\CharActor.h"
+
+// Forward declarations
+//class CharActor;
+//class CollisionHandler;
+//class Bitmask;
 
 class PixelArthScreen : public Renderable
 {
@@ -22,6 +27,8 @@ public:
 
 protected:
 	std::vector<Renderable*> _objects;
+    CharActor *m_arth;
+
 private:
     std::map<String, Bitmask*> m_bitmaskmap;
 };
@@ -51,6 +58,7 @@ public:
 	CollisionHandler *m_collHandler;
 protected:
 	PixelArthGameManager();
+    ~PixelArthGameManager();
 	static PixelArthGameManager *s_PixelArthGameManager;
 
 private:

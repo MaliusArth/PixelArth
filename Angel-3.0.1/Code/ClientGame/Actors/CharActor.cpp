@@ -14,34 +14,34 @@
 
 #define IDLE_TIME 5.0f
 
-CharActor::CharActor(Bitmask* mask, const Vector2 size)
-	: PhysicsActor()
+CharActor::CharActor(Bitmask * const mask, const Vector2 size)
+	: CollidingActor(mask, size)
 	, m_direction(SOUTH)
 	, m_moving(false)
 	, m_movingNorth(false)
 	, m_movingEast(false)
 	, m_movingSouth(false)
 	, m_movingWest(false)
-	, m_movementSpeed(3.0f)	//3.0f
+	, m_movementSpeed(3.0f)
 	, m_idleness(0.0f)
 	, m_idleAnim(false)
 	//, m_isKinematic(true)
 {
-    
-    assert(mask != nullptr);
-    m_mask = new Bitmask(*mask);
-    m_mask->m_original_mask = mask;
-	//SetName("Arth");
+    SetName("Arth");
 	//SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	SetSize(size.X, size.Y);
+    
+    SetSize(size.X, size.Y);
     m_mask->setSize(size);
 
-	SetDensity(1.0f);
-	SetFriction(0.0f);
-	SetRestitution(0.0f);
-	SetIsSensor(true);
-	SetFixedRotation(true);
-	InitPhysics();
+    m_bBox = BoundingBox(Vector2(GetPosition().X-(_size.X/2), GetPosition().Y-(_size.Y/2)),
+                         Vector2(GetPosition().X+(_size.X/2), GetPosition().Y+(_size.Y/2)));
+    //m_bBox.RenderBox();       //not working?
+    //m_bBox.RenderOutline();   //not working?
+    
+    /*if(GetBody() != NULL){
+        std::cout << "charactor ctor getbody succeeded!" << std::endl;
+        GetBody()->SetUserData(m_mask);
+    }*/
 	
 	//_timestampArrowReleased = theWorld.GetCurrentTimeSeconds();
 
@@ -60,17 +60,36 @@ CharActor::CharActor(Bitmask* mask, const Vector2 size)
 
 	///TEST
 	//_world = new Bitmask("Resources/Images/coll.png");
+    
+	SetDensity(1.0f);
+	SetFriction(0.0f);
+	SetRestitution(0.0f);
+	SetIsSensor(true);
+	SetFixedRotation(true);
+	InitPhysics();
 }
 
-/*CharActor::~CharActor(void)
+CharActor::~CharActor(void)
 {
-    ~m_mask;
-}*/
+    delete m_mask;
+}
 
 void CharActor::Update(float dt)
 {
-	SetLayer(-MathUtil::WorldUnitsToPixels(GetPosition().Y-(GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y));
-	float delay = 0.1f;
+	CollidingActor::Update(dt);
+
+    m_bBox.Min = Vector2(GetPosition().X-(_size.X/2), GetPosition().Y-(_size.Y/2));
+    m_bBox.Max = Vector2(GetPosition().X+(_size.X/2), GetPosition().Y+(_size.Y/2));
+
+    //IsColliding();
+    
+    //iterate through contacts, get other userdata and call own collision
+    //PhysicsActor* other = static_cast<PhysicsActor*>(GetBody()->GetContactList()->other->GetUserData());
+    //theWorld.GetPhysicsWorld().
+	
+    //SetLayer(-MathUtil::WorldUnitsToPixels(GetPosition().Y-(GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
+	
+    float delay = 0.1f;
 	spriteAnimationType animType = SAT_None;
 	int startFrame = 0;
 	int endFrame = 0;
@@ -479,11 +498,9 @@ void CharActor::Update(float dt)
 		//ApplyForce(dt, newPosition);	//BUGGY
 		//MoveTo(newPosition, dt);
 	}
-	GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
-
-	PhysicsActor::Update(dt);
+    if (GetBody() != NULL)
+	    GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
 }
-
 
 void CharActor::AnimCallback(String animName)
 {
@@ -498,9 +515,39 @@ void CharActor::AnimCallback(String animName)
 
 void CharActor::ReceiveMessage(Message* m)
 {
+    std::cout << "CharActor recieved Msg: " << m->GetMessageName() << std::endl;
 	if (m->GetMessageName() == "CameraChange")
 	{
 	}
+
+    if (m->GetMessageName() == "CollisionStartWith"+GetName())
+    {
+        m_colliding = true;
+        std::cout << "coll test: " + GetName() << std::endl;
+        //
+        //TypedMessage<b2Contact*>* coll = dynamic_cast<TypedMessage<b2Contact*>*>(m);
+
+        ////TypedMessage<b2Contact*>* coll = new TypedMessage<b2Contact*>(pa1Message, contact, pa2);
+        //b2Contact* b2c = coll->GetValue();
+
+        //CollidingActor* pa = static_cast<CollidingActor*>(b2c->GetFixtureA()->GetBody()->GetUserData());
+        //CollidingActor* pb = static_cast<CollidingActor*>(b2c->GetFixtureB()->GetBody()->GetUserData());
+        //
+        //std::cout << "Test NameA: " << pa->GetName() << std::endl;
+        //std::cout << "Test NameB: " << pb->GetName() << std::endl;
+        //thePixelArthGame.m_collHandler->checkCollisions(pa->GetPosition(), pa->GetMask(), pb->GetPosition(), pb->GetMask());
+        
+
+        /// no need for collision messages...simply put this in CollidingActor::Update (CollidingActor::Update calls PhysicsActor::Update too)
+        /*CollidingActor *ca;
+        b2ContactEdge* contactlist = GetBody()->GetContactList();
+        while(contactlist!=NULL)
+        {
+        ca = static_cast<CollidingActor *>(contactlist->other->GetUserData());
+        std::cout << "char contacts with " << ca->GetName() << std::endl;
+        contactlist = contactlist->next;
+        }*/
+    }
 
 #pragma region Animation Ended messages
 
@@ -563,13 +610,14 @@ void CharActor::ReceiveMessage(Message* m)
 		{
 
 		}*/
-		std::cout << "RIGHT after UP " << theWorld.GetCurrentTimeSeconds() - m_timestampArrowReleased << std::endl;
+		//std::cout << "RIGHT after UP " << theWorld.GetCurrentTimeSeconds() - m_timestampArrowReleased << std::endl;
 		m_timestampArrowReleased = theWorld.GetCurrentTimeSeconds();
 	}
 
 #pragma endregion
 
 }
+
 /*
 void CharActor::InitPhysics()
 {
@@ -651,7 +699,3 @@ void CharActor::InitPhysics()
 	CustomInitPhysics();
 }
 */
-//const BoundingBox& CharActor::GetBoundingBox() const
-//{
-//	return m_bBox; 
-//}

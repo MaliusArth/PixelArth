@@ -1,8 +1,13 @@
 #include "StdAfx.h"
 #include "SnakeActor.h"
 
+SnakeActor::SnakeActor(Bitmask * const mask, const Path& argPath, const Vector2 size, const float& argSpeed)
+    : CollidingActor(mask, size)
+    , m_path(argPath)
+    , m_movementSpeed(argSpeed)
+{
+	SetSprite("Resources/Images/animations/chars/snake/down/snakeDown_00.png");
 
-SnakeActor::SnakeActor(const Path& argPath, const float& argSpeed):m_path(argPath), m_movementSpeed(argSpeed){
 	//checking if the begin is smaller than the end (correcting if not)
 	if(m_path.begin.X > m_path.end.X)
 	{
@@ -11,19 +16,18 @@ SnakeActor::SnakeActor(const Path& argPath, const float& argSpeed):m_path(argPat
 		m_path.begin=m_path.end;
 		m_path.end=tmp;
 	}
-	this->SetPosition(m_path.begin);
+	SetPosition(m_path.begin);
 	if(m_path.begin.Y < m_path.end.Y) m_yDir=true;
 	else m_yDir=false;
+    
 	SetDensity(1.0f);
 	SetFriction(0.0f);
-	SetColor(0,0,0); 
 	SetRestitution(0.0f);
 	SetIsSensor(true);
 	SetFixedRotation(true);
 	InitPhysics();
-	doMovement();
 
-	
+	doMovement();
 }
 
 void SnakeActor::setFirstPoint(const Vector2& argPoint){
@@ -48,12 +52,15 @@ void SnakeActor::doMovement(bool reverse){
 	//bug fix along axes:
 	direction.X = direction.X == 0 ? 0 : (m_movementSpeed)*cos(angle_rad);
 	direction.Y = direction.Y == 0 ? 0 : ((m_movementSpeed/2))*sin(angle_rad);
-	GetBody()->SetLinearVelocity(b2Vec2(direction.X,direction.Y));
+    if (GetBody() != NULL)
+	    GetBody()->SetLinearVelocity(b2Vec2(direction.X,direction.Y));
 }
+
 void SnakeActor::Update(float dt){
-	PhysicsActor::Update(dt);
-	SetLayer(-MathUtil::WorldUnitsToPixels(GetPosition().Y-(GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y));
-	if (GetPosition().X <= m_path.begin.X)
+    //std::cout << "layer: " << -MathUtil::WorldUnitsToPixels(GetPosition().Y-(GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y) << std::endl;
+	//SetLayer(-MathUtil::WorldUnitsToPixels(GetPosition().Y-(GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
+	
+    if (GetPosition().X <= m_path.begin.X)
 	{
 		
 		if(m_yDir==true)
@@ -88,5 +95,6 @@ void SnakeActor::Update(float dt){
 				doMovement();
 			}
 		}
-	}	
+	}
+	CollidingActor::Update(dt);
 }

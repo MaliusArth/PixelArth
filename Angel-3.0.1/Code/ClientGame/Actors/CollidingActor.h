@@ -1,12 +1,21 @@
 #pragma once
-#include "PixelArthGameManager.h"
-class CollidingActor:public PhysicsActor{
+//#include "PixelArthGameManager.h"
+#include "Physics\Bitmask.h"
+
+class CollidingActor : public PhysicsActor
+{
 public:
-	CollidingActor(const Bitmask * argMask,const
-		Vector2 argSize);
+	explicit CollidingActor(Bitmask * const argMask, const Vector2 argSize = (-1.0f));
+
+    const Bitmask* GetMask() const { return m_mask; }
+
 	void SetColliding(const bool = true);
-	bool IsColliding() const;
-private:
-	bool m_isColliding;
+	
+    bool IsColliding() const;
+
+    virtual void Update(float dt);
+
+protected:
+	bool m_colliding;
 	Bitmask *m_mask;
 };
