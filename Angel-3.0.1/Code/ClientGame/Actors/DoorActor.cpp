@@ -19,7 +19,6 @@ void DoorActor::setLocked(const bool locked){
 void DoorActor::addButton(ButtonActor* const argButton)
 {
 	m_buttons.push_back(argButton);
-	std::cout<<"penis"<<std::endl;
 }
 bool DoorActor::isLocked() const
 {
