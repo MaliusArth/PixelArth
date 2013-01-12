@@ -1,7 +1,6 @@
 #include "StdAfx.h"
 #include "Bitmask.h"
 #include "Physics/stb_image.c"
-#include "PixelArthGameManager.h"
 
 //enum BitField
 //{
@@ -24,7 +23,7 @@
 Bitmask::Bitmask(const String& path)
 	: m_path(path)
 {
-	Bitmask::loadMask(m_path);
+	loadMask(m_path);
     m_original_mask = nullptr;
 	/*
 	//TEST
@@ -41,10 +40,10 @@ Bitmask::Bitmask(const String& path)
 	*/
 };
 
-Bitmask::Bitmask(const String& path, Bitmask* original)
+Bitmask::Bitmask(const String& path, Bitmask * const original)
 	: m_path(path)
 {
-	Bitmask::loadMask(m_path);
+	loadMask(m_path);
     m_original_mask = original;
 };
 

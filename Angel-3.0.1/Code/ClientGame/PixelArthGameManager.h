@@ -4,6 +4,7 @@
 #include <string>
 
 #include "Physics\CollisionHandler.h"
+#include "Physics\Bitmask.h"
 #include "Actors\CharActor.h"
 
 // Forward declarations
@@ -23,7 +24,12 @@ public:
 	
 	virtual void ReceiveMessage(Message *message) {}
 
-    Bitmask* GetBitmask(const String& path);
+    Bitmask * const GetBitmask(const String& path);
+
+    inline CharActor* GetHero(void)
+    {
+        return m_arth;
+    }
 
 protected:
 	std::vector<Renderable*> _objects;
@@ -54,6 +60,8 @@ public:
 	virtual void SoundEnded(AngelSoundHandle sound);
 
 	virtual void ReceiveMessage(Message* message);
+
+    virtual void Update(float dt);
 	
 	CollisionHandler *m_collHandler;
 protected:

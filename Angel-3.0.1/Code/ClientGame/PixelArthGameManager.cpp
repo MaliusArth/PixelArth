@@ -64,12 +64,20 @@ void PixelArthScreen::Update(float dt) {
     //for (b2Contact* c = theWorld.GetPhysicsWorld().GetContactList(); c; c = c->GetNext())
     //{
     //    // process c
+    //    //c->GetFixtureA()->GetBody()->GetUserData();
+    //    PhysicsActor* pa = static_cast<PhysicsActor*> (c->GetFixtureA()->GetBody()->GetUserData());
+    //    
+    //    CollidingActor* ca = dynamic_cast<CollidingActor*>(pa);
+    //    if (ca != NULL)
+    //    {
+    //        std::cout << "Body userData: " << ca->GetMask()->getPath() << std::endl;
+    //    }
     //}
 
     /*std::vector<Renderable*>::iterator it = _objects.begin();
 	while(_objects.end() != it)
 	{
-		PhysicsActor* pa = dynamic_cast<PhysicsActor*> (*it);
+		CollidingActor* pa = dynamic_cast<CollidingActor*> (*it);
 		if (pa != NULL)
 		{
 			if (pa->GetBody() != NULL)
@@ -93,8 +101,8 @@ void PixelArthScreen::Update(float dt) {
 		if (pa != NULL)
 		{
             //std::cout << "destroyed? " << pa->IsDestroyed() << std::endl;
-            if(!pa->IsDestroyed()){
-                std::cout << "SetLayer: " << -MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2) << std::endl;
+            if(!pa->IsDestroyed()){ // not neccessary?
+                //std::cout << "SetLayer: " << -MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2) << std::endl;
                 pa->SetLayer(-MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
                 // TEST: DEBUG: TODO: WTF
                 //pa->SetLayer(10);
@@ -114,9 +122,10 @@ void PixelArthScreen::Update(float dt) {
         thePixelArthGame.MoveBackwards();
 	}
 }
+
 void PixelArthScreen::Render() {}
 
-Bitmask* PixelArthScreen::GetBitmask(const String& path)
+Bitmask * const PixelArthScreen::GetBitmask(const String& path)
 {
     if ( m_bitmaskmap.find(path) == m_bitmaskmap.end() ) {
         // not found
@@ -125,7 +134,6 @@ Bitmask* PixelArthScreen::GetBitmask(const String& path)
     }
     return m_bitmaskmap.at(path);
 }
-
 
 
 PixelArthGameManager* PixelArthGameManager::s_PixelArthGameManager = NULL;
@@ -151,6 +159,8 @@ PixelArthGameManager::PixelArthGameManager()
 		theWorld.Add(_screens[startingIndex]);
 		_screens[startingIndex]->Start();
 		_current = startingIndex;
+        //theSwitchboard.SubscribeTo(this, "CollisionStartWith"+GetCurrentScreen()->GetHero()->GetName());
+        //theSwitchboard.SubscribeTo(this, "CollisionEndWith"+GetCurrentScreen()->GetHero()->GetName());
 	}
 	else
 	{
@@ -183,6 +193,56 @@ PixelArthScreen* PixelArthGameManager::GetCurrentScreen()
 	return _screens[_current];
 }
 
+void PixelArthGameManager::Update(float dt)
+{
+    GameManager::Update(dt);
+
+    //TODODODODOODODODODO!!!!!
+
+    //collidingActor::SetColliding() checks the contactlist
+
+    //manager stores std::vector with all collidingactors
+    //on CollisionStartWith: push_back the b2contact from the message
+    //in the manager::Update: checkCollisions every frame
+    //on CollisionEndWith: check contactlist of actors if they don't contain any CollidingActors pop actor from std::vector?
+
+    b2Contact* contactlist = theWorld.GetPhysicsWorld().GetContactList();
+    
+    while(contactlist != NULL)
+    {
+        PhysicsActor *pa = static_cast<PhysicsActor*>(contactlist->GetFixtureA()->GetBody()->GetUserData());
+        CollidingActor *ca = dynamic_cast<CollidingActor*>(pa);
+
+        if(ca != NULL)
+        {
+            PhysicsActor *pb = static_cast<PhysicsActor*>(contactlist->GetFixtureB()->GetBody()->GetUserData());
+            CollidingActor *cb = dynamic_cast<CollidingActor*>(pb);
+
+            if (ca != NULL && cb != NULL)
+            {
+                std::cout << ca->GetName() << " collides with " << cb->GetName() << std::endl;
+                /// check with next position of the actors...implement getNextPosition() ?
+                CollFlags cf;
+                
+                std::cout << cf.none << std::endl;
+
+                cf = m_collHandler->checkCollisions(ca->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/ , *(ca->GetMask()), cb->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/, *(cb->GetMask()));
+                
+                std::cout << cf.none << std::endl;
+                
+                ca->SetCollFlags(cf);
+                
+                std::cout << cf.none << std::endl;
+
+                cf = m_collHandler->checkCollisions(cb->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/ , *(cb->GetMask()), ca->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/, *(ca->GetMask()));
+                cb->SetCollFlags(cf);
+            }
+        }
+
+        contactlist = contactlist->GetNext();
+    }
+}
+
 void PixelArthGameManager::ReceiveMessage(Message* message)
 {
 	if (message->GetMessageName() == "MoveForwards")
@@ -193,16 +253,51 @@ void PixelArthGameManager::ReceiveMessage(Message* message)
 	{
 		MoveBackwards();
 	}
+
+    /*if (message->GetMessageName() == "CollisionStartWith"+ _screens[_current]->GetHero()->GetName())
+	{
+        //collidingActor::SetColliding() checks the contactlist
+
+        //manager stores std::vector with all collidingactors
+        //on CollisionStartWith: push_back the b2contact from the message
+        //in the manager::Update: checkCollisions every frame
+        //on CollisionEndWith: check contactlist of actors if they don't contain any CollidingActors pop actor from std::vector?
+		TypedMessage<b2Contact*>* coll = dynamic_cast<TypedMessage<b2Contact*>*>(message);
+
+        //TypedMessage<b2Contact*>* coll = new TypedMessage<b2Contact*>(pa1Message, contact, pa2);
+        b2Contact* b2c = coll->GetValue();
+        
+        
+        
+        PhysicsActor *pa = static_cast<PhysicsActor*>(b2c->GetFixtureA()->GetBody()->GetUserData());
+        PhysicsActor *pb = static_cast<PhysicsActor*>(b2c->GetFixtureB()->GetBody()->GetUserData());
+        
+        CollidingActor *ca = dynamic_cast<CollidingActor*>(pa);
+        CollidingActor *cb = dynamic_cast<CollidingActor*>(pb);
+
+        if (ca != NULL && cb != NULL)
+        {
+            std::cout << "char contacts with " << ca->GetName() << std::endl;
+            /// check with next position of the actors...implement getNextPosition() ?
+            CollFlags cf = m_collHandler->checkCollisions(ca->GetPosition()+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y) , *(ca->GetMask()), cb->GetPosition()+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y), *(cb->GetMask()));
+            ca->SetCollFlags(cf);
+            cb->SetCollFlags(cf);
+        }
+	}*/
 }
 
 void PixelArthGameManager::MoveForwards()
 {
 	if ((_current >= 0) && (_current < (int)_screens.size() - 1))
 	{
+        //theSwitchboard.UnsubscribeFrom(this, "CollisionStartWith"+GetCurrentScreen()->GetHero()->GetName());
+        //theSwitchboard.UnsubscribeFrom(this, "CollisionEndWith"+GetCurrentScreen()->GetHero()->GetName());
 		_screens[_current]->Stop();
 		theWorld.Remove(_screens[_current]);
 		_screens[++_current]->Start();
 		theWorld.Add(_screens[_current]);
+        //theSwitchboard.SubscribeTo(this, "CollisionStartWith"+GetCurrentScreen()->GetHero()->GetName());
+        //theSwitchboard.SubscribeTo(this, "CollisionEndWith"+GetCurrentScreen()->GetHero()->GetName());
 		
 		if (sample)
 			theSound.PlaySound(sample, 1.0f, false/*no loop*/, 0);

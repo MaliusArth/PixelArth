@@ -15,8 +15,8 @@ void PixelArthScreenCharTest::Start()
 
 	//m_a = new Actor();
 	m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
-	m_arth->SetName("Arth");
-    
+	//m_arth->SetName("Arth");
+    std::cout << "Arth Name: " << m_arth->GetName() << std::endl;
     //m_arth->GetBody()->SetUserData((void*)m_arth->GetMask());
 	//Sizes and coordinates are always in GL units, which can mean whatever you decide they mean
 	// -- our physics packages (Box2D) assumes that they mean meters, though. 

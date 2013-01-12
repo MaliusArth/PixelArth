@@ -1,7 +1,8 @@
 #pragma once
 
 #include "PixelArthGameManager.h"
-#include "Actors/CharActor.h"
+
+//#include "Actors/CharActor.h"
 
 
 class PixelArthScreenCharTest : public PixelArthScreen

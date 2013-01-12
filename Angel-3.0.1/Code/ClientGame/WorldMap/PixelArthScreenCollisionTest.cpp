@@ -17,8 +17,6 @@ void PixelArthScreenCollisionTest::Start()
 	m_sky = new CloudActor("Resources/Images/clouds2.jpg");
 	m_ground = new GroundActor("Resources/Images/floating1.png");
     m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
-    theSwitchboard.SubscribeTo(m_arth,"CollisionStartWith"+m_arth->GetName());
-    theSwitchboard.SubscribeTo(m_arth,"CollisionEndWith"+m_arth->GetName());
 
     if(m_arth->GetBody() != NULL){
     //std::cout << "data: " << static_cast<CharActor*>(m_arth->GetBody()->GetUserData())->GetMask()->getPath() << std::endl;

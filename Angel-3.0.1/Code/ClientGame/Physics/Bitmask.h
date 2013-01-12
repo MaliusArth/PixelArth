@@ -1,4 +1,5 @@
 #pragma once
+//#include "PixelArthGameManager.h"
 
 /// <summary></summary>
 class Bitmask
@@ -13,7 +14,7 @@ public:
 	/// <param name="path">Describes the path to the bitmask file
 	/// <para>e.g. "Resources/Images/..."</para></param>
 	/// <param name="orig_mask">Original sized mask</param>
-	Bitmask(const String& path, Bitmask* orig_mask);
+	Bitmask(const String& path, Bitmask* const orig_mask);
 
     /// <summary>Destructor</summary>
 	~Bitmask(void);

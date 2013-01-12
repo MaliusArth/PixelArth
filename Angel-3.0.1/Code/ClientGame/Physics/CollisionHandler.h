@@ -20,5 +20,5 @@ struct CollFlags
 class CollisionHandler{
 public:
 	//CollisionHandler();
-	CollFlags checkCollisions(const Vector2&,const Bitmask&, const Vector2&, const Bitmask&) const;
+	CollFlags checkCollisions(const Vector2&, const Bitmask&, const Vector2&, const Bitmask&) const;
 };

@@ -4,7 +4,8 @@
 enum CollType
 {
 	c_wall = 0,
-	c_floor = 255
+	c_floor = 255,
+    c_enemy = 100
 };
 
 struct Box
@@ -25,7 +26,8 @@ struct Box
 //    */
 //}
 
-CollFlags CollisionHandler::checkCollisions(const Vector2& argBegin1,const Bitmask& bitmask1, const Vector2& argBegin2, const Bitmask& bitmask2) const{
+CollFlags CollisionHandler::checkCollisions(const Vector2& argBegin1, const Bitmask& bitmask1, const Vector2& argBegin2, const Bitmask& bitmask2) const
+{
 	Box m1, m2, inter;
 	int i,j;
 	Vec2i offset1, offset2;

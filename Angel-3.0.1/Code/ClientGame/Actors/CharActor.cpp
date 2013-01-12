@@ -10,6 +10,7 @@
 #include "Infrastructure/Log.h"
 
 #include "CharActor.h"
+#include "PixelArthGameManager.h"
 #include <iostream>
 
 #define IDLE_TIME 5.0f
@@ -48,6 +49,16 @@ CharActor::CharActor(Bitmask * const mask, const Vector2 size)
 	//ClearSpriteInfo();
 	SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundDown/lookAroundDown_00.png");
 
+	///TEST
+	//_world = new Bitmask("Resources/Images/coll.png");
+    
+	SetDensity(1.0f);
+	SetFriction(0.0f);
+	SetRestitution(0.0f);
+	//SetIsSensor(true);
+	SetFixedRotation(true);
+	InitPhysics();
+
 	theSwitchboard.SubscribeTo(this, "CameraChange");
 	theSwitchboard.SubscribeTo(this, "UpArrowPressed");
 	theSwitchboard.SubscribeTo(this, "DownArrowPressed");
@@ -57,16 +68,6 @@ CharActor::CharActor(Bitmask * const mask, const Vector2 size)
 	theSwitchboard.SubscribeTo(this, "DownArrowReleased");
 	theSwitchboard.SubscribeTo(this, "LeftArrowReleased");
 	theSwitchboard.SubscribeTo(this, "RightArrowReleased");
-
-	///TEST
-	//_world = new Bitmask("Resources/Images/coll.png");
-    
-	SetDensity(1.0f);
-	SetFriction(0.0f);
-	SetRestitution(0.0f);
-	SetIsSensor(true);
-	SetFixedRotation(true);
-	InitPhysics();
 }
 
 CharActor::~CharActor(void)
@@ -163,7 +164,8 @@ void CharActor::Update(float dt)
 			m_direction = NORTHWEST;
 		}
 	}
-
+    
+    //if(m_moving && m_collFlags.floor)
 	if(m_moving && !collType)
 	{
 		m_idleAnim = false;
@@ -293,7 +295,8 @@ void CharActor::Update(float dt)
 	{
 		
 	}*/
-
+    
+    //if(!m_moving || !m_collFlags.floor)
 	if(!m_moving || collType)
 	{
 		m_idleness+=dt;
@@ -490,14 +493,32 @@ void CharActor::Update(float dt)
 		);
 	}
 
-	if(m_moving & !collType)
+    //if(m_moving & m_collFlags.floor)
+	if(m_moving && !collType)
 	{
 		//_position = newPosition;		//TODO: check for memory leak
 		//GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
 	
 		//ApplyForce(dt, newPosition);	//BUGGY
 		//MoveTo(newPosition, dt);
+        
 	}
+    std::cout << "none: " << m_collFlags.none << std::endl;
+    std::cout << "floor: " << m_collFlags.floor << std::endl;
+    std::cout << "wall: " << m_collFlags.wall << std::endl;
+    if(m_collFlags.none)
+        std::cout << "none" << std::endl;
+    
+    if(m_collFlags.floor)
+        std::cout << "floor" << std::endl;
+    
+    if(m_collFlags.wall)
+        std::cout << "wall" << std::endl;
+
+    if(m_moving && collType)
+    {
+        direction = Vector2::Zero;
+    }
     if (GetBody() != NULL)
 	    GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
 }
@@ -520,7 +541,7 @@ void CharActor::ReceiveMessage(Message* m)
 	{
 	}
 
-    if (m->GetMessageName() == "CollisionStartWith"+GetName())
+    /*if (m->GetMessageName() == "CollisionStartWith"+GetName())
     {
         m_colliding = true;
         std::cout << "coll test: " + GetName() << std::endl;
@@ -539,15 +560,16 @@ void CharActor::ReceiveMessage(Message* m)
         
 
         /// no need for collision messages...simply put this in CollidingActor::Update (CollidingActor::Update calls PhysicsActor::Update too)
-        /*CollidingActor *ca;
-        b2ContactEdge* contactlist = GetBody()->GetContactList();
-        while(contactlist!=NULL)
-        {
-        ca = static_cast<CollidingActor *>(contactlist->other->GetUserData());
-        std::cout << "char contacts with " << ca->GetName() << std::endl;
-        contactlist = contactlist->next;
-        }*/
+        //CollidingActor *ca;
+        //b2ContactEdge* contactlist = GetBody()->GetContactList();
+        //while(contactlist!=NULL)
+        //{
+        //ca = static_cast<CollidingActor *>(contactlist->other->GetUserData());
+        //std::cout << "char contacts with " << ca->GetName() << std::endl;
+        //contactlist = contactlist->next;
+        //}
     }
+    */
 
 #pragma region Animation Ended messages
 

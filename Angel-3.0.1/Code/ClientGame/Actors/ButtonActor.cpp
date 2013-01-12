@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "ButtonActor.h"
 
-ButtonActor::ButtonActor(const Vector2& position, const String& spritePath, float pressed):m_path(spritePath), m_time(pressed){
+ButtonActor::ButtonActor(const Vector2& position, const String& spritePath, float pressed)
+    : m_path(spritePath)
+    , m_time(pressed)
+{
 	setPressed(false);
 	//SetSize(MathUtil::GetWorldDimensions());
 	SetColor(1,1,1,1);
