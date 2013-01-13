@@ -43,7 +43,7 @@ Bitmask::Bitmask(const String& path)
 	*/
 };
 
-Bitmask::Bitmask(const String& path, Bitmask * const original)
+Bitmask::Bitmask(const String& path, const Bitmask * const original)
 	: m_path(path)
 {
 	loadMask(m_path);
@@ -72,8 +72,8 @@ String Bitmask::getPath(void) const
 	return m_path;
 };
 
-void Bitmask::setSize(const float& sizeX, const float& sizeY){
-    Bitmask* maskToScale = m_original_mask != nullptr ? m_original_mask : this;
+void Bitmask::setSize(const float sizeX, const float sizeY){
+    const Bitmask* maskToScale = m_original_mask != nullptr ? m_original_mask : this;
     
     // check if this bitmask isn't the same as the one in the hashmap
     int i,j;
@@ -119,7 +119,7 @@ void Bitmask::setSize(const Vector2& size){
     Bitmask::setSize(size.X, size.Y);
 };
 
-unsigned char Bitmask::getBit(const int& xPos, const int& yPos) const
+unsigned char Bitmask::getBit(const int xPos, const int yPos) const
 {
     if (m_mask!=NULL)
         return m_mask[yPos*m_size.X + xPos];
@@ -130,3 +130,24 @@ unsigned char Bitmask::getBit(const Vec2i& pos) const
 {
     return Bitmask::getBit(pos.X, pos.Y);
 };
+
+void Bitmask::printMask() const
+{
+     int i, j;
+    std::ofstream myfile;
+    myfile.open ("mask.txt", std::ios::app);
+    myfile<<m_path<<"\n";
+    //std::cout<<"size: "<<getPixelSize().X<<std::endl;
+    for(i= 0;i<getPixelSize().Y;i++)
+    {
+        //myfile << i << ". ";
+        for(j=0;j<getPixelSize().X;j++)
+        {
+            //std::cout<<(int)getBit(j,i)<<"|";
+            myfile<<(short int)getBit(j,i)<<"|";//<<std::endl;
+           // else if(getBit(j,i) != 0)  myfile<<" ";
+           // else myfile<<"f";
+        }
+        myfile<<"\n";
+    }
+}

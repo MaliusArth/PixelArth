@@ -5,6 +5,7 @@ enum CollType
 {
     c_wall = 0,
     c_snake = 78,
+    c_button = 35,
     c_floor = 255
 };
 
@@ -87,6 +88,10 @@ CollFlags CollisionHandler::checkCollisions(const Vector2& argBegin1, const Bitm
                         break;
                     case c_wall:
                         flags.wall = 1;
+                        break;
+                    case c_button:
+                        break;
+                    default:
                         break;
                     }
                     

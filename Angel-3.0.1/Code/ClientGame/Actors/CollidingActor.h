@@ -6,7 +6,7 @@
 class CollidingActor : public PhysicsActor
 {
 public:
-	explicit CollidingActor(Bitmask * const argMask, const Vector2 argSize = (-1.0f));
+	explicit CollidingActor(const Bitmask * const argMask, const Vector2 argSize = (-1.0f));
 
     inline Bitmask * const GetMask() const { return m_mask; };
 

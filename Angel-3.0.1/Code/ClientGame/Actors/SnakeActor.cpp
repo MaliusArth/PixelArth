@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "SnakeActor.h"
 
-SnakeActor::SnakeActor(Bitmask * const mask, const Path& argPath, const Vector2 size, const float& argSpeed)
+SnakeActor::SnakeActor(const Bitmask * const mask, const Path& argPath, const Vector2 size, const float argSpeed)
     : CollidingActor(mask, size)
     , m_path(argPath)
     , m_movementSpeed(argSpeed)
@@ -37,7 +37,7 @@ void SnakeActor::setFirstPoint(const Vector2& argPoint){
 void SnakeActor::setSecondPoint(const Vector2& argPoint){
 	m_path.end= argPoint;
 }
-void SnakeActor::setMovementSpeed(const float& argSpeed){
+void SnakeActor::setMovementSpeed(const float argSpeed){
 	m_movementSpeed=argSpeed;
 }
 //verwende zum überprüfen der position die function MathUtil::FuzzyEquals(Vector2 currPos, Vector2 goalPos)

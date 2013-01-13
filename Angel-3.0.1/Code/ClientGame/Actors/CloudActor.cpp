@@ -1,7 +1,8 @@
 #include "StdAfx.h"
 #include "CloudActor.h"
 
-CloudActor::CloudActor(const String& picturefile, const Vector2& argSpeed): m_speed(argSpeed)
+CloudActor::CloudActor(const String& picturefile, const Vector2& argSpeed)
+    : m_speed(argSpeed)
 {
 	//std::cout<<"cloud speed: "<<argSpeed.X<<std::endl;
 	m_repeat=0;

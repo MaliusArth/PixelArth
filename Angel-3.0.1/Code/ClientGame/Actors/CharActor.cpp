@@ -15,7 +15,7 @@
 
 #define IDLE_TIME 5.0f
 
-CharActor::CharActor(Bitmask * const mask, const Vector2 size)
+CharActor::CharActor(const Bitmask * const mask, const Vector2& size)
 	: CollidingActor(mask, size)
 	, m_direction(SOUTH)
 	, m_moving(false)
@@ -31,8 +31,8 @@ CharActor::CharActor(Bitmask * const mask, const Vector2 size)
     SetName("Arth");
 	//SetColor(1.0f, 1.0f, 1.0f, 1.0f);
     
-    SetSize(size.X, size.Y);
-    m_mask->setSize(size);
+    //SetSize(size.X, size.Y);
+    //m_mask->setSize(size);
 
     m_bBox = BoundingBox(Vector2(GetPosition().X-(_size.X/2), GetPosition().Y-(_size.Y/2)),
                          Vector2(GetPosition().X+(_size.X/2), GetPosition().Y+(_size.Y/2)));
@@ -77,9 +77,7 @@ CharActor::~CharActor(void)
 
 void CharActor::Collide(const CollFlags& collFlags)
 {
-    CollidingActor::Collide(collFlags);
-
-    if(/*m_moving && */m_collFlags.wall)
+    if(/*m_moving && */collFlags.wall && !m_collFlags.wall)
     {
         Vector2 temp;
         if (GetBody() != NULL)
@@ -87,20 +85,23 @@ void CharActor::Collide(const CollFlags& collFlags)
             temp = Vector2::Negate(Vector2(GetBody()->GetLinearVelocity().x, GetBody()->GetLinearVelocity().y));
         }
         GetBody()->SetLinearVelocity(b2Vec2(temp.X, temp.Y));
-
+        
+//        std::cout<<"colliding! "<<GetBody()->GetLinearVelocity().x<<" "<<GetBody()->GetLinearVelocity().y<<std::endl;
+        
         //direction = Vector2::Zero;
     }
     if(m_collFlags.damage)
     {
-        std::cout << "Snake!!!" << std::endl;
+        std::cout << "Ouch!!!" << std::endl;
         //send broadcast message: GetName()+"Died"
         //manager listens to Death Messages
     }
+
+    CollidingActor::Collide(collFlags);
 }
 
 void CharActor::Update(float dt)
 {
-	CollidingActor::Update(dt);
 
     m_bBox.Min = Vector2(GetPosition().X-(_size.X/2), GetPosition().Y-(_size.Y/2));
     m_bBox.Max = Vector2(GetPosition().X+(_size.X/2), GetPosition().Y+(_size.Y/2));
@@ -181,7 +182,7 @@ void CharActor::Update(float dt)
 			m_direction = NORTHWEST;
 		}
 	}
-    
+    #pragma region render    
     if(m_moving && !m_collFlags.wall)
 	//if(m_moving && !collType)
 	{
@@ -312,7 +313,7 @@ void CharActor::Update(float dt)
 	{
 		
 	}*/
-    
+
     if(!m_moving || m_collFlags.wall)
 	//if(!m_moving || collType)
 	{
@@ -509,21 +510,31 @@ void CharActor::Update(float dt)
 			animName.c_str()		//name of the animation so you can get the event when it finishes
 		);
 	}
+    #pragma endregion render
 
-    if(m_moving && m_collFlags.wall)
+    //if(m_moving && m_collFlags.wall)
 	//if(m_moving && !collType)
-	{
+	//{
 		//_position = newPosition;		//TODO: check for memory leak
 		//GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
 	
 		//ApplyForce(dt, newPosition);	//BUGGY
 		//MoveTo(newPosition, dt);
         
-	}
+	//}
 
     if(!m_collFlags.wall)
-    if (GetBody() != NULL)
-	    GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
+    {
+        if (GetBody() != NULL)
+        {
+	        GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
+            
+        }
+    }
+    if (GetBody() != NULL){
+//        std::cout<<"colliding! updated "<<GetBody()->GetLinearVelocity().x<<" "<<GetBody()->GetLinearVelocity().y<<std::endl;
+    }
+	CollidingActor::Update(dt);
 }
 
 void CharActor::AnimCallback(String animName)

@@ -2,7 +2,7 @@
 #include <assert.h>
 #include "CollidingActor.h"
 
-CollidingActor::CollidingActor(Bitmask * const argMask, const Vector2 argSize)
+CollidingActor::CollidingActor(const Bitmask * const argMask, const Vector2 argSize)
 {
     assert(argMask != nullptr);
     m_mask = new Bitmask(*argMask);
@@ -21,7 +21,11 @@ void CollidingActor::SetColliding(const bool argColl)
 
 void CollidingActor::Collide(const CollFlags& collFlags)
 {
-    m_collFlags = collFlags;
+    //would be much nicer with operator overloading but it's too late at night...
+    m_collFlags.wall = collFlags.wall ? collFlags.wall : m_collFlags.wall;
+    m_collFlags.floor = collFlags.floor ? collFlags.floor : m_collFlags.floor;
+    m_collFlags.damage = collFlags.damage ? collFlags.damage : m_collFlags.damage;
+    //m_collFlags = collFlags;
 	//std::cout << "none: " << m_collFlags.none << std::endl;
  //   std::cout << "floor: " << m_collFlags.floor << std::endl;
  //   std::cout << "wall: " << m_collFlags.wall << std::endl;
@@ -32,7 +36,10 @@ void CollidingActor::Collide(const CollFlags& collFlags)
 
 void CollidingActor::Update(float dt)
 {
+    m_collFlags=CollFlags();
+
 	PhysicsActor::Update(dt);
+
     /*
     if(GetBody() != NULL)
     {

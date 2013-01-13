@@ -95,22 +95,25 @@ void PixelArthScreen::Update(float dt)
     std::vector<Renderable*>::iterator it = _objects.begin();
     while(_objects.end() != it)
     {
-        // we're pre-destroying physics bodies here because it 
-        //  can mess with the pathfinding regeneration.
+        // TODO: GroundActor and ButtonActor need to be derived from the same class e.g. EnvironmentActor
         GroundActor* ga = dynamic_cast<GroundActor*> (*it);
         if(ga == NULL)
         {
-            CollidingActor* pa = dynamic_cast<CollidingActor*> (*it);
-
-            if (pa != NULL)
+            ButtonActor* ba = dynamic_cast<ButtonActor*> (*it);
+            if(ba == NULL)
             {
-                //std::cout << "destroyed? " << pa->IsDestroyed() << std::endl;
-                if(!pa->IsDestroyed()){ // not neccessary?
-                    //std::cout << "SetLayer: " << -MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2) << std::endl;
-                    pa->SetLayer(-MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
-                    // TEST: DEBUG: TODO: WTF
-                    //pa->SetLayer(10);
-                    //pa->SetLayer(20);
+                CollidingActor* pa = dynamic_cast<CollidingActor*> (*it);
+
+                if (pa != NULL)
+                {
+                    //std::cout << "destroyed? " << pa->IsDestroyed() << std::endl;
+                    if(!pa->IsDestroyed()){ // not neccessary?
+                        //std::cout << "SetLayer: " << -MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2) << std::endl;
+                        pa->SetLayer(-MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
+                        // TEST: DEBUG: TODO: WTF
+                        //pa->SetLayer(10);
+                        //pa->SetLayer(20);
+                    }
                 }
             }
         }
@@ -215,34 +218,40 @@ void PixelArthGameManager::Update(float dt)
     
     while(contactlist != NULL)
     {
-        PhysicsActor *pa = static_cast<PhysicsActor*>(contactlist->GetFixtureA()->GetBody()->GetUserData());
-        CollidingActor *ca = dynamic_cast<CollidingActor*>(pa);
-
-        if(ca != NULL)
+        if((contactlist->GetFixtureA()->GetBody()->GetUserData() == contactlist->GetFixtureB()->GetBody()->GetUserData()))
         {
-            PhysicsActor *pb = static_cast<PhysicsActor*>(contactlist->GetFixtureB()->GetBody()->GetUserData());
-            CollidingActor *cb = dynamic_cast<CollidingActor*>(pb);
+            std::cout << "WTF" << (contactlist->GetFixtureA()->GetBody()->GetUserData()) << std::endl;
+        }
+        if(!(contactlist->GetFixtureA()->GetBody()->GetUserData() == contactlist->GetFixtureB()->GetBody()->GetUserData()))
+        {
+            PhysicsActor *pa = static_cast<PhysicsActor*>(contactlist->GetFixtureA()->GetBody()->GetUserData());
+            CollidingActor *ca = dynamic_cast<CollidingActor*>(pa);
 
-            if (ca != NULL && cb != NULL)
+            if(ca != NULL)
             {
-                //std::cout << ca->GetName() << " collides with " << cb->GetName() << std::endl;
-                /// check with next position of the actors...implement getNextPosition() ?
-                CollFlags cf;
-                
-                //std::cout << cf.none << std::endl;
+                PhysicsActor *pb = static_cast<PhysicsActor*>(contactlist->GetFixtureB()->GetBody()->GetUserData());
+                CollidingActor *cb = dynamic_cast<CollidingActor*>(pb);
 
-                cf = m_collHandler->checkCollisions(ca->GetPosition()/*-(ca->GetSize()/2)*//*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/ , *(ca->GetMask()), cb->GetPosition()/*-(cb->GetSize()/2)*//*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/, *(cb->GetMask()));
+                if (ca != NULL && cb != NULL)
+                {
+                    //std::cout << ca->GetName() << " collides with " << cb->GetName() << std::endl;
+                    /// check with next position of the actors...implement getNextPosition() ?
+                    CollFlags cf;
                 
-                //std::cout << "after coll call: " << cf.wall << std::endl;
-                
-                ca->Collide(cf);
-                //std::cout << cf.none << std::endl;
+                    //std::cout << cf.none << std::endl;
 
-                cf = m_collHandler->checkCollisions(cb->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/ , *(cb->GetMask()), ca->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/, *(ca->GetMask()));
-                cb->Collide(cf);
+                    cf = m_collHandler->checkCollisions(ca->GetPosition()/*-(ca->GetSize()/2)*//*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/ , *(ca->GetMask()), cb->GetPosition()/*-(cb->GetSize()/2)*//*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/, *(cb->GetMask()));
+                
+                    //std::cout << "after coll call: " << cf.wall << std::endl;
+                
+                    ca->Collide(cf);
+                    //std::cout << cf.none << std::endl;
+
+                    cf = m_collHandler->checkCollisions(cb->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/ , *(cb->GetMask()), ca->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/, *(ca->GetMask()));
+                    cb->Collide(cf);
+                }
             }
         }
-
         contactlist = contactlist->GetNext();
     }
 }

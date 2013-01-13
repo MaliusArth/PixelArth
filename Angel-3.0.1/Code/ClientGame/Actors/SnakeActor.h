@@ -6,11 +6,11 @@ struct Path{
 
 class SnakeActor : public CollidingActor{
 public:
-    explicit SnakeActor(Bitmask * const mask, const Path& argPath, const Vector2 size = 1.0f, const float& argSpeed = 1.0f);
+    explicit SnakeActor(const Bitmask * const mask, const Path& argPath, const Vector2 size = 1.0f, const float argSpeed = 1.0f);
 	virtual void Update(float dt);
 	void setFirstPoint(const Vector2&);
 	void setSecondPoint(const Vector2&);
-	void setMovementSpeed(const float&);
+	void setMovementSpeed(const float);
 private:
 
 	void doMovement(bool reverse=false);

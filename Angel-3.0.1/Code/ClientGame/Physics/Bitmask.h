@@ -14,7 +14,7 @@ public:
 	/// <param name="path">Describes the path to the bitmask file
 	/// <para>e.g. "Resources/Images/..."</para></param>
 	/// <param name="orig_mask">Original sized mask</param>
-	Bitmask(const String& path, Bitmask* const orig_mask);
+	Bitmask(const String& path, const Bitmask* const orig_mask);
 
     /// <summary>Destructor</summary>
 	~Bitmask(void);
@@ -26,7 +26,7 @@ public:
     /// <param name="orig_mask">original sized mask.</param>
     /// <param name="x">Size along x-axis (in GL units).</param>
     /// <param name="y">Size along y-axis (in GL units). By default -1.0f for a uniform scale.</param>
-	void setSize(const float& sizeX, const float& sizeY = -1.0f);
+	void setSize(const float sizeX, const float sizeY = -1.0f);
 	
     /// <summary>Copies and resizes the bitmask</summary>
     /// <param name="orig_mask">original sized mask.</param>
@@ -51,14 +51,16 @@ public:
     /// <param name="xPos">X coord describing the position of a bit (in pixels)</param>
     /// <param name="yPos">Y coord describing the position of a bit (in pixels)</param>
     /// <returns>TODO hufi</returns>
-    unsigned char getBit(const int& xPos, const int& yPos) const;
+    unsigned char getBit(const int xPos, const int yPos) const;
 
     /// <summary>TODO hufi</summary>
     /// <param name="pos">Position describing a bit (in pixels)</param>
     /// <returns>TODO hufi</returns>
     unsigned char getBit(const Vec2i& pos) const;
-    
-    Bitmask * m_original_mask;
+
+    void printMask() const;
+
+    const Bitmask * m_original_mask;
 private:
     //Bitmask (const Bitmask &);
     //Bitmask &operator= (const Bitmask &);
