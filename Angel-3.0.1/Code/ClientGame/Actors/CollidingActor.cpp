@@ -12,24 +12,27 @@ CollidingActor::CollidingActor(Bitmask * const argMask, const Vector2 argSize)
     m_mask->setSize(argSize);
 
     //m_collFlags = CollFlags();
- }
+}
 
- void CollidingActor::SetColliding(const bool argColl)
- {
-	 m_colliding = argColl;
- }
+void CollidingActor::SetColliding(const bool argColl)
+{
+	m_colliding = argColl;
+}
 
- void CollidingActor::SetCollFlags(const CollFlags& collFlags)
- {
-     m_collFlags = collFlags;
-     //m_collFlags.none = collFlags.none;
-     //m_collFlags.floor = collFlags.floor;
-     //m_collFlags.wall = collFlags.wall;
- }
+void CollidingActor::SetCollFlags(const CollFlags& collFlags)
+{
+    m_collFlags = collFlags;
+	//std::cout << "none: " << m_collFlags.none << std::endl;
+ //   std::cout << "floor: " << m_collFlags.floor << std::endl;
+ //   std::cout << "wall: " << m_collFlags.wall << std::endl;
+    //m_collFlags.none = collFlags.none;
+    //m_collFlags.floor = collFlags.floor;
+    //m_collFlags.wall = collFlags.wall;
+}
 
- void CollidingActor::Update(float dt)
- {
-    PhysicsActor::Update(dt);
+void CollidingActor::Update(float dt)
+{
+	PhysicsActor::Update(dt);
     /*
     if(GetBody() != NULL)
     {
@@ -52,7 +55,7 @@ CollidingActor::CollidingActor(Bitmask * const argMask, const Vector2 argSize)
         }
     }
     */
- }
+}
 
  void CollidingActor::ReceiveMessage(Message* m)
 {

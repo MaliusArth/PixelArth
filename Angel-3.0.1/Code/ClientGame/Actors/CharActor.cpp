@@ -503,17 +503,15 @@ void CharActor::Update(float dt)
 		//MoveTo(newPosition, dt);
         
 	}
-    std::cout << "none: " << m_collFlags.none << std::endl;
-    std::cout << "floor: " << m_collFlags.floor << std::endl;
-    std::cout << "wall: " << m_collFlags.wall << std::endl;
-    if(m_collFlags.none)
+    
+    /*if(m_collFlags.none)
         std::cout << "none" << std::endl;
     
     if(m_collFlags.floor)
         std::cout << "floor" << std::endl;
     
     if(m_collFlags.wall)
-        std::cout << "wall" << std::endl;
+        std::cout << "wall" << std::endl;*/
 
     if(m_moving && collType)
     {
@@ -536,7 +534,7 @@ void CharActor::AnimCallback(String animName)
 
 void CharActor::ReceiveMessage(Message* m)
 {
-    std::cout << "CharActor recieved Msg: " << m->GetMessageName() << std::endl;
+    //std::cout << "CharActor recieved Msg: " << m->GetMessageName() << std::endl;
 	if (m->GetMessageName() == "CameraChange")
 	{
 	}

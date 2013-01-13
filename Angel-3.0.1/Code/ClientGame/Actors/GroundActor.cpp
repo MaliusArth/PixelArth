@@ -1,12 +1,16 @@
 #include "StdAfx.h"
 #include "GroundActor.h"
 
-GroundActor::GroundActor(const String& picturefile)
+GroundActor::GroundActor(const String& SpritePath, Bitmask * const mask)
+	: CollidingActor(mask, MathUtil::GetWorldDimensions())
 {
-	SetLayer("Ground");
-	SetSize(MathUtil::GetWorldDimensions());    //MathUtil::PixelsToWorldUnits(800),MathUtil::PixelsToWorldUnits(600)
-	SetColor(1,1,1,1);
-	SetSprite(picturefile);
+	SetSprite(SpritePath);
+
+	SetFriction(1.0f);
+	SetRestitution(0.0f);
+	SetIsSensor(true);
+	SetFixedRotation(true);
+	InitPhysics();
 }
 
 //void GroundActor::Update(float dt){

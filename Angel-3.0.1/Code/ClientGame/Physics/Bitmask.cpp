@@ -2,6 +2,9 @@
 #include "Bitmask.h"
 #include "Physics/stb_image.c"
 
+#include <iostream>
+#include <fstream>
+
 //enum BitField
 //{
 //	NONE	= 1 << 0,
@@ -58,7 +61,7 @@ Bitmask::~Bitmask(void)
 /// <param name="path">Path to the bitmask file</param>
 void Bitmask::loadMask(const String& path)
 {
-    m_mask = stbi_load(path.c_str(),&m_size.X,&m_size.Y,&m_type,0);
+    m_mask = stbi_load(path.c_str(),&m_size.X,&m_size.Y,&m_type,1);
 	if (m_mask == NULL) std::cout<<"cant inizialise mask! inputfile: "<<path<<std::endl;
 	else
 	std::cout << "Bitmask created! x: " << m_size.X << " y: " << m_size.Y << " type: " << m_type << " inputfile: " << path << std::endl;
@@ -78,8 +81,8 @@ void Bitmask::setSize(const float& sizeX, const float& sizeY){
 	m_size.X= ceil(MathUtil::WorldUnitsToPixels(sizeX));
 	m_size.Y= ceil(MathUtil::WorldUnitsToPixels(sizeY));
 	//m_type= argMask.getType();
-	scaleX=(float)maskToScale->getSize().X/(float)m_size.X;
-	scaleY=(float)maskToScale->getSize().Y/(float)m_size.Y;
+	scaleX=(float)maskToScale->getPixelSize().X/(float)m_size.X;
+	scaleY=(float)maskToScale->getPixelSize().Y/(float)m_size.Y;
 	m_mask= new unsigned char[m_size.X*m_size.Y];
 	for(i=0;i<m_size.X;i++)
 	{
@@ -92,6 +95,25 @@ void Bitmask::setSize(const float& sizeX, const float& sizeY){
 			//std::cout<<"X"<<"|";
 		}
 	}
+
+	using namespace std;
+		//int i, j;
+		std::ofstream myfile;
+		myfile.open ("mask.txt", ios::app);
+		//std::cout<<"size: "<<getPixelSize().X<<std::endl;
+		for(i= 0;i<getPixelSize().Y;i++)
+		{
+			//myfile << i << ". ";
+			for(j=0;j<getPixelSize().X;j++)
+			{
+
+				//std::cout<<(int)getBit(j,i)<<"|";
+				if(getBit(j,i) != 255) myfile<<"X";//<<std::endl;
+				else if(getBit(j,i) != 0)  myfile<<" ";
+				else myfile<<"f";
+			}
+			myfile<<"\n";
+		}
 	//int debug;
 	//for(debug=0;debug<m_sizeX*m_sizeY; debug++)
 	//    if(m_mask[debug] != 255)
