@@ -9,11 +9,11 @@ struct CollFlags
     {
         floor = 0;
         wall = 0;
-        none = 0;
+        damage = 0;
     }
     unsigned int floor : 1;
     unsigned int wall : 1;
-    unsigned int none : 1;
+    unsigned int damage : 1;
 };
 
 /// <summary></summary>

@@ -39,6 +39,8 @@ public:
 	 */
 	virtual void Update(float dt);
 
+    virtual void Collide(const CollFlags& collFlags);
+
 	/**
 	 * Override of the Renderable::Render function to draw text
 	 */

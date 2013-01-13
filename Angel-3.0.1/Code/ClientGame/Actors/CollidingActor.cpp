@@ -19,7 +19,7 @@ void CollidingActor::SetColliding(const bool argColl)
 	m_colliding = argColl;
 }
 
-void CollidingActor::SetCollFlags(const CollFlags& collFlags)
+void CollidingActor::Collide(const CollFlags& collFlags)
 {
     m_collFlags = collFlags;
 	//std::cout << "none: " << m_collFlags.none << std::endl;

@@ -235,12 +235,11 @@ void PixelArthGameManager::Update(float dt)
                 
                 //std::cout << "after coll call: " << cf.wall << std::endl;
                 
-                ca->SetCollFlags(cf);
-                
+                ca->Collide(cf);
                 //std::cout << cf.none << std::endl;
 
                 cf = m_collHandler->checkCollisions(cb->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/ , *(cb->GetMask()), ca->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/, *(ca->GetMask()));
-                cb->SetCollFlags(cf);
+                cb->Collide(cf);
             }
         }
 

@@ -17,7 +17,7 @@ public:
         return m_colliding;
     };
 
-    void SetCollFlags(const CollFlags& collFlags);
+    virtual void Collide(const CollFlags& collFlags);
 
     virtual void Update(float dt);
 

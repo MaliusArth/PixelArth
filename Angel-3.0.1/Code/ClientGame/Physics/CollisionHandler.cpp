@@ -4,7 +4,7 @@
 enum CollType
 {
     c_wall = 0,
-    c_enemy = 100,
+    c_snake = 78,
     c_floor = 255
 };
 
@@ -78,7 +78,18 @@ CollFlags CollisionHandler::checkCollisions(const Vector2& argBegin1, const Bitm
                 //std::cout<<(short int)bitmask1.getBit(inter.begin.X-m1.begin.X+j, inter.begin.Y-m1.begin.Y+i)<<std::endl;
                 if(bitmask2.getBit(inter.begin.X-m2.begin.X+j, inter.begin.Y-m2.begin.Y+i) != c_floor)
                 {
-                    flags.wall = 1;
+                    //std::cout<<(short int)bitmask1.getBit(inter.begin.X-m1.begin.X+j, inter.begin.Y-m1.begin.Y+i)<<std::endl;
+                    switch(bitmask2.getBit(inter.begin.X-m2.begin.X+j, inter.begin.Y-m2.begin.Y+i))
+                    {
+                    case c_snake:
+                        flags.damage = 1;
+                        flags.wall = 1;
+                        break;
+                    case c_wall:
+                        flags.wall = 1;
+                        break;
+                    }
+                    
                 }
             }
             //if( bitmask2.getBit(inter.begin.X-m1.begin.X+i, inter.begin.Y-m1.begin.Y+j)==c_wall)
@@ -87,7 +98,7 @@ CollFlags CollisionHandler::checkCollisions(const Vector2& argBegin1, const Bitm
         }
         //collTypeList.clear();
     }
-    std::cout<<"handler: "<<flags.wall<<std::endl;
+    //std::cout<<"handler: "<<flags.wall<<std::endl;
 	
     return flags;
 

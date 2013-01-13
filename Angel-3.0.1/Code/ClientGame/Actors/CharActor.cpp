@@ -75,6 +75,29 @@ CharActor::~CharActor(void)
     delete m_mask;
 }
 
+void CharActor::Collide(const CollFlags& collFlags)
+{
+    CollidingActor::Collide(collFlags);
+
+    if(/*m_moving && */m_collFlags.wall)
+    {
+        Vector2 temp;
+        if (GetBody() != NULL)
+        {
+            temp = Vector2::Negate(Vector2(GetBody()->GetLinearVelocity().x, GetBody()->GetLinearVelocity().y));
+        }
+        GetBody()->SetLinearVelocity(b2Vec2(temp.X, temp.Y));
+
+        //direction = Vector2::Zero;
+    }
+    if(m_collFlags.damage)
+    {
+        std::cout << "Snake!!!" << std::endl;
+        //send broadcast message: GetName()+"Died"
+        //manager listens to Death Messages
+    }
+}
+
 void CharActor::Update(float dt)
 {
 	CollidingActor::Update(dt);
@@ -82,14 +105,8 @@ void CharActor::Update(float dt)
     m_bBox.Min = Vector2(GetPosition().X-(_size.X/2), GetPosition().Y-(_size.Y/2));
     m_bBox.Max = Vector2(GetPosition().X+(_size.X/2), GetPosition().Y+(_size.Y/2));
 
-    //IsColliding();
-    
-    //iterate through contacts, get other userdata and call own collision
-    //PhysicsActor* other = static_cast<PhysicsActor*>(GetBody()->GetContactList()->other->GetUserData());
-    //theWorld.GetPhysicsWorld().
-	
-    //SetLayer(-MathUtil::WorldUnitsToPixels(GetPosition().Y-(GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
-	
+    //Collide();
+
     float delay = 0.1f;
 	spriteAnimationType animType = SAT_None;
 	int startFrame = 0;
@@ -124,7 +141,7 @@ void CharActor::Update(float dt)
 	}
 	Vector2 newPosition = _position + direction;
 	///
-	bool collType = false;//thePixelArthGame.m_wColl->isColliding(*m_mask, newPosition-(GetSize()/2));
+	//bool collType = false;//thePixelArthGame.m_wColl->isColliding(*m_mask, newPosition-(GetSize()/2));
 
 	//std::cout << "moving: " << m_moving << " collType: " << collType << std::endl;
 
@@ -165,8 +182,8 @@ void CharActor::Update(float dt)
 		}
 	}
     
-    //if(m_moving && m_collFlags.floor)
-	if(m_moving && !collType)
+    if(m_moving && !m_collFlags.wall)
+	//if(m_moving && !collType)
 	{
 		m_idleAnim = false;
 	
@@ -296,8 +313,8 @@ void CharActor::Update(float dt)
 		
 	}*/
     
-    //if(!m_moving || !m_collFlags.floor)
-	if(!m_moving || collType)
+    if(!m_moving || m_collFlags.wall)
+	//if(!m_moving || collType)
 	{
 		m_idleness+=dt;
 		if(m_idleness < IDLE_TIME)
@@ -493,8 +510,8 @@ void CharActor::Update(float dt)
 		);
 	}
 
-    //if(m_moving & m_collFlags.floor)
-	if(m_moving && !collType)
+    if(m_moving && m_collFlags.wall)
+	//if(m_moving && !collType)
 	{
 		//_position = newPosition;		//TODO: check for memory leak
 		//GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
@@ -503,20 +520,8 @@ void CharActor::Update(float dt)
 		//MoveTo(newPosition, dt);
         
 	}
-    
-    /*if(m_collFlags.none)
-        std::cout << "none" << std::endl;
-    
-    if(m_collFlags.floor)
-        std::cout << "floor" << std::endl;
-    
-    if(m_collFlags.wall)
-        std::cout << "wall" << std::endl;*/
 
-    if(m_moving && collType)
-    {
-        direction = Vector2::Zero;
-    }
+    if(!m_collFlags.wall)
     if (GetBody() != NULL)
 	    GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
 }

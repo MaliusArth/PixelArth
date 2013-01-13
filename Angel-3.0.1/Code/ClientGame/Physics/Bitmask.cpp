@@ -96,28 +96,23 @@ void Bitmask::setSize(const float& sizeX, const float& sizeY){
 		}
 	}
 
-	using namespace std;
-		//int i, j;
-		std::ofstream myfile;
-		myfile.open ("mask.txt", ios::app);
-		//std::cout<<"size: "<<getPixelSize().X<<std::endl;
-		for(i= 0;i<getPixelSize().Y;i++)
-		{
-			//myfile << i << ". ";
-			for(j=0;j<getPixelSize().X;j++)
-			{
-
-				//std::cout<<(int)getBit(j,i)<<"|";
-				if(getBit(j,i) != 255) myfile<<"X";//<<std::endl;
-				else if(getBit(j,i) != 0)  myfile<<" ";
-				else myfile<<"f";
-			}
-			myfile<<"\n";
-		}
-	//int debug;
-	//for(debug=0;debug<m_sizeX*m_sizeY; debug++)
-	//    if(m_mask[debug] != 255)
-	//	    std::cout<<"X|";
+    //using namespace std;
+    ////int i, j;
+    //std::ofstream myfile;
+    //myfile.open ("mask.txt", ios::app);
+    ////std::cout<<"size: "<<getPixelSize().X<<std::endl;
+    //for(i= 0;i<getPixelSize().Y;i++)
+    //{
+    //    //myfile << i << ". ";
+    //    for(j=0;j<getPixelSize().X;j++)
+    //    {
+    //        //std::cout<<(int)getBit(j,i)<<"|";
+    //        if(getBit(j,i) != 255) myfile<<"X";//<<std::endl;
+    //        else if(getBit(j,i) != 0)  myfile<<" ";
+    //        else myfile<<"f";
+    //    }
+    //    myfile<<"\n";
+    //}
 };
 
 void Bitmask::setSize(const Vector2& size){
