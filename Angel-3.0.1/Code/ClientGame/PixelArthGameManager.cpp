@@ -4,9 +4,12 @@
 
 #if !ANGEL_MOBILE
     #include "WorldMap/PixelArthScreenCharTest.h"
+    #include "WorldMap/Screen1.h"
     #include "WorldMap/Screen2.h"
     #include "WorldMap/Screen3.h"
     #include "WorldMap/Screen4.h"
+    #include "WorldMap/Screen5.h"
+
 
 #endif
 
@@ -162,9 +165,11 @@ PixelArthGameManager::PixelArthGameManager()
         //_screens.push_back(new PixelArthScreenMobileSimulator());				// 0
     #else
         //_screens.push_back(new PixelArthScreenCharTest());
+        _screens.push_back(new Screen1());
         _screens.push_back(new Screen2());
         _screens.push_back(new Screen3());
         _screens.push_back(new Screen4());
+        _screens.push_back(new Screen5());
     #endif
 	
     unsigned int startingIndex = 0;

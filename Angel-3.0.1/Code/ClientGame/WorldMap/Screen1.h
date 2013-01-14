@@ -9,21 +9,18 @@
 #include "Actors\DoorActor.h"
 //#include "Actors/CharActor.h"
 
-class Screen4 : public PixelArthScreen
+class Screen1 : public PixelArthScreen
 {
 public:
-	Screen4();
-	//~Screen4();
+	Screen1();
+	//~Screen1();
 
 	virtual void Start();
 	virtual void Update(float dt);
 private:
-	TextActor *m_text;
+	//TextActor *m_text;
 	CloudActor *m_sky;
 	GroundActor *m_ground;
-    ButtonActor *m_button, *m_buttonPerm;
-    DoorActor *m_door;
-	SnakeActor *m_snake;
 
 	//CharActor *m_arth;
 };

@@ -193,9 +193,11 @@ cd ..\Tools\BuildScripts\
     </ClCompile>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="WorldMap\PixelArthScreenCharTest.cpp" />
-    <ClCompile Include="WorldMap\Screen3.cpp" />
+    <ClCompile Include="WorldMap\Screen1.cpp" />
     <ClCompile Include="WorldMap\Screen4.cpp" />
+    <ClCompile Include="WorldMap\Screen3.cpp" />
     <ClCompile Include="WorldMap\Screen2.cpp" />
+    <ClCompile Include="WorldMap\Screen5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actors\ButtonActor.h" />
@@ -210,9 +212,11 @@ cd ..\Tools\BuildScripts\
     <ClInclude Include="PixelArthGameManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="WorldMap\PixelArthScreenCharTest.h" />
+    <ClInclude Include="WorldMap\Screen1.h" />
     <ClInclude Include="WorldMap\Screen3.h" />
     <ClInclude Include="WorldMap\Screen4.h" />
     <ClInclude Include="WorldMap\Screen2.h" />
+    <ClInclude Include="WorldMap\Screen5.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\defaults.lua" />

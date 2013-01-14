@@ -23,7 +23,6 @@ private:
 	GroundActor *m_ground;
     ButtonActor *m_button;
     DoorActor *m_door;
-	SnakeActor *m_snake;
 
 	//CharActor *m_arth;
 };
