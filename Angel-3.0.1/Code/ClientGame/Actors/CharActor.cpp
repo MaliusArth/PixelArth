@@ -15,7 +15,7 @@
 
 #define IDLE_TIME 5.0f
 
-CharActor::CharActor(const Bitmask * const mask, const Vector2& size)
+CharActor::CharActor(const Bitmask * const mask, const Vector2& argPosition ,const Vector2& size)
 	: CollidingActor(mask, size)
 	, m_direction(SOUTH)
 	, m_moving(false)
@@ -52,6 +52,8 @@ CharActor::CharActor(const Bitmask * const mask, const Vector2& size)
 	///TEST
 	//_world = new Bitmask("Resources/Images/coll.png");
     
+    SetPosition(argPosition);
+
 	SetDensity(1.0f);
 	SetFriction(0.0f);
 	SetRestitution(0.0f);

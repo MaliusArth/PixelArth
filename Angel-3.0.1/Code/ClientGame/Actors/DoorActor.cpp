@@ -30,12 +30,13 @@ DoorActor::DoorActor(const String& spritePath, const Bitmask* const maskOpen, co
 	InitPhysics();
 }
 void DoorActor::setLocked(const bool locked){
-	if(locked)
+    std::cout<<"wall: "<<m_collFlags.wall<<std::endl;
+    if((locked) && (m_collFlags.wall==0))
 	{
 		SetSprite(m_spritePath +"off.png");
         m_mask=m_closed;
 	}
-	else
+	if(!locked)
 	{
 		SetSprite(m_spritePath +"on.png");
         m_mask=m_open;
@@ -60,4 +61,6 @@ void DoorActor::Update(float dt){
 		}
 	}
 	setLocked(tmp);
+
+    CollidingActor::Update(dt);
 }

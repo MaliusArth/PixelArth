@@ -16,7 +16,7 @@ void PixelArthScreenCollisionTest::Start()
 {
     m_sky = new CloudActor("Resources/Images/clouds2.jpg");
     m_ground = new GroundActor("Resources/Images/floating1.png", GetBitmask("Resources/Images/floating1_Bitmask.png"), MathUtil::GetWorldDimensions());
-    m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
+    m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"),Vector2(-3,0));
 
     Path pos;
     pos.begin = Vector2(0,2);

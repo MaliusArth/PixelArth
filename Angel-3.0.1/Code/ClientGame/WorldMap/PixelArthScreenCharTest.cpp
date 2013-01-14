@@ -14,7 +14,7 @@ void PixelArthScreenCharTest::Start()
 	//Creating a new, generic actor is simple.
 
 	//m_a = new Actor();
-	m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"));
+	m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"),Vector2(-3,0));
 	//m_arth->SetName("Arth");
     std::cout << "Arth Name: " << m_arth->GetName() << std::endl;
     //m_arth->GetBody()->SetUserData((void*)m_arth->GetMask());

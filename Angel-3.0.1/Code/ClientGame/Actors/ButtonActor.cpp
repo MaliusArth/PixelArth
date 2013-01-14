@@ -48,7 +48,7 @@ void ButtonActor::Update(float dt){
 	if(m_time>0 && m_pressed==true)
 	{
 		m_countup+= dt;
-		std::cout<<m_countup<<std::endl;
+		//std::cout<<m_countup<<std::endl;
 		if(m_countup>=m_time)
 			setPressed(false);
 

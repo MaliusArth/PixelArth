@@ -24,7 +24,7 @@ public:
 	 * The constructor sets up all the information that this CharActor will
 	 *  use to draw itself to the screen. 
 	 */
-	explicit CharActor(const Bitmask * const mask, const Vector2& size = 2.0f);
+	explicit CharActor(const Bitmask * const mask, const Vector2& argPosition, const Vector2& size = 2.0f);
 	
 	~CharActor(void);
 
