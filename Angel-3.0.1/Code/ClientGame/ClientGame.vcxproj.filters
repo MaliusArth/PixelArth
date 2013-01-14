@@ -44,9 +44,6 @@
     <ClCompile Include="WorldMap\PixelArthScreenCharTest.cpp">
       <Filter>WorldMap</Filter>
     </ClCompile>
-    <ClCompile Include="WorldMap\PixelArthScreenCollisionTest.cpp">
-      <Filter>WorldMap</Filter>
-    </ClCompile>
     <ClCompile Include="Physics\Bitmask.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
@@ -68,6 +65,15 @@
     <ClCompile Include="Actors\DoorActor.cpp">
       <Filter>Actors</Filter>
     </ClCompile>
+    <ClCompile Include="WorldMap\Screen2.cpp">
+      <Filter>WorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap\Screen4.cpp">
+      <Filter>WorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap\Screen3.cpp">
+      <Filter>WorldMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -81,9 +87,6 @@
       <Filter>Actors</Filter>
     </ClInclude>
     <ClInclude Include="WorldMap\PixelArthScreenCharTest.h">
-      <Filter>WorldMap</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldMap\PixelArthScreenCollisionTest.h">
       <Filter>WorldMap</Filter>
     </ClInclude>
     <ClInclude Include="Physics\Bitmask.h">
@@ -106,6 +109,15 @@
     </ClInclude>
     <ClInclude Include="Actors\DoorActor.h">
       <Filter>Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap\Screen2.h">
+      <Filter>WorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap\Screen4.h">
+      <Filter>WorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap\Screen3.h">
+      <Filter>WorldMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

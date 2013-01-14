@@ -9,11 +9,11 @@
 #include "Actors\DoorActor.h"
 //#include "Actors/CharActor.h"
 
-class PixelArthScreenCollisionTest : public PixelArthScreen
+class Screen3 : public PixelArthScreen
 {
 public:
-	PixelArthScreenCollisionTest();
-	//~PixelArthScreenCollisionTest();
+	Screen3();
+	//~Screen3();
 
 	virtual void Start();
 	virtual void Update(float dt);
@@ -23,7 +23,7 @@ private:
 	GroundActor *m_ground;
     ButtonActor *m_button;
     DoorActor *m_door;
-	SnakeActor *m_snake[4];
+	SnakeActor *m_snake;
 
 	//CharActor *m_arth;
 };

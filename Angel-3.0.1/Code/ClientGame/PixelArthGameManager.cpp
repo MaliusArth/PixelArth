@@ -4,7 +4,10 @@
 
 #if !ANGEL_MOBILE
     #include "WorldMap/PixelArthScreenCharTest.h"
-    #include "WorldMap/PixelArthScreenCollisionTest.h"
+    #include "WorldMap/Screen2.h"
+    #include "WorldMap/Screen3.h"
+    #include "WorldMap/Screen4.h"
+
 #endif
 
 //#include "PixelArthScreenMobileSimulator.h"
@@ -151,14 +154,17 @@ PixelArthGameManager::PixelArthGameManager()
     //subscribe to messages
     theSwitchboard.SubscribeTo(this, "MoveForwards");
     theSwitchboard.SubscribeTo(this, "MoveBackwards");
+    theSwitchboard.SubscribeTo(this, "Dead");
 	
     m_collHandler = new CollisionHandler();	
 	
     #if ANGEL_MOBILE
         //_screens.push_back(new PixelArthScreenMobileSimulator());				// 0
     #else
-        _screens.push_back(new PixelArthScreenCharTest());
-        _screens.push_back(new PixelArthScreenCollisionTest());
+        //_screens.push_back(new PixelArthScreenCharTest());
+        _screens.push_back(new Screen2());
+        _screens.push_back(new Screen3());
+        _screens.push_back(new Screen4());
     #endif
 	
     unsigned int startingIndex = 0;
@@ -266,6 +272,13 @@ void PixelArthGameManager::ReceiveMessage(Message* message)
     {
         MoveBackwards();
     }
+    else if (message->GetMessageName() == "Dead")
+    {
+        _screens[_current]->Stop();
+        theWorld.Remove(_screens[_current]);
+        _screens[_current]->Start();
+        theWorld.Add(_screens[_current]);
+    }
 
     /*if (message->GetMessageName() == "CollisionStartWith"+ _screens[_current]->GetHero()->GetName())
     {
@@ -312,8 +325,8 @@ void PixelArthGameManager::MoveForwards()
         //theSwitchboard.SubscribeTo(this, "CollisionStartWith"+GetCurrentScreen()->GetHero()->GetName());
         //theSwitchboard.SubscribeTo(this, "CollisionEndWith"+GetCurrentScreen()->GetHero()->GetName());
 		
-        if (sample)
-            theSound.PlaySound(sample, 1.0f, false/*no loop*/, 0);
+        //if (sample)
+        //    theSound.PlaySound(sample, 1.0f, false/*no loop*/, 0);
     }
 }
 
@@ -326,32 +339,32 @@ void PixelArthGameManager::MoveBackwards()
         _screens[--_current]->Start();
         theWorld.Add(_screens[_current]);
 		
-        if (sample)
-            theSound.PlaySound(sample, 1.0f, false/*no loop*/, 0);
+        //if (sample)
+        //    theSound.PlaySound(sample, 1.0f, false/*no loop*/, 0);
     }
 }
 
 void PixelArthGameManager::Render()
 {
-    glColor3f(0.5f, 0.5f, 0.5f);
-    char* infoString = "";
-    int xOffset = 0;
-    if (_current == 0)
-    {
-        infoString = "[A/Space]: Next";
-        xOffset = 887;
-    }
-    else if (_current == _screens.size() - 1)
-    {
-        infoString = "[Back/Minus]: Previous";
-        xOffset = 824;
-    }
-    else
-    {
-        infoString = "[A/Space]: Next [Back/Minus]: Previous";
-        xOffset = 680;
-    }
-    DrawGameText(infoString, "ConsoleSmall", xOffset, 563);	//763
+    //glColor3f(0.5f, 0.5f, 0.5f);
+    //char* infoString = "";
+    //int xOffset = 0;
+    //if (_current == 0)
+    //{
+    //    infoString = "[A/Space]: Next";
+    //    xOffset = 887;
+    //}
+    //else if (_current == _screens.size() - 1)
+    //{
+    //    infoString = "[Back/Minus]: Previous";
+    //    xOffset = 824;
+    //}
+    //else
+    //{
+    //    infoString = "[A/Space]: Next [Back/Minus]: Previous";
+    //    xOffset = 680;
+    //}
+    //DrawGameText(infoString, "ConsoleSmall", xOffset, 563);	//763
 }
 
 void PixelArthGameManager::SoundEnded(AngelSoundHandle sound)

@@ -95,6 +95,7 @@ void CharActor::Collide(const CollFlags& collFlags)
     if(m_collFlags.damage)
     {
         std::cout << "Ouch!!!" << std::endl;
+        theSwitchboard.Broadcast(new Message("Dead"));
         //send broadcast message: GetName()+"Died"
         //manager listens to Death Messages
     }
