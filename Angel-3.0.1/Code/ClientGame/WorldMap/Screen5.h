@@ -21,6 +21,7 @@ private:
 	//TextActor *m_text;
 	CloudActor *m_sky;
 	GroundActor *m_ground;
-
+    TextActor *m_text;
+    Actor *m_plain;
 	//CharActor *m_arth;
 };

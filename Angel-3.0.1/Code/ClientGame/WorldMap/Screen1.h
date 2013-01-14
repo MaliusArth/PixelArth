@@ -7,6 +7,7 @@
 #include "Actors\SnakeActor.h"
 #include "Actors\ButtonActor.h"
 #include "Actors\DoorActor.h"
+#include "Actors\TextActor.h"
 //#include "Actors/CharActor.h"
 
 class Screen1 : public PixelArthScreen
@@ -18,9 +19,9 @@ public:
 	virtual void Start();
 	virtual void Update(float dt);
 private:
-	//TextActor *m_text;
+	TextActor *m_text;
 	CloudActor *m_sky;
 	GroundActor *m_ground;
-
+    Actor *m_plain;
 	//CharActor *m_arth;
 };
