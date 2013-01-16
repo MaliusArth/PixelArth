@@ -1,14 +1,18 @@
 PixelArth
 =========
 
+Move with the Arrow Keys.
+Got stuck ? Kill yourself with [q] ;)
+Or why not just jump through the levels with [SPACE] and [-]... (You cheater)
+
+
 Main Game Project: ClientGame
 
-Rest: AngelEngine (do not touch!)
-
-Please, don't use "git add -A" for adding files, unless you really know what will be added.
-More recommended is "git add -u" and adding untracked files manually.
+Rest: AngelEngine
 
 Team:
-Viktor Was	- viktor.was@technikum-wien.at
+Viktor Was - viktor.was@technikum-wien.at
+Game Design, User & Character Interaction, Quality Assurance, Lead Programmer, Debugging, Concept Art/Artwork
+
 Philipp Hufnagl	- philipp.hufnagl@technikum-wien.at
-Philipp Langer	- philipp.langer@technikum-wien.at
+Programmer: Bitmask Collision, Levels, Interactive Actors
