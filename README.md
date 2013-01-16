@@ -1,14 +1,17 @@
 PixelArth
 =========
 
+Your goal is to reach the last level without touching the ssssnakes.
+
 Move with the Arrow Keys.
 Got stuck ? Kill yourself with [q] ;)
 Or why not just jump through the levels with [SPACE] and [-]... (You cheater)
 
+---------
 
 Main Game Project: ClientGame
 
-Rest: AngelEngine
+"The Rest is Silence" (AngelEngine)
 
 Team:
 Viktor Was - viktor.was@technikum-wien.at
