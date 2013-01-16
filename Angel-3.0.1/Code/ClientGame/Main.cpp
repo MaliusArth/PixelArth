@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 	theWorld.Initialize(800, 600, "PixelArth", true, false);
 	
 	theWorld.SetupPhysics(Vector2::Zero);
-    theWorld.SetSideBlockers(true);
+    //theWorld.SetSideBlockers(true);
 	theWorld.NameLayer("Sky", -1);
 	theWorld.NameLayer("Ground", 0);
 

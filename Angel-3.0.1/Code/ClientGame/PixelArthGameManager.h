@@ -26,10 +26,10 @@ public:
 
     Bitmask * const GetBitmask(const String& path);
 
-    inline CharActor* GetHero(void)
+    /*inline CharActor* GetHero(void)
     {
         return m_arth;
-    }
+    }*/
 
 protected:
 	std::vector<Renderable*> _objects;

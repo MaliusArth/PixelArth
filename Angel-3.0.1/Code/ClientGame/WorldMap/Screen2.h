@@ -21,6 +21,4 @@ private:
 	CloudActor *m_sky;
 	GroundActor *m_ground;
 	SnakeActor *m_snake[4];
-
-	//CharActor *m_arth;
 };

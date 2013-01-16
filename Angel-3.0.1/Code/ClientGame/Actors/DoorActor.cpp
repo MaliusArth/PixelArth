@@ -12,8 +12,10 @@ DoorActor::DoorActor(const String& spritePath, const Bitmask* const maskOpen, co
     m_open->m_original_mask = maskOpen;
     m_closed = m_mask;
     setLocked(locked);
+
 	SetPosition(position);
     m_open->setSize(size);
+
     //don't forget to delete the second mask!!! m_mask is deleted by CollidingActor so check which one to delete
     //std::cout << "param:maskOpen: pixelsize: " << maskOpen->getPixelSize().X << " " << maskOpen->getPixelSize().Y << std::endl;
     //std::cout << "param:maskClosed: pixelsize: " << maskClosed->getPixelSize().X << " " << maskClosed->getPixelSize().Y << std::endl;
@@ -21,13 +23,6 @@ DoorActor::DoorActor(const String& spritePath, const Bitmask* const maskOpen, co
     //std::cout << "mask: pixelsize: " << m_mask->getPixelSize().X << " " << m_mask->getPixelSize().Y << std::endl;
     //std::cout << "maskClosed: pixelsize: " << m_closed->getPixelSize().X << " " << m_closed->getPixelSize().Y << std::endl;
     //std::cout << "maskOpen: pixelsize: " << m_open->getPixelSize().X << " " << m_open->getPixelSize().Y << std::endl;
-    
-    SetDensity(1.0f);
-	SetFriction(0.0f);
-	SetRestitution(0.0f);
-	SetIsSensor(true);
-	SetFixedRotation(true);
-	InitPhysics();
 }
 void DoorActor::setLocked(const bool locked){
     //std::cout<<"wall: "<<m_collFlags.wall<<std::endl;

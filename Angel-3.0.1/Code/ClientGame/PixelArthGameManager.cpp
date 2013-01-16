@@ -17,15 +17,25 @@
 
 PixelArthScreen::PixelArthScreen() {}
 
-void PixelArthScreen::Start(){}
+void PixelArthScreen::Start()
+{
+    std::vector<Renderable*>::iterator it = _objects.begin();
+    while(_objects.end() != it)
+    {
+        PhysicsActor* pa = dynamic_cast<PhysicsActor*> (*it);
+        if (pa != NULL)
+        {
+            pa->InitPhysics();
+        }
+        it++;
+    }
+}
 
 void PixelArthScreen::Stop()
 {
     std::vector<Renderable*>::iterator it = _objects.begin();
     while(_objects.end() != it)
     {
-        // we're pre-destroying physics bodies here because it 
-        //  can mess with the pathfinding regeneration.
         PhysicsActor* pa = dynamic_cast<PhysicsActor*> (*it);
         if (pa != NULL)
         {
@@ -41,18 +51,7 @@ void PixelArthScreen::Stop()
     }
     _objects.clear();
 
-    m_arth = NULL;
-
-    /*if (m_arth != NULL)
-    {
-	    if (m_arth->GetBody() != NULL)
-	    {
-		    m_arth->GetBody()->SetUserData(NULL);
-		    theWorld.GetPhysicsWorld().DestroyBody(m_arth->GetBody());
-		    m_arth->ResetBody();
-	    }
-    }
-    m_arth->Destroy();*/
+    m_arth = nullptr;
 
     // clear bitmasks
     std::map<String, Bitmask*>::iterator it2 = m_bitmaskmap.begin();
@@ -67,73 +66,41 @@ void PixelArthScreen::Stop()
 
 void PixelArthScreen::Update(float dt)
 {
-    //for (b2Contact* c = theWorld.GetPhysicsWorld().GetContactList(); c; c = c->GetNext())
-    //{
-    //    // process c
-    //    //c->GetFixtureA()->GetBody()->GetUserData();
-    //    PhysicsActor* pa = static_cast<PhysicsActor*> (c->GetFixtureA()->GetBody()->GetUserData());
-    //    
-    //    CollidingActor* ca = dynamic_cast<CollidingActor*>(pa);
-    //    if (ca != NULL)
-    //    {
-    //        std::cout << "Body userData: " << ca->GetMask()->getPath() << std::endl;
-    //    }
-    //}
-
-    /*std::vector<Renderable*>::iterator it = _objects.begin();
-    while(_objects.end() != it)
-    {
-        CollidingActor* pa = dynamic_cast<CollidingActor*> (*it);
-        if (pa != NULL)
-        {
-            if (pa->GetBody() != NULL)
-            {
-                pa->GetBody()->SetUserData(NULL);
-                theWorld.GetPhysicsWorld().DestroyBody(pa->GetBody());
-                pa->ResetBody();
-            }
-        }
-        (*it)->Destroy();
-        it++;
-    }
-    _objects.clear();*/
-
     std::vector<Renderable*>::iterator it = _objects.begin();
     while(_objects.end() != it)
     {
-        // TODO: GroundActor and ButtonActor need to be derived from the same class e.g. EnvironmentActor
-        GroundActor* ga = dynamic_cast<GroundActor*> (*it);
-        if(ga == NULL)
-        {
-            ButtonActor* ba = dynamic_cast<ButtonActor*> (*it);
-            if(ba == NULL)
-            {
-                CollidingActor* pa = dynamic_cast<CollidingActor*> (*it);
+        CollidingActor* pa = dynamic_cast<CollidingActor*> (*it);
 
-                if (pa != NULL)
-                {
-                    //std::cout << "destroyed? " << pa->IsDestroyed() << std::endl;
-                    if(!pa->IsDestroyed()){ // not neccessary?
-                        //std::cout << "SetLayer: " << -MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2) << std::endl;
-                        pa->SetLayer(-MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
-                        // TEST: DEBUG: TODO: WTF
-                        //pa->SetLayer(10);
-                        //pa->SetLayer(20);
-                    }
+        if (pa != NULL)
+        {
+            if(pa->IsLayered())
+            {
+                if(!pa->IsDestroyed()){
+                    //std::cout << "SetLayer: " << -MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2) << std::endl;
+                    pa->SetLayer(-MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
+                    // TEST: DEBUG: TODO: Screen Switch Crash
+                    //pa->SetLayer(10);
+                    //pa->SetLayer(20);
                 }
             }
         }
         it++;
     }
-
     //std::cout << "pos: " << (m_arth->GetPosition()+(m_arth->GetSize()/2)).X << " bBox: " << m_arth->GetBoundingBox().Max.X << " right: " << MathUtil::GetWorldDimensions().X/2 << std::endl;
     if(m_arth->GetBoundingBox().Max.X >= (MathUtil::GetWorldDimensions().X/2))
     {
-        thePixelArthGame.MoveForwards();
+        theSwitchboard.Broadcast(new Message("MoveForwards"));
+        //thePixelArthGame.MoveForwards();
     }
-    if(m_arth->GetBoundingBox().Min.X <= -(MathUtil::GetWorldDimensions().X/2))
+    else if(m_arth->GetBoundingBox().Min.X <= -(MathUtil::GetWorldDimensions().X/2))
     {
-        thePixelArthGame.MoveBackwards();
+        theSwitchboard.Broadcast(new Message("MoveBackwards"));
+        //thePixelArthGame.MoveBackwards();
+    }
+
+    if(theInput.IsKeyDown('q'))
+    {
+        theSwitchboard.Broadcast(new Message("Dead"));
     }
 }
 
@@ -190,11 +157,12 @@ PixelArthGameManager::PixelArthGameManager()
     // allow them to not specify it if they don't need the functionality.
     theSound.SetSoundCallback(this, &GameManager::SoundEnded);
 	
-    sample = theSound.LoadSample("Resources/Sounds/click.ogg", false /*no stream*/);
+    //sample = theSound.LoadSample("Resources/Sounds/click.ogg", false /*no stream*/);
 }
 
 PixelArthGameManager::~PixelArthGameManager()
 {
+    GameManager::~GameManager();
     delete m_collHandler;
 }
 
@@ -215,15 +183,6 @@ PixelArthScreen* PixelArthGameManager::GetCurrentScreen()
 void PixelArthGameManager::Update(float dt)
 {
     GameManager::Update(dt);
-
-    //TODODODODOODODODODO!!!!!
-
-    //collidingActor::SetColliding() checks the contactlist
-
-    //manager stores std::vector with all collidingactors
-    //on CollisionStartWith: push_back the b2contact from the message
-    //in the manager::Update: checkCollisions every frame
-    //on CollisionEndWith: check contactlist of actors if they don't contain any CollidingActors pop actor from std::vector?
 
     b2Contact* contactlist = theWorld.GetPhysicsWorld().GetContactList();
     
@@ -281,9 +240,23 @@ void PixelArthGameManager::ReceiveMessage(Message* message)
     {
         _screens[_current]->Stop();
         theWorld.Remove(_screens[_current]);
+
         _screens[_current]->Start();
         theWorld.Add(_screens[_current]);
+
+        //TODO: GameOverScreen
+        //_screens[_gameOver]->Start();
+        //theWorld.Add(_screens[_gameOver]);
     }
+    //else if (message->GetMessageName() == "Retry")
+    //{
+    //    _screens[_gameOver]->Stop();
+    //    theWorld.Remove(_screens[_gameOver]);
+
+    //    //TODO: GameOverScreen
+    //    _screens[_current]->Start();
+    //    theWorld.Add(_screens[_current]);
+    //}
 
     /*if (message->GetMessageName() == "CollisionStartWith"+ _screens[_current]->GetHero()->GetName())
     {
@@ -309,7 +282,7 @@ void PixelArthGameManager::ReceiveMessage(Message* message)
         if (ca != NULL && cb != NULL)
         {
             std::cout << "char contacts with " << ca->GetName() << std::endl;
-            /// check with next position of the actors...implement getNextPosition() ?
+            /// check with next position of the actors...implement getNextPosition() ? HOW? buffered movement?
             CollFlags cf = m_collHandler->checkCollisions(ca->GetPosition()+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y) , *(ca->GetMask()), cb->GetPosition()+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y), *(cb->GetMask()));
             ca->SetCollFlags(cf);
             cb->SetCollFlags(cf);

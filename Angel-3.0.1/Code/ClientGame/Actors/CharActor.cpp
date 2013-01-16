@@ -26,42 +26,17 @@ CharActor::CharActor(const Bitmask * const mask, const Vector2& argPosition ,con
 	, m_movementSpeed(3.0f)
 	, m_idleness(0.0f)
 	, m_idleAnim(false)
-	//, m_isKinematic(true)
 {
-    SetName("Arth");
-	//SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-    
-    //SetSize(size.X, size.Y);
-    //m_mask->setSize(size);
+    //SetName("Arth");
+	SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundDown/lookAroundDown_00.png");
+    SetPosition(argPosition);
 
     m_bBox = BoundingBox(Vector2(GetPosition().X-(_size.X/2), GetPosition().Y-(_size.Y/2)),
                          Vector2(GetPosition().X+(_size.X/2), GetPosition().Y+(_size.Y/2)));
-    //m_bBox.RenderBox();       //not working?
-    //m_bBox.RenderOutline();   //not working?
-    
-    /*if(GetBody() != NULL){
-        std::cout << "charactor ctor getbody succeeded!" << std::endl;
-        GetBody()->SetUserData(m_mask);
-    }*/
-	
-	//_timestampArrowReleased = theWorld.GetCurrentTimeSeconds();
+    //m_bBox.RenderBox();
+    //m_bBox.RenderOutline();
 
-	//ClearSpriteInfo();
-	SetSprite("Resources/Images/animations/chars/arth/stand/lookAroundDown/lookAroundDown_00.png");
-
-	///TEST
-	//_world = new Bitmask("Resources/Images/coll.png");
-    
-    SetPosition(argPosition);
-
-	SetDensity(1.0f);
-	SetFriction(0.0f);
-	SetRestitution(0.0f);
-	//SetIsSensor(true);
-	SetFixedRotation(true);
-	InitPhysics();
-
-	theSwitchboard.SubscribeTo(this, "CameraChange");
+	//theSwitchboard.SubscribeTo(this, "CameraChange");
 	theSwitchboard.SubscribeTo(this, "UpArrowPressed");
 	theSwitchboard.SubscribeTo(this, "DownArrowPressed");
 	theSwitchboard.SubscribeTo(this, "LeftArrowPressed");
@@ -74,6 +49,15 @@ CharActor::CharActor(const Bitmask * const mask, const Vector2& argPosition ,con
 
 CharActor::~CharActor(void)
 {
+	//theSwitchboard.UnsubscribeFrom(this, "CameraChange");
+    theSwitchboard.UnsubscribeFrom(this, "UpArrowPressed");
+	theSwitchboard.UnsubscribeFrom(this, "DownArrowPressed");
+	theSwitchboard.UnsubscribeFrom(this, "LeftArrowPressed");
+	theSwitchboard.UnsubscribeFrom(this, "RightArrowPressed");
+	theSwitchboard.UnsubscribeFrom(this, "UpArrowReleased");
+	theSwitchboard.UnsubscribeFrom(this, "DownArrowReleased");
+	theSwitchboard.UnsubscribeFrom(this, "LeftArrowReleased");
+	theSwitchboard.UnsubscribeFrom(this, "RightArrowReleased");
     delete m_mask;
 }
 
@@ -105,18 +89,15 @@ void CharActor::Collide(const CollFlags& collFlags)
 
 void CharActor::Update(float dt)
 {
-
     m_bBox.Min = Vector2(GetPosition().X-(_size.X/2), GetPosition().Y-(_size.Y/2));
     m_bBox.Max = Vector2(GetPosition().X+(_size.X/2), GetPosition().Y+(_size.Y/2));
-
-    //Collide();
 
     float delay = 0.1f;
 	spriteAnimationType animType = SAT_None;
 	int startFrame = 0;
 	int endFrame = 0;
 	String animName = String();
-	///HUUUUUUFFFFIIIIII
+
 	Vector2 direction = Vector2::Zero;
 	if(m_movingNorth)
 	{
@@ -144,13 +125,8 @@ void CharActor::Update(float dt)
 		m_idleness = 0.0f;
 	}
 	Vector2 newPosition = _position + direction;
-	///
-	//bool collType = false;//thePixelArthGame.m_wColl->isColliding(*m_mask, newPosition-(GetSize()/2));
-
-	//std::cout << "moving: " << m_moving << " collType: " << collType << std::endl;
-
-	//bool collType = false;
-	if(m_moving)
+	
+    if(m_moving)
 	{
 		if((newPosition.Y > _position.Y) & (newPosition.X == _position.X))
 		{
@@ -187,7 +163,6 @@ void CharActor::Update(float dt)
 	}
     #pragma region render    
     if(m_moving && !m_collFlags.wall)
-	//if(m_moving && !collType)
 	{
 		m_idleAnim = false;
 	
@@ -312,13 +287,8 @@ void CharActor::Update(float dt)
 		}
 		#pragma endregion Walk North-West
 	}
-	/*else if(collType == 0)	//make enum for collType
-	{
-		
-	}*/
 
     if(!m_moving || m_collFlags.wall)
-	//if(!m_moving || collType)
 	{
 		m_idleness+=dt;
 		if(m_idleness < IDLE_TIME)
@@ -516,9 +486,7 @@ void CharActor::Update(float dt)
     #pragma endregion render
 
     //if(m_moving && m_collFlags.wall)
-	//if(m_moving && !collType)
 	//{
-		//_position = newPosition;		//TODO: check for memory leak
 		//GetBody()->SetLinearVelocity(b2Vec2(direction.X, direction.Y));
 	
 		//ApplyForce(dt, newPosition);	//BUGGY
@@ -557,36 +525,6 @@ void CharActor::ReceiveMessage(Message* m)
 	if (m->GetMessageName() == "CameraChange")
 	{
 	}
-
-    /*if (m->GetMessageName() == "CollisionStartWith"+GetName())
-    {
-        m_colliding = true;
-        std::cout << "coll test: " + GetName() << std::endl;
-        //
-        //TypedMessage<b2Contact*>* coll = dynamic_cast<TypedMessage<b2Contact*>*>(m);
-
-        ////TypedMessage<b2Contact*>* coll = new TypedMessage<b2Contact*>(pa1Message, contact, pa2);
-        //b2Contact* b2c = coll->GetValue();
-
-        //CollidingActor* pa = static_cast<CollidingActor*>(b2c->GetFixtureA()->GetBody()->GetUserData());
-        //CollidingActor* pb = static_cast<CollidingActor*>(b2c->GetFixtureB()->GetBody()->GetUserData());
-        //
-        //std::cout << "Test NameA: " << pa->GetName() << std::endl;
-        //std::cout << "Test NameB: " << pb->GetName() << std::endl;
-        //thePixelArthGame.m_collHandler->checkCollisions(pa->GetPosition(), pa->GetMask(), pb->GetPosition(), pb->GetMask());
-        
-
-        /// no need for collision messages...simply put this in CollidingActor::Update (CollidingActor::Update calls PhysicsActor::Update too)
-        //CollidingActor *ca;
-        //b2ContactEdge* contactlist = GetBody()->GetContactList();
-        //while(contactlist!=NULL)
-        //{
-        //ca = static_cast<CollidingActor *>(contactlist->other->GetUserData());
-        //std::cout << "char contacts with " << ca->GetName() << std::endl;
-        //contactlist = contactlist->next;
-        //}
-    }
-    */
 
 #pragma region Animation Ended messages
 
@@ -650,91 +588,9 @@ void CharActor::ReceiveMessage(Message* m)
 
 		}*/
 		//std::cout << "RIGHT after UP " << theWorld.GetCurrentTimeSeconds() - m_timestampArrowReleased << std::endl;
-		m_timestampArrowReleased = theWorld.GetCurrentTimeSeconds();
+		//m_timestampArrowReleased = theWorld.GetCurrentTimeSeconds();
 	}
 
 #pragma endregion
 
 }
-
-/*
-void CharActor::InitPhysics()
-{
-	if (!theWorld.IsPhysicsSetUp())
-	{
-		sysLog.Log("ERROR: World physics must be initialized before Actor's.");
-		return;
-	}
-	
-	b2CircleShape circle;
-	b2PolygonShape box;
-	b2Shape* shape = NULL;
-	if (_shapeType == SHAPETYPE_BOX)
-	{
-		// The extents is just a vector of the box's half widths. 
-		// Box2D is tuned for meters, kilograms, and seconds. (Unless you've changed its units.)
-		box.SetAsBox(0.5f*_size.X, 0.5f*_size.Y);
-		shape = &box;
-	}
-	else if (_shapeType == SHAPETYPE_CIRCLE)
-	{
-		// TODO: handle ellipse?
-		circle.m_radius = 0.5f*_size.X;
-		shape = &circle;
-	}
-	else
-	{
-		sysLog.Log("ERROR: Invalid shape type given.");
-		return;
-	}
-	
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = shape;
-	fixtureDef.density = _density;
-	fixtureDef.friction = _friction;
-	fixtureDef.restitution = _restitution;
-	
-	fixtureDef.filter.groupIndex = _groupIndex;
-	fixtureDef.isSensor = _isSensor;
-	
-	InitShape( shape );
-	
-	b2BodyDef bd;
-
-	// CHANGED FROM HERE
-	//bd.userData = this;
-	bd.userData = NULL;
-	// CHANGED UNTIL HERE
-
-	bd.position.Set(_position.X, _position.Y);
-	bd.angle = MathUtil::ToRadians(_rotation);
-	bd.fixedRotation = _fixedRotation;
-	
-	//=====================================================//
-	// CHANGED FROM HERE
-	
-	if(m_isKinematic)
-	{
-		bd.type = b2_kinematicBody;
-	}
-	else
-	{
-		if (MathUtil::FuzzyEquals(_density, 0.0f))
-		{
-			bd.type = b2_staticBody;
-		}
-		else 
-		{
-			bd.type = b2_dynamicBody;
-		}
-	}
-	
-	//  CHANGED UNTIL HERE
-	//=====================================================//
-	
-	_physBody = theWorld.GetPhysicsWorld().CreateBody(&bd);
-	_physBody->CreateFixture(&fixtureDef);
-	_physBody->SetUserData(this);
-	CustomInitPhysics();
-}
-*/

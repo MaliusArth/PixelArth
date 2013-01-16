@@ -19,15 +19,6 @@ SnakeActor::SnakeActor(const Bitmask * const mask, const Path& argPath, const Ve
 	SetPosition(m_path.begin);
 	if(m_path.begin.Y < m_path.end.Y) m_yDir=true;
 	else m_yDir=false;
-    
-	SetDensity(1.0f);
-	SetFriction(0.0f);
-	SetRestitution(0.0f);
-	SetIsSensor(true);
-	SetFixedRotation(true);
-	InitPhysics();
-
-	doMovement();
 }
 
 void SnakeActor::setFirstPoint(const Vector2& argPoint){

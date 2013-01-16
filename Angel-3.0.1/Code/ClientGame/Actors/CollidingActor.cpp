@@ -3,15 +3,24 @@
 #include "CollidingActor.h"
 
 CollidingActor::CollidingActor(const Bitmask * const argMask, const Vector2 argSize)
+    : PhysicsActor()
 {
     assert(argMask != nullptr);
     m_mask = new Bitmask(*argMask);
     m_mask->m_original_mask = argMask;
-    //SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+
     SetSize(argSize.X, argSize.Y);
     m_mask->setSize(argSize);
 
-    //m_collFlags = CollFlags();
+    SetLayered();
+
+	SetIsSensor(true);
+	SetFixedRotation(true);
+}
+
+void CollidingActor::SetLayered(const bool layered)
+{
+	m_layered = layered;
 }
 
 void CollidingActor::SetColliding(const bool argColl)
@@ -25,18 +34,11 @@ void CollidingActor::Collide(const CollFlags& collFlags)
     m_collFlags.wall = collFlags.wall ? collFlags.wall : m_collFlags.wall;
     m_collFlags.floor = collFlags.floor ? collFlags.floor : m_collFlags.floor;
     m_collFlags.damage = collFlags.damage ? collFlags.damage : m_collFlags.damage;
-    //m_collFlags = collFlags;
-	//std::cout << "none: " << m_collFlags.none << std::endl;
- //   std::cout << "floor: " << m_collFlags.floor << std::endl;
- //   std::cout << "wall: " << m_collFlags.wall << std::endl;
-    //m_collFlags.none = collFlags.none;
-    //m_collFlags.floor = collFlags.floor;
-    //m_collFlags.wall = collFlags.wall;
 }
 
 void CollidingActor::Update(float dt)
 {
-    m_collFlags=CollFlags();
+    m_collFlags = CollFlags();
 
 	PhysicsActor::Update(dt);
 

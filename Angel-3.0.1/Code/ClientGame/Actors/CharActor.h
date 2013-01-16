@@ -93,7 +93,6 @@ public:
 	virtual const String GetClassName() const { return "CharActor"; }
 
 private:
-	//bool m_isKinematic;
 	BoundingBox m_bBox;
 	Direction m_direction;
 	bool m_moving;
@@ -105,7 +104,5 @@ private:
 	float m_idleness;
 	bool m_idleAnim;
 
-	float m_timestampArrowReleased;
-	///TEST
-	//Bitmask* _world;
+	//float m_timestampArrowReleased;
 };

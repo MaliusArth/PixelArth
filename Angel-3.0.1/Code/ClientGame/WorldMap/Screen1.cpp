@@ -15,16 +15,15 @@ Screen1::Screen1()
 void Screen1::Start()
 {
     m_sky = new CloudActor("Resources/Images/clouds2.jpg");
-    m_ground = new GroundActor("Resources/Images/Levels/Screen1/screen1.png", GetBitmask("Resources/Images/Levels/Screen1/screen1Bitmask.png"), MathUtil::GetWorldDimensions());
+    m_ground = new GroundActor("Resources/Images/Levels/Screen1/screen1.png", GetBitmask("Resources/Images/Levels/Screen1/screen1Bitmask.png"), Vector2(0.0f), MathUtil::GetWorldDimensions());
+    m_ground->SetLayered(false);
     m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"),Vector2(0,-2));
    
     m_text = new TextActor("Console","Shit! My plane crashed!\n How do i come away from this island?",TextAlignment(TXT_Center));
     m_text->SetPosition(0.0f,4.0f);
-    m_text->SetColor(1,1,1);
-    
-    CollidingActor* m_propeller = new CollidingActor(GetBitmask("Resources/Images/Levels/Screen1/propellerBitmask.png"));
-    m_propeller->SetSprite("Resources/Images/Levels/Screen1/propeller.png");
-    m_propeller->SetPosition(-2,4);
+    m_text->SetColor(0,0,0);
+
+    GroundActor* m_propeller = new GroundActor("Resources/Images/Levels/Screen1/propeller.png", GetBitmask("Resources/Images/Levels/Screen1/propellerBitmask.png"), Vector2(-4.0f,1.0f));
     
     //We have to add it to the world for it to be drawn. All Actors implement Update and Render
     // methods that get called once per frame. All your logic should happen in the Update function,
@@ -43,7 +42,7 @@ void Screen1::Start()
     _objects.push_back(m_arth);
     _objects.push_back(m_text);
     _objects.push_back(m_propeller);
-
+    PixelArthScreen::Start();
     #pragma endregion
 }
 

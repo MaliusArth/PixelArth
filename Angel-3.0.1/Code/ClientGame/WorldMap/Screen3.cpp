@@ -15,7 +15,8 @@ Screen3::Screen3()
 void Screen3::Start()
 {
     m_sky = new CloudActor("Resources/Images/clouds2.jpg");
-    m_ground = new GroundActor("Resources/Images/floating1.png", GetBitmask("Resources/Images/floating1_Bitmask.png"), MathUtil::GetWorldDimensions());
+    m_ground = new GroundActor("Resources/Images/Levels/Screen2/Screen2.png", GetBitmask("Resources/Images/Levels/Screen2/Screen2Bitmask.png"), 0.0f, MathUtil::GetWorldDimensions());
+    m_ground->SetLayered(false);    
     m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"),Vector2(-3,0));
 
     m_button = new ButtonActor("Resources/Images/Button/", GetBitmask("Resources/Images/Button/mask.png"), Vector2(0.0f,0.0f), Vector2(1.0f));
@@ -41,7 +42,7 @@ void Screen3::Start()
     _objects.push_back(m_button);
     _objects.push_back(m_door);
     _objects.push_back(m_arth);
-
+    PixelArthScreen::Start();
     #pragma endregion
 }
 

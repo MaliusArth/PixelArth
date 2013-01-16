@@ -9,12 +9,6 @@ ButtonActor::ButtonActor(const String& spritePath, const Bitmask * const mask, c
 	setPressed(false);
 
 	SetPosition(position);
-	SetDensity(1.0f);
-	SetFriction(0.0f);
-	SetRestitution(0.0f);
-	SetIsSensor(true);
-	SetFixedRotation(true);
-	InitPhysics();
 }
 
 void ButtonActor::setTimer(float timer)
