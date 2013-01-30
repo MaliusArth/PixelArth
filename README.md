@@ -21,9 +21,11 @@ Programmer: Bitmask Collision, Interactive Actors
 
 --
 
-Additional artwork:
+Disclaimer:
 
-This game is only meant for learning purposes.
+This game is only meant for learning purposes. Not meant for distribution.
+
+Additional artwork:
 
 Main character sprites:
 http://www.spriters-resource.com/gameboy_advance/gs2/sheet/46777
