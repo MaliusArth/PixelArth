@@ -18,7 +18,9 @@ Game Design, User & Character Interaction, Levels, Quality Assurance, Lead Progr
 
 Philipp Hufnagl	- philipp.hufnagl@technikum-wien.at
 Programmer: Bitmask Collision, Interactive Actors
+
 --
+
 Additional artwork:
 
 This game is only meant for learning purposes.
