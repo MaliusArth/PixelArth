@@ -1,24 +1,62 @@
+/////////////////////////////////////////////////////////////////////////
+// PixelArth
+// Copyright (C) 2012  Viktor Was <viktor.was@technikum-wien.at>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+/////////////////////////////////////////////////////////////////////////
+
+//
+// This file contains class definitions for both PixelArthScreen and PixelArthGameManager
+//
+
 #include "stdafx.h"
 #include "PixelArthGameManager.h"
 #include <map>
 
-#if !ANGEL_MOBILE
-    #include "WorldMap/PixelArthScreenCharTest.h"
-    #include "WorldMap/Screen1.h"
-    #include "WorldMap/Screen2.h"
-    #include "WorldMap/Screen3.h"
-    #include "WorldMap/Screen4.h"
-    #include "WorldMap/Screen5.h"
+#include "WorldMap/Screen1.h"
+#include "WorldMap/Screen2.h"
+#include "WorldMap/Screen3.h"
+#include "WorldMap/Screen4.h"
+#include "WorldMap/Screen5.h"
+#include "WorldMap/GameOverScreen.h"
 
+#include "Actors\CloudActor.h"
+#include "Actors\GroundActor.h"
+#include "Actors\CharActor.h"
 
-#endif
-
-//#include "PixelArthScreenMobileSimulator.h"
-
-PixelArthScreen::PixelArthScreen() {}
+PixelArthScreen::PixelArthScreen()
+    : m_sky(NULL)
+    , m_ground(NULL)
+    , m_arth(NULL)
+{}
 
 void PixelArthScreen::Start()
 {
+    if(m_sky != NULL)
+    theWorld.Add(m_sky, "Sky");
+    if(m_ground !=NULL)
+    theWorld.Add(m_ground, "Ground");
+    if(m_arth != NULL)
+    theWorld.Add(m_arth, "Front");
+    
+    if(m_sky != NULL)
+    _objects.push_back(m_sky);
+    if(m_ground !=NULL)
+    _objects.push_back(m_ground);
+    if(m_arth != NULL)
+    _objects.push_back(m_arth);
+
     std::vector<Renderable*>::iterator it = _objects.begin();
     while(_objects.end() != it)
     {
@@ -47,18 +85,20 @@ void PixelArthScreen::Stop()
             }
         }
         (*it)->Destroy();
+        //delete (*it);
         it++;
     }
     _objects.clear();
 
     m_arth = nullptr;
+    m_ground = nullptr;
+    m_sky = nullptr;
 
     // clear bitmasks
     std::map<String, Bitmask*>::iterator it2 = m_bitmaskmap.begin();
     while(m_bitmaskmap.end() != it2)
     {
         delete (*it2).second;
-        //it2 = (*it2).second.erase(it2);
         ++it2;
     }
     m_bitmaskmap.clear();
@@ -76,26 +116,26 @@ void PixelArthScreen::Update(float dt)
             if(pa->IsLayered())
             {
                 if(!pa->IsDestroyed()){
-                    //std::cout << "SetLayer: " << -MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2) << std::endl;
                     pa->SetLayer(-MathUtil::WorldUnitsToPixels(pa->GetPosition().Y-(pa->GetSize().Y/2))+MathUtil::WorldUnitsToPixels(MathUtil::GetWorldDimensions().Y/2));
-                    // TEST: DEBUG: TODO: Screen Switch Crash
-                    //pa->SetLayer(10);
-                    //pa->SetLayer(20);
                 }
             }
         }
         it++;
     }
-    //std::cout << "pos: " << (m_arth->GetPosition()+(m_arth->GetSize()/2)).X << " bBox: " << m_arth->GetBoundingBox().Max.X << " right: " << MathUtil::GetWorldDimensions().X/2 << std::endl;
-    if(m_arth->GetBoundingBox().Max.X >= (MathUtil::GetWorldDimensions().X/2))
+    CharActor* arth = dynamic_cast<CharActor*>(m_arth);
+    if(arth != nullptr)
     {
-        theSwitchboard.Broadcast(new Message("MoveForwards"));
-        //thePixelArthGame.MoveForwards();
-    }
-    else if(m_arth->GetBoundingBox().Min.X <= -(MathUtil::GetWorldDimensions().X/2))
-    {
-        theSwitchboard.Broadcast(new Message("MoveBackwards"));
-        //thePixelArthGame.MoveBackwards();
+        if(!arth->IsDead())
+        {
+            if(arth->GetBoundingBox().Max.X >= (MathUtil::GetWorldDimensions().X/2))
+            {
+                theSwitchboard.Broadcast(new Message("MoveForwards"));
+            }
+            else if(arth->GetBoundingBox().Min.X <= -(MathUtil::GetWorldDimensions().X/2))
+            {
+                theSwitchboard.Broadcast(new Message("MoveBackwards"));
+            }
+        }
     }
 
     if(theInput.IsKeyDown('q'))
@@ -125,28 +165,23 @@ PixelArthGameManager::PixelArthGameManager()
     theSwitchboard.SubscribeTo(this, "MoveForwards");
     theSwitchboard.SubscribeTo(this, "MoveBackwards");
     theSwitchboard.SubscribeTo(this, "Dead");
+    theSwitchboard.SubscribeTo(this, "Retry");
 	
     m_collHandler = new CollisionHandler();	
 	
-    #if ANGEL_MOBILE
-        //_screens.push_back(new PixelArthScreenMobileSimulator());				// 0
-    #else
-        //_screens.push_back(new PixelArthScreenCharTest());
-        _screens.push_back(new Screen1());
-        _screens.push_back(new Screen2());
-        _screens.push_back(new Screen3());
-        _screens.push_back(new Screen4());
-        _screens.push_back(new Screen5());
-    #endif
-	
+    _screens.push_back(new Screen1());
+    _screens.push_back(new Screen2());
+    _screens.push_back(new Screen3());
+    _screens.push_back(new Screen4());
+    _screens.push_back(new Screen5());
+    _gameOver = new GameOverScreen();
+    
     unsigned int startingIndex = 0;
     if (_screens.size() > startingIndex)
     {
         theWorld.Add(_screens[startingIndex]);
         _screens[startingIndex]->Start();
         _current = startingIndex;
-        //theSwitchboard.SubscribeTo(this, "CollisionStartWith"+GetCurrentScreen()->GetHero()->GetName());
-        //theSwitchboard.SubscribeTo(this, "CollisionEndWith"+GetCurrentScreen()->GetHero()->GetName());
     }
     else
     {
@@ -190,7 +225,7 @@ void PixelArthGameManager::Update(float dt)
     {
         if((contactlist->GetFixtureA()->GetBody()->GetUserData() == contactlist->GetFixtureB()->GetBody()->GetUserData()))
         {
-            std::cout << "WTF" << (contactlist->GetFixtureA()->GetBody()->GetUserData()) << std::endl;
+            //std::cout << "WTF " << (contactlist->GetFixtureA()->GetBody()->GetUserData()) << std::endl;
         }
         if(!(contactlist->GetFixtureA()->GetBody()->GetUserData() == contactlist->GetFixtureB()->GetBody()->GetUserData()))
         {
@@ -204,20 +239,13 @@ void PixelArthGameManager::Update(float dt)
 
                 if (ca != NULL && cb != NULL)
                 {
-                    //std::cout << ca->GetName() << " collides with " << cb->GetName() << std::endl;
-                    /// check with next position of the actors...implement getNextPosition() ?
                     CollFlags cf;
-                
-                    //std::cout << cf.none << std::endl;
 
-                    cf = m_collHandler->checkCollisions(ca->GetPosition()/*-(ca->GetSize()/2)*//*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/ , *(ca->GetMask()), cb->GetPosition()/*-(cb->GetSize()/2)*//*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/, *(cb->GetMask()));
-                
-                    //std::cout << "after coll call: " << cf.wall << std::endl;
-                
+                    cf = m_collHandler->checkCollisions(ca->GetPosition(), *(ca->GetMask()), cb->GetPosition(), *(cb->GetMask()));
+                    
                     ca->Collide(cf);
-                    //std::cout << cf.none << std::endl;
 
-                    cf = m_collHandler->checkCollisions(cb->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/ , *(cb->GetMask()), ca->GetPosition()/*+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y)*/, *(ca->GetMask()));
+                    cf = m_collHandler->checkCollisions(cb->GetPosition(), *(cb->GetMask()), ca->GetPosition(), *(ca->GetMask()));
                     cb->Collide(cf);
                 }
             }
@@ -241,67 +269,32 @@ void PixelArthGameManager::ReceiveMessage(Message* message)
         _screens[_current]->Stop();
         theWorld.Remove(_screens[_current]);
 
-        _screens[_current]->Start();
-        theWorld.Add(_screens[_current]);
+        //_screens[_current]->Start();
+        //theWorld.Add(_screens[_current]);
 
         //TODO: GameOverScreen
-        //_screens[_gameOver]->Start();
-        //theWorld.Add(_screens[_gameOver]);
+        _gameOver->Start();
+        theWorld.Add(_gameOver);
     }
-    //else if (message->GetMessageName() == "Retry")
-    //{
-    //    _screens[_gameOver]->Stop();
-    //    theWorld.Remove(_screens[_gameOver]);
-
-    //    //TODO: GameOverScreen
-    //    _screens[_current]->Start();
-    //    theWorld.Add(_screens[_current]);
-    //}
-
-    /*if (message->GetMessageName() == "CollisionStartWith"+ _screens[_current]->GetHero()->GetName())
+    else if (message->GetMessageName() == "Retry")
     {
-        //collidingActor::SetColliding() checks the contactlist
+        _gameOver->Stop();
+        theWorld.Remove(_gameOver);
 
-        //manager stores std::vector with all collidingactors
-        //on CollisionStartWith: push_back the b2contact from the message
-        //in the manager::Update: checkCollisions every frame
-        //on CollisionEndWith: check contactlist of actors if they don't contain any CollidingActors pop actor from std::vector?
-        TypedMessage<b2Contact*>* coll = dynamic_cast<TypedMessage<b2Contact*>*>(message);
-
-        //TypedMessage<b2Contact*>* coll = new TypedMessage<b2Contact*>(pa1Message, contact, pa2);
-        b2Contact* b2c = coll->GetValue();
-        
-        
-        
-        PhysicsActor *pa = static_cast<PhysicsActor*>(b2c->GetFixtureA()->GetBody()->GetUserData());
-        PhysicsActor *pb = static_cast<PhysicsActor*>(b2c->GetFixtureB()->GetBody()->GetUserData());
-        
-        CollidingActor *ca = dynamic_cast<CollidingActor*>(pa);
-        CollidingActor *cb = dynamic_cast<CollidingActor*>(pb);
-
-        if (ca != NULL && cb != NULL)
-        {
-            std::cout << "char contacts with " << ca->GetName() << std::endl;
-            /// check with next position of the actors...implement getNextPosition() ? HOW? buffered movement?
-            CollFlags cf = m_collHandler->checkCollisions(ca->GetPosition()+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y) , *(ca->GetMask()), cb->GetPosition()+Vector2(ca->GetBody()->GetLinearVelocity().x, ca->GetBody()->GetLinearVelocity().y), *(cb->GetMask()));
-            ca->SetCollFlags(cf);
-            cb->SetCollFlags(cf);
-        }
-    }*/
+        //TODO: GameOverScreen
+        _screens[_current]->Start();
+        theWorld.Add(_screens[_current]);
+    }
 }
 
 void PixelArthGameManager::MoveForwards()
 {
     if ((_current >= 0) && (_current < (int)_screens.size() - 1))
     {
-        //theSwitchboard.UnsubscribeFrom(this, "CollisionStartWith"+GetCurrentScreen()->GetHero()->GetName());
-        //theSwitchboard.UnsubscribeFrom(this, "CollisionEndWith"+GetCurrentScreen()->GetHero()->GetName());
         _screens[_current]->Stop();
         theWorld.Remove(_screens[_current]);
         _screens[++_current]->Start();
         theWorld.Add(_screens[_current]);
-        //theSwitchboard.SubscribeTo(this, "CollisionStartWith"+GetCurrentScreen()->GetHero()->GetName());
-        //theSwitchboard.SubscribeTo(this, "CollisionEndWith"+GetCurrentScreen()->GetHero()->GetName());
 		
         //if (sample)
         //    theSound.PlaySound(sample, 1.0f, false/*no loop*/, 0);
@@ -324,25 +317,6 @@ void PixelArthGameManager::MoveBackwards()
 
 void PixelArthGameManager::Render()
 {
-    //glColor3f(0.5f, 0.5f, 0.5f);
-    //char* infoString = "";
-    //int xOffset = 0;
-    //if (_current == 0)
-    //{
-    //    infoString = "[A/Space]: Next";
-    //    xOffset = 887;
-    //}
-    //else if (_current == _screens.size() - 1)
-    //{
-    //    infoString = "[Back/Minus]: Previous";
-    //    xOffset = 824;
-    //}
-    //else
-    //{
-    //    infoString = "[A/Space]: Next [Back/Minus]: Previous";
-    //    xOffset = 680;
-    //}
-    //DrawGameText(infoString, "ConsoleSmall", xOffset, 563);	//763
 }
 
 void PixelArthGameManager::SoundEnded(AngelSoundHandle sound)

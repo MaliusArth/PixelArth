@@ -1,7 +1,7 @@
 #pragma once
 #include "PixelArthGameManager.h"
-#include "GroundActor.h"
-class ButtonActor :public CollidingActor{
+#include "CollidingActor.h"
+class ButtonActor : public CollidingActor{
 public:
 	ButtonActor(const String& spritePath, const Bitmask * const mask, const Vector2& position = 0.0f, const Vector2& size = 1.0f, float pressed=-1.0f);
 	void setPressed(bool pressed=true);
@@ -16,5 +16,4 @@ private:
 	float m_time, m_countup;
 	String m_path;
 	Vector2 position;
-
 };

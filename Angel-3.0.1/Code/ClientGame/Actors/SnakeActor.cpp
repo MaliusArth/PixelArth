@@ -36,7 +36,8 @@ void SnakeActor::setMovementSpeed(const float argSpeed){
 void SnakeActor::doMovement(bool reverse){
 	Vector2 direction;
 	direction=m_path.begin-m_path.end;
-	direction.Normalize();
+    if(direction!= Vector2::Zero)
+	    direction.Normalize();
 	if (reverse)direction= Vector2::Negate(direction);
 	//direction= direction*m_movementSpeed;
 	float angle_rad = MathUtil::AngleFromVector(direction);

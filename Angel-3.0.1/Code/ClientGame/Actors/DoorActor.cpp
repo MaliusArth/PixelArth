@@ -1,12 +1,11 @@
 #include "stdafx.h"
 #include "DoorActor.h"
+#include "Actors\ButtonActor.h"
 
 DoorActor::DoorActor(const String& spritePath, const Bitmask* const maskOpen, const Bitmask* const maskClosed, const Vector2& position, const Vector2& size, const std::vector<ButtonActor *>& buttons, bool locked)
     : CollidingActor(maskClosed, size)
     , m_spritePath(spritePath)
     , m_buttons(buttons)
-    //, m_closed(maskClosed)
-    //, m_open(maskOpen)
 {
     m_open = new Bitmask(*maskOpen);
     m_open->m_original_mask = maskOpen;
@@ -15,18 +14,23 @@ DoorActor::DoorActor(const String& spritePath, const Bitmask* const maskOpen, co
 
 	SetPosition(position);
     m_open->setSize(size);
-
-    //don't forget to delete the second mask!!! m_mask is deleted by CollidingActor so check which one to delete
-    //std::cout << "param:maskOpen: pixelsize: " << maskOpen->getPixelSize().X << " " << maskOpen->getPixelSize().Y << std::endl;
-    //std::cout << "param:maskClosed: pixelsize: " << maskClosed->getPixelSize().X << " " << maskClosed->getPixelSize().Y << std::endl;
-    //
-    //std::cout << "mask: pixelsize: " << m_mask->getPixelSize().X << " " << m_mask->getPixelSize().Y << std::endl;
-    //std::cout << "maskClosed: pixelsize: " << m_closed->getPixelSize().X << " " << m_closed->getPixelSize().Y << std::endl;
-    //std::cout << "maskOpen: pixelsize: " << m_open->getPixelSize().X << " " << m_open->getPixelSize().Y << std::endl;
 }
-void DoorActor::setLocked(const bool locked){
-    //std::cout<<"wall: "<<m_collFlags.wall<<std::endl;
-    if((locked) && (m_collFlags.wall==0))
+DoorActor::DoorActor(const String& spritePath, const Bitmask* const maskOpen, const Bitmask* const maskClosed, const Vector2& position, const Vector2& size, bool locked)
+    : CollidingActor(maskClosed, size)
+    , m_spritePath(spritePath)
+{
+    m_buttons.clear();
+    m_open = new Bitmask(*maskOpen);
+    m_open->m_original_mask = maskOpen;
+    m_closed = m_mask;
+    setLocked(locked);
+
+	SetPosition(position);
+    m_open->setSize(size);
+}
+void DoorActor::setLocked(const bool locked)
+{
+    if((locked) && (m_collFlags.damage==0))
 	{
 		SetSprite(m_spritePath +"off.png");
         m_mask=m_closed;
@@ -47,15 +51,18 @@ bool DoorActor::isLocked() const
 	return m_locked;
 }
 void DoorActor::Update(float dt){
-	std::vector<ButtonActor*>::iterator it ;
-	bool tmp=false;
-	for(it=m_buttons.begin();it!=m_buttons.end();it++){
-		if(!(*it)->isPressed()){
-			tmp=true;
-			break;
-		}
-	}
-	setLocked(tmp);
+	std::vector<ButtonActor*>::iterator it;
+    if(!m_buttons.empty())
+	{
+        bool tmp=false;
+	    for(it=m_buttons.begin();it!=m_buttons.end();it++){
+		    if(!(*it)->isPressed()){
+			    tmp=true;
+			    break;
+		    }
+	    }
+	    setLocked(tmp);
+    }
 
     CollidingActor::Update(dt);
 }

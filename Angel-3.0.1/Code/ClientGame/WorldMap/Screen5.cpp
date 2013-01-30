@@ -1,56 +1,59 @@
+/////////////////////////////////////////////////////////////////////////
+// PixelArth
+// Copyright (C) 2012  Viktor Was <viktor.was@technikum-wien.at>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+/////////////////////////////////////////////////////////////////////////
+
 #include "stdafx.h"
 #include "Screen5.h"
 
-Screen5::Screen5()
-{
-}
-
-//Screen5::~Screen5()
-//{
-//	delete m_background;
-//	delete m_text;
-//	delete m_hero;
-//}
+#include "Actors\CloudActor.h"
+#include "Actors\GroundActor.h"
+#include "Actors\CharActor.h"
 
 void Screen5::Start()
 {
     m_sky = new CloudActor("Resources/Images/clouds2.jpg");
     m_ground = new GroundActor("Resources/Images/Levels/Screen3/Screen3.png", GetBitmask("Resources/Images/Levels/Screen3/Screen3Bitmask.png"), 0.0f, MathUtil::GetWorldDimensions());
-    m_ground->SetLayered(false);    
-    m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"),Vector2(-3,0));
+    m_ground->SetLayered(false);
+    m_arth = new CharActor(GetBitmask("Resources/Images/animations/chars/arth/arthBitmask.png"),Vector2(-(MathUtil::GetWorldDimensions().X/2)+2,0));
+    
+    m_plain = new GroundActor("Resources/Images/Plain/plain2.png", GetBitmask("Resources/Images/Plain/plain2_Bitmask.png"), Vector2(0,-1), 4);
+    m_plain->SetLayered(false);
 
-    m_plain =new Actor();
-    m_plain->SetSprite("Resources/Images/Plain/plain2.png");
-    m_plain->SetLayer(1);
-    m_plain->SetPosition(0,-1);
-    m_plain->SetSize(4);
-
-    m_text = new TextActor("Console","What a luck!\n There is standing a brand new plane here!",TextAlignment(TXT_Center));
-    m_text->SetPosition(0.0f,4.0f);
-    m_text->SetColor(0,0,0);
-    m_text->SetLayer(1);
-    //We have to add it to the world for it to be drawn. All Actors implement Update and Render
-    // methods that get called once per frame. All your logic should happen in the Update function,
-    // and you should only implement Render if you have to do something out of the ordinary. 
-	
-    theWorld.Add(m_sky, "Sky");
-    theWorld.Add(m_ground, "Ground");
-    theWorld.Add(m_arth, "Front");
-    theWorld.Add(m_text);
-    theWorld.Add(m_plain);
+    TextActor *text;
+    text = new TextActor("Console","What a luck!\n There is standing a brand new plane here!",TXT_Center);
+    text->SetPosition(0.0f,4.0f);
+    text->SetColor(0,0,0);
+    
+    theWorld.Add(text, 500);
+    theWorld.Add(m_plain, 1);
 
     //PixelArth housekeeping below this point. 
     #pragma region PixelArth Housekeeping
-    _objects.push_back(m_sky);
-    _objects.push_back(m_ground);
-    _objects.push_back(m_arth);
-    _objects.push_back(m_text);
+    _objects.push_back(text);
     _objects.push_back(m_plain);
+
     PixelArthScreen::Start();
     #pragma endregion
 }
 
 void Screen5::Update(float dt)
 {
-    PixelArthScreen::Update(dt);
+    if(m_plain->IsColliding())
+    {
+        theWorld.StopGame();
+    }
 }

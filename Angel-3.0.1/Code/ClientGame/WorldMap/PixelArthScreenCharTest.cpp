@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PixelArthScreenCharTest.h"
+#include "Actors\CharActor.h"
 
 PixelArthScreenCharTest::PixelArthScreenCharTest()
 {

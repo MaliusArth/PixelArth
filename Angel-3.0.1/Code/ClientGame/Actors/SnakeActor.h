@@ -1,6 +1,7 @@
 #pragma once
 
-#include "PixelArthGameManager.h"
+//#include "PixelArthGameManager.h"
+#include "Actors\CollidingActor.h"
 
 struct Path{
 	Vector2 begin, end;

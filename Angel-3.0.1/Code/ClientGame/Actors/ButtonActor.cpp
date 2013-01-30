@@ -7,6 +7,7 @@ ButtonActor::ButtonActor(const String& spritePath, const Bitmask * const mask, c
     , m_time(timer)
 {
 	setPressed(false);
+    SetLayered(false);
 
 	SetPosition(position);
 }

@@ -1,54 +1,71 @@
-/** @file */
-#pragma once
-#include "CollidingActor.h"
-//#include "Physics\Bitmask.h"
+/////////////////////////////////////////////////////////////////////////
+// PixelArth
+// Copyright (C) 2012  Viktor Was <viktor.was@technikum-wien.at>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+/////////////////////////////////////////////////////////////////////////
 
-//forward declaration - why isn't this needed in this particular case?
-//class Bitmask;
+#pragma once
+#include "Actors\CollidingActor.h"
 
 enum Direction {NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, NUM_DIRECTIONS};
 
-/// An Actor for displaying game characters on the screen.
 /**
- * A CharActor handles drawing text to the screen using world coordinates. The
- *  basis text rendering functions operate in screen-space, which can be annoying
- *  if you want to have debug data or labels for your Actors. 
- * 
- * In addition, a CharActor supports wraps up more functionality than the simple 
- *  text rendering, allowing varying alignments, newlines, etc. 
+ * The CharActor/Protagonist class.
  */
 class CharActor : public CollidingActor
 {
 public:
 	/**
 	 * The constructor sets up all the information that this CharActor will
-	 *  use to draw itself to the screen. 
+	 *  use to draw itself to the screen.
+	 * 
+	 * @param mask One generic bitmask for pixel perfect collision.
+	 * 
+	 * @param argPosition Starting position.
+	 * 
+	 * @param size The size of the actor in GL units.
 	 */
 	explicit CharActor(const Bitmask * const mask, const Vector2& argPosition, const Vector2& size = 2.0f);
 	
 	~CharActor(void);
 
 	/**
-	 * A function which makes the necessary updates to the Actor. The base 
-	 *  implementation just updates the animations and intervals, but a 
-	 *  subclass override can perform whatever extra magic is necessary. Make 
-	 *  sure to call the base class's Update if you subclass. 
+	 * A function which makes the necessary updates to the Actor.
 	 * 
 	 * @param dt The amount of time that's elapsed since the beginning of the 
 	 *   last frame. 
 	 */
 	virtual void Update(float dt);
 
+    /**
+     * Changes char states on collision
+     *  (Is called before Update)
+     */
     virtual void Collide(const CollFlags& collFlags);
 
 	/**
 	 * Override of the Renderable::Render function to draw text
 	 */
-	//virtual void Render();
+	virtual void Render();
 
 	/**
-	 * 
-	 */
+     * Animation callback function
+     *  Is called after an animation finishes and if a callback name is set
+     * 
+	 * @param animName animation name on which to respond.
+     */
 	virtual void AnimCallback(String animName);
 
 	/**
@@ -59,18 +76,6 @@ public:
 	 * @param message The message getting delivered. 
 	 */
 	virtual void ReceiveMessage(Message* message);
-
-	/**
-	 * Start simulating this PhysicsActor in the world. 
-	 */
-	//virtual void InitPhysics();
-	
-	/**
-	 * If you want to have your own setup in a derived class, you can 
-	 *  implement this function there. It's called at the end of the base
-	 *  class's PhysicsActor::InitPhysics.
-	 */
-	//virtual void CustomInitPhysics() {}
 
 	/**
 	 * If you want to do any kind of logic dealing with CharActor overlap, 
@@ -92,17 +97,23 @@ public:
 	 */
 	virtual const String GetClassName() const { return "CharActor"; }
 
+    inline const bool IsDead() const { return m_dead; };
 private:
 	BoundingBox m_bBox;
-	Direction m_direction;
+	
+    bool m_dead;
+
+    // Orientation & movement
+    Direction m_direction;
+    Vector2 m_nextPosition;
 	bool m_moving;
 	bool m_movingNorth;
 	bool m_movingEast;
 	bool m_movingSouth;
 	bool m_movingWest;
 	float m_movementSpeed;
-	float m_idleness;
+	
+    // animation
+    float m_idleness;
 	bool m_idleAnim;
-
-	//float m_timestampArrowReleased;
 };

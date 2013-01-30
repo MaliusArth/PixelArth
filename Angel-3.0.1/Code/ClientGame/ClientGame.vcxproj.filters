@@ -10,9 +10,6 @@
     <Filter Include="Config\Level">
       <UniqueIdentifier>{027ef47e-a415-44e8-9cc7-72525bf54708}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Config\ActorDef">
-      <UniqueIdentifier>{3e8b0d74-440c-4b46-84b3-14ae937c5fe3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Docs">
       <UniqueIdentifier>{110ed210-6a86-4ab9-861c-fa9c07fa378f}</UniqueIdentifier>
     </Filter>
@@ -24,6 +21,9 @@
     </Filter>
     <Filter Include="WorldMap">
       <UniqueIdentifier>{57a0cda3-eceb-4e6d-ba3e-718cfd78c88d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config\ActorDef">
+      <UniqueIdentifier>{3e8b0d74-440c-4b46-84b3-14ae937c5fe3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,9 +40,6 @@
     </ClCompile>
     <ClCompile Include="Actors\GroundActor.cpp">
       <Filter>Actors</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldMap\PixelArthScreenCharTest.cpp">
-      <Filter>WorldMap</Filter>
     </ClCompile>
     <ClCompile Include="Physics\Bitmask.cpp">
       <Filter>Physics</Filter>
@@ -80,6 +77,9 @@
     <ClCompile Include="WorldMap\Screen5.cpp">
       <Filter>WorldMap</Filter>
     </ClCompile>
+    <ClCompile Include="WorldMap\GameOverScreen.cpp">
+      <Filter>WorldMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -91,9 +91,6 @@
     </ClInclude>
     <ClInclude Include="Actors\GroundActor.h">
       <Filter>Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldMap\PixelArthScreenCharTest.h">
-      <Filter>WorldMap</Filter>
     </ClInclude>
     <ClInclude Include="Physics\Bitmask.h">
       <Filter>Physics</Filter>
@@ -129,6 +126,9 @@
       <Filter>WorldMap</Filter>
     </ClInclude>
     <ClInclude Include="WorldMap\Screen5.h">
+      <Filter>WorldMap</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap\GameOverScreen.h">
       <Filter>WorldMap</Filter>
     </ClInclude>
   </ItemGroup>

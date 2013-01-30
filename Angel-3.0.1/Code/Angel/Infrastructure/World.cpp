@@ -388,7 +388,7 @@ float World::CalculateNewDT()
 	#endif
 	_dt = MathUtil::Clamp((_currTime - _prevTime), 0.0f, MAX_TIMESTEP);
 	_prevTime = _currTime;
-	return _dt;		
+	return _dt;
 }
 
 void World::Simulate(bool simRunning)
@@ -481,10 +481,10 @@ void World::SendCollisionNotifications(b2Contact* contact, bool beginning)
 		messageStart = "CollisionEndWith";
 	}
 	
-	PhysicsActor* pa1 = (PhysicsActor*)contact->GetFixtureA()->GetBody()->GetUserData();
-	PhysicsActor* pa2 = (PhysicsActor*)contact->GetFixtureB()->GetBody()->GetUserData();
+	PhysicsActor* pa1 = /*(PhysicsActor*)*/static_cast<PhysicsActor*>(contact->GetFixtureA()->GetBody()->GetUserData());
+	PhysicsActor* pa2 = /*(PhysicsActor*)*/static_cast<PhysicsActor*>(contact->GetFixtureB()->GetBody()->GetUserData());
 	
-	if (pa1 != NULL)
+    if (pa1 != NULL && !pa1->GetName().empty()) //Edited
 	{
 		String pa1Message = messageStart + pa1->GetName();
 		if (theSwitchboard.GetSubscribersTo(pa1Message).size() > 0)
@@ -496,20 +496,20 @@ void World::SendCollisionNotifications(b2Contact* contact, bool beginning)
 			}
 			_currentTouches[pa1].insert(pa2);
 		}
-	}
 	
-	if (pa2 != NULL)
-	{
-		String pa2Message = messageStart + pa2->GetName();
-		if (theSwitchboard.GetSubscribersTo(pa2Message).size() > 0)
-		{
-			if (_currentTouches[pa2].find(pa1) == _currentTouches[pa2].end())
-			{
-				TypedMessage<b2Contact*>* coll = new TypedMessage<b2Contact*>(pa2Message, contact, pa1);
-				theSwitchboard.Broadcast(coll);
-			}
-			_currentTouches[pa2].insert(pa1);
-		}
+	    if (pa2 != NULL)
+	    {
+		    String pa2Message = messageStart + pa2->GetName();
+		    if (theSwitchboard.GetSubscribersTo(pa2Message).size() > 0)
+		    {
+			    if (_currentTouches[pa2].find(pa1) == _currentTouches[pa2].end())
+			    {
+				    TypedMessage<b2Contact*>* coll = new TypedMessage<b2Contact*>(pa2Message, contact, pa1);
+				    theSwitchboard.Broadcast(coll);
+			    }
+			    _currentTouches[pa2].insert(pa1);
+		    }
+	    }
 	}
 }
 

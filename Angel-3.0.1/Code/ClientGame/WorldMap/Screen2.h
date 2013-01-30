@@ -1,24 +1,27 @@
+/////////////////////////////////////////////////////////////////////////
+// PixelArth
+// Copyright (C) 2012  Viktor Was <viktor.was@technikum-wien.at>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+/////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include "PixelArthGameManager.h"
 
-#include "Actors\CloudActor.h"
-#include "Actors\GroundActor.h"
-#include "Actors\SnakeActor.h"
-#include "Actors\ButtonActor.h"
-#include "Actors\DoorActor.h"
-//#include "Actors/CharActor.h"
-
 class Screen2 : public PixelArthScreen
 {
 public:
-	Screen2();
-	//~Screen2();
-
 	virtual void Start();
-	virtual void Update(float dt);
-private:
-	CloudActor *m_sky;
-	GroundActor *m_ground;
-	SnakeActor *m_snake[4];
 };
