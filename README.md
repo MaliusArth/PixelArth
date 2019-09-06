@@ -13,10 +13,13 @@ Main Game Project: ClientGame
 "The Rest is Silence" (AngelEngine)
 
 Team:
+
 Viktor W.
+
 Game Design, User & Character Interaction, Levels, Quality Assurance, Lead Programmer, Debugging, Concept Art/Artwork
 
 Philipp H.
+
 Programmer: Bitmask Collision, Interactive Actors
 
 --
