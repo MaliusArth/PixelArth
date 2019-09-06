@@ -13,10 +13,10 @@ Main Game Project: ClientGame
 "The Rest is Silence" (AngelEngine)
 
 Team:
-Viktor Was - viktor.was@technikum-wien.at
+Viktor W.
 Game Design, User & Character Interaction, Levels, Quality Assurance, Lead Programmer, Debugging, Concept Art/Artwork
 
-Philipp Hufnagl	- philipp.hufnagl@technikum-wien.at
+Philipp H.
 Programmer: Bitmask Collision, Interactive Actors
 
 --
